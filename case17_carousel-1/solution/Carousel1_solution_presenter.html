@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Case17 : Carousel 1 - 출제자 해설</title>
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css" />
+	<style>
+		/*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. 루트 폴더에 README_OOO.md 생성 (OOO : Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+        
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+		html {
+			overflow-x: hidden;
+		}
+
+		body {
+			font-family: "Noto Sans KR", sans-serif;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		ul,
+		ol,
+		li,
+		dl,
+		dt,
+		dd,
+		p,
+		table {
+			margin: 0;
+			padding: 0;
+			color: #494949;
+			letter-spacing: -0.025rem;
+			box-sizing: border-box;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-weight: 600;
+		}
+
+		a {
+			color: inherit;
+			text-decoration: inherit;
+		}
+
+		a img {
+			border: none;
+		}
+
+		img {
+			max-width: 100%;
+			vertical-align: middle;
+		}
+
+		ul li {
+			list-style: none;
+		}
+
+		p {
+			line-height: 1.8;
+		}
+
+		/* STYLE */
+		body {
+			padding: 0;
+			margin: 0;
+			line-height: 1.6;
+		}
+
+		h2 {
+			padding: 50px 0;
+			color: #ffffff;
+			font-size: 2rem;
+			text-align: center;
+			background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+		}
+
+		h2::before {
+			content: "#";
+			display: inline-block;
+			margin-right: 5px;
+			color: #ff9db0;
+			font-weight: 300;
+			font-size: 2.2rem;
+		}
+
+		h3 {
+			position: relative;
+			margin: 30px 20px;
+			padding-bottom: 15px;
+			color: #303030;
+			font-size: 1.6rem;
+			border-bottom: 1px solid #ededed;
+		}
+
+		blockquote {
+			margin: 20px;
+			padding: 20px;
+			background: #f2f2f2;
+		}
+
+		strong {
+			display: block;
+			margin-top: 10px;
+		}
+
+		.code-wrap {
+			position: relative;
+			background: #2f303b;
+			margin: 15px 0 0 0;
+		}
+
+		.code-wrap>p {
+			position: absolute;
+			left: 0;
+			top: 0;
+			padding: 2px 15px;
+			font-size: 0.7rem;
+			color: #ffffff;
+			text-align: center;
+			background: #61c8cc;
+		}
+
+		code {
+			background: #ededed;
+		}
+
+		.language-html>div,
+		.language-css>div,
+		.language-js>div {
+			color: #fff;
+			padding: 30px 20px;
+			background: #2f303b;
+		}
+
+		code.language-bash div {
+			margin-top: -20px;
+			padding: 30px 20px;
+			font-size: 1rem;
+			color: #ffffff;
+			background: #2f303b;
+			box-sizing: border-box;
+		}
+
+		code::after {
+			content: "";
+			display: block;
+		}
+
+		code.code-inlineBlock::after {
+			content: "";
+			display: inline-block;
+		}
+
+		.excute-text {
+			font-size: 0.8rem;
+			font-weight: bold;
+			color: #ed234b;
+		}
+
+		/* 좌, 우 여백 */
+		ol,
+		ul {
+			margin: 20px;
+			padding: 20px;
+			background: #f2f2f2;
+		}
+
+		ol li {
+			margin-left: 15px;
+		}
+
+		li {
+			font-size: 0.85rem;
+		}
+
+		table,
+		h4,
+		h5,
+		h6,
+		p,
+		img,
+		pre {
+			padding: 0 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<h2 id="case12--carousel-1---출제자-해설">Case17 : Carousel 1 - 출제자 해설</h2>
+	<h3 id="q1-vanillajs-로-코드를-작성해보세요">q1. vanilla.js 로 코드를 작성해보세요.</h3>
+	<h4 id="a">A)</h4>
+	<ul>
+		<li>다음 슬라이드로 이동하는 시간(0.5초)동안 다음 슬라이드로 이동하면 안된다. 이전으로 가기 클릭시에도 동일하게 작동한다.</li>
+		<li>마지막 슬라이드(5)에서 다음 슬라이드로 클릭하면 첫번째로, 첫번째 슬라이드에서 이전 슬라이드로 이동 클릭하면 마지막 슬라이드로 간다.</li>
+		<li>슬라이드의 갯수를 늘리더라도 슬라이드 갯수만큼 작동해야 한다.
+			​</li>
+	</ul>
+	<pre><code class="language-js"><div><span class="hljs-function"><span class="hljs-keyword">function</span>  <span class="hljs-title">Carousel</span>(<span class="hljs-params"> carouselElement </span>)</span>{
+
+	<span class="hljs-built_in">this</span>.carouselElement = carouselElement;
+
+	<span class="hljs-built_in">this</span>.itemClassName = <span class="hljs-string">&quot;carousel_item&quot;</span>;
+
+	<span class="hljs-built_in">this</span>.items = <span class="hljs-built_in">this</span>.carouselElement.querySelectorAll(<span class="hljs-string">&#x27;.carousel_item&#x27;</span>);
+
+<span class="hljs-comment">//.... 이하 생략</span>
+
+</div></code></pre>
+	<ul>
+		<li>.carousel_item 슬라이드 각 아이템을 설정한다. querySelectorAll</li>
+	</ul>
+	<pre><code class="language-js"><div>Carousel.prototype.disableInteraction =	<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+
+	<span class="hljs-built_in">this</span>.isMoving = <span class="hljs-literal">true</span>;
+
+	<span class="hljs-built_in">setTimeout</span>( <span class="hljs-function">() =&gt;</span> {
+
+	<span class="hljs-built_in">this</span>.isMoving = <span class="hljs-literal">false</span>
+
+	}, <span class="hljs-number">500</span>);
+
+}
+</div></code></pre>
+	<p>슬라이드 클릭 시 isMoving 을 true 기본상태로,
+		0.5 초뒤 isMoving 을 false 로 바꾼다.</p>
+	<pre><code class="language-js"><div>
+Carousel.prototype.movePrev = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+
+  
+
+	<span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.isMoving) {
+	
+
+		<span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.current === <span class="hljs-number">0</span>) {
+
+			<span class="hljs-built_in">this</span>.current = (<span class="hljs-built_in">this</span>.totalItems - <span class="hljs-number">1</span>);
+
+		} <span class="hljs-keyword">else</span> {
+
+			<span class="hljs-built_in">this</span>.current--;
+
+		}	  
+
+		<span class="hljs-built_in">this</span>.moveCarouselTo();
+
+	}
+
+}
+​
+</div></code></pre>
+	<ul>
+		<li>이전으로 가기 클릭시, isMoving 의 상태를 확인한다.</li>
+		<li>0 번째는 현재 위치가 첫번째 이므로, 마지막 슬라이드로 현재 위치를 변경한다,</li>
+		<li>그게 아니면 현재 위치를 감소 시킨다.</li>
+	</ul>
+	<pre><code class="language-js"><div>Carousel.prototype.moveNext = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+	
+	<span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.isMoving) {
+
+		<span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.current === (<span class="hljs-built_in">this</span>.totalItems - <span class="hljs-number">1</span>)) {
+			<span class="hljs-built_in">this</span>.current = <span class="hljs-number">0</span>;
+
+		} <span class="hljs-keyword">else</span> {
+
+			<span class="hljs-built_in">this</span>.current++;
+
+		}
+
+		<span class="hljs-built_in">this</span>.moveCarouselTo(); 
+
+	}
+
+}
+
+</div></code></pre>
+	<ul>
+		<li>다음으로 가기는 현재위치가 마지막 위치인지만 확인하면 된다( ex - this.totalItems - 1)</li>
+		<li>마지막 위치라면 다음 슬라이드는 처음(0) 으로 이동한다.</li>
+		<li>그밖의 상황은 슬라이드 위치를 증가시킨다.</li>
+	</ul>
+	<pre><code class="language-js"><div>Carousel.prototype.moveCarouselTo = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+
+	<span class="hljs-comment">// ... 이전 생략</span>
+	<span class="hljs-built_in">this</span>.disableInteraction();
+
+	<span class="hljs-keyword">var</span>  prev = <span class="hljs-built_in">this</span>.current - <span class="hljs-number">1</span>,
+	next = <span class="hljs-built_in">this</span>.current + <span class="hljs-number">1</span>;	  
+
+	<span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.current === <span class="hljs-number">0</span>) {
+		prev = (<span class="hljs-built_in">this</span>.totalItems - <span class="hljs-number">1</span>);
+	} <span class="hljs-keyword">else</span>  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.current === (<span class="hljs-built_in">this</span>.totalItems <span class="hljs-number">-1</span>)) {
+		next = <span class="hljs-number">0</span>;
+	}
+	
+	<span class="hljs-comment">//... 다음 설명 참조</span>
+
+}
+
+</div></code></pre>
+	<ul>
+		<li>이 함수는 슬라이드 이동을 완료하는 함수다.</li>
+		<li>현재 위치를 가지고, 이전과 이후 슬라이드를 셋팅한다.</li>
+		<li>현재위치가 0 번째인지와 마지막 인지를 체크한다.</li>
+		<li>현재위치가 0 이면 next는 현재위치 + 1</li>
+		<li>현재위치가 마지막 이면 next는 처음으로 간다.</li>
+	</ul>
+	<blockquote>
+		<p>인덱스를 반복문으로 돌리면서
+			현재위치면 active
+			이전이면 prev
+			다음이면 next
+			를 붙인다.
+			그외에는 기본 클래스르 명만 붙인다.</p>
+	</blockquote>
+	<pre><code class="language-js"><div><span class="hljs-keyword">if</span> ((<span class="hljs-built_in">this</span>.totalItems - <span class="hljs-number">1</span>) &gt; <span class="hljs-number">3</span>) {
+
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span>  i=<span class="hljs-number">0</span> ; i&lt;<span class="hljs-built_in">this</span>.totalItems ; i++ ){
+	
+		<span class="hljs-keyword">if</span>(i==<span class="hljs-built_in">this</span>.current){
+			<span class="hljs-built_in">this</span>.items[i].className = <span class="hljs-built_in">this</span>.itemClassName + <span class="hljs-string">&quot; active&quot;</span>;
+		}<span class="hljs-keyword">else</span>  <span class="hljs-keyword">if</span>(i==prev){
+			<span class="hljs-built_in">this</span>.items[i].className = <span class="hljs-built_in">this</span>.itemClassName + <span class="hljs-string">&quot; prev&quot;</span>;
+		}<span class="hljs-keyword">else</span>  <span class="hljs-keyword">if</span>(i==next){
+			<span class="hljs-built_in">this</span>.items[i].className = <span class="hljs-built_in">this</span>.itemClassName + <span class="hljs-string">&quot; next&quot;</span>;
+		}<span class="hljs-keyword">else</span>{
+			<span class="hljs-built_in">this</span>.items[i].className = <span class="hljs-built_in">this</span>.itemClassName;
+		}
+
+	}
+}
+  
+</div></code></pre>
+	<h3 id="q2-jquery-로-코드를-작성해보세요">q2. jQuery 로 코드를 작성해보세요.</h3>
+	<h4 id="a-1">A)</h4>
+	<ul>
+		<li>querySelectorAll 을 jQuery로 셀렉터로 지정하기</li>
+		<li>클릭이벤트 jQuery 로 할당</li>
+	</ul>
+	<h4 id="해설">해설</h4>
+	<ul>
+		<li>하위 엘리먼트 설정</li>
+	</ul>
+	<pre><code class="language-js"><div>$(셀렉터).children()
+</div></code></pre>
+	<ul>
+		<li>아래와 같이 클릭이벤트 설정</li>
+	</ul>
+	<pre><code class="language-js"><div><span class="hljs-built_in">this</span>.prevButton = <span class="hljs-built_in">this</span>.carouselElement.children(<span class="hljs-string">&#x27;.carousel_button--prev&#x27;</span>);
+<span class="hljs-built_in">this</span>.prevButton.click(<span class="hljs-function">() =&gt;</span> { ... }
+</div></code></pre>
+	<h3 id="q3-react-로-코드를-작성해보세요">q3. React 로 코드를 작성해보세요.</h3>
+	<h4 id="a-중점포인트">A) 중점포인트</h4>
+	<ul>
+		<li>0.5 초 뒤에 isMoving 을 false 로 처리하기</li>
+		<li>useState 훅으로 현재 슬라이드의 위치</li>
+	</ul>
+	<h4 id="해설-1">해설</h4>
+	<blockquote>
+		<p>useRef 로 컴포넌트가 리랜더링 되더라도 변수를 유지</p>
+	</blockquote>
+	<blockquote>
+		<p>src/Carousel.js</p>
+	</blockquote>
+	<pre><code class="language-js"><div><span class="hljs-keyword">const</span>  isMoving = useRef(<span class="hljs-literal">false</span>);
+
+useEffect(<span class="hljs-function">() =&gt;</span> {
+
+	isMoving.current = <span class="hljs-literal">true</span>;
+	<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+		isMoving.current = <span class="hljs-literal">false</span>;
+	}, <span class="hljs-number">500</span>);
+	
+}, [current]);
+
+</div></code></pre>
+	<ul>
+		<li>isMoving.current 를 시작전에 true</li>
+		<li>0.5초뒤에 false 로 바꾼다.</li>
+	</ul>
+	<blockquote>
+		<p>다음 슬라이드로 가기</p>
+	</blockquote>
+	<pre><code class="language-js"><div>
+<span class="hljs-keyword">const</span> moveNext = <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">if</span>(!isMoving.current){
+    <span class="hljs-keyword">if</span> (current === (totalItems<span class="hljs-number">-1</span>)) {
+      setCurrent(<span class="hljs-number">0</span>);
+    } <span class="hljs-keyword">else</span> {
+      setCurrent(current+<span class="hljs-number">1</span>);
+    }
+  }
+}
+</div></code></pre>
+	<ul>
+		<li>isMoving.current 현재 슬라이드가 작동중인지 체크한다.</li>
+		<li>if : 마지막 위치라면 첫번째 (0)로 이동</li>
+		<li>else : 다음 슬라이드로 이동</li>
+	</ul>
+	<blockquote>
+		<p>이전 슬라이드로 가기</p>
+	</blockquote>
+	<pre><code class="language-js"><div><span class="hljs-keyword">const</span> movePrev = <span class="hljs-function">() =&gt;</span> {
+    
+  <span class="hljs-keyword">if</span>(!isMoving.current){
+    <span class="hljs-keyword">if</span> (current === <span class="hljs-number">0</span>) {
+      setCurrent(totalItems - <span class="hljs-number">1</span>);
+    } <span class="hljs-keyword">else</span> {
+      setCurrent(current<span class="hljs-number">-1</span>);
+    }
+  }
+
+}
+
+</div></code></pre>
+	<ul>
+		<li>isMoving.current 현재 슬라이드가 작동중인지 체크한다.</li>
+		<li>if : 첫번째 슬라이드라면 다음슬라이드는 마지막 슬라이드로</li>
+		<li>else : 현재 슬라이드 위치 감소</li>
+	</ul>
+	<blockquote>
+		<p>버튼의 이전위치와 다음 위치를 설정해주어서 Button에 prev와 next boolean 값을 넘긴다.</p>
+	</blockquote>
+	<pre><code class="language-js"><div><span class="hljs-keyword">const</span> prev = ((current) === <span class="hljs-number">0</span> ? totalItems - <span class="hljs-number">1</span> : current<span class="hljs-number">-1</span>);
+<span class="hljs-keyword">const</span> next = (current === (totalItems<span class="hljs-number">-1</span>) ) ? <span class="hljs-number">0</span> : current+<span class="hljs-number">1</span>;    
+</div></code></pre>
+	<ul>
+		<li>prev : 현재위치가 0 이면 이전위치는 마지막 슬라이드 , 그밖은 -1</li>
+		<li>next : 현재위치가 마지막이면 다음 위치는 0, 그밖은 +1</li>
+	</ul>
+</body>
+
+</html>

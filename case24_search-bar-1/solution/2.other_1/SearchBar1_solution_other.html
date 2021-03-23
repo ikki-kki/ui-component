@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case24 : Search bar 해설</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css" />
+    <style>
+        /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. 루트 폴더에 README_OOO.md 생성 (OOO : Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+        
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+        html {
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: "Noto Sans KR", sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul,
+        ol,
+        li,
+        dl,
+        dt,
+        dd,
+        p,
+        table {
+            margin: 0;
+            padding: 0;
+            color: #494949;
+            letter-spacing: -0.025rem;
+            box-sizing: border-box;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 600;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: inherit;
+        }
+
+        a img {
+            border: none;
+        }
+
+        img {
+            max-width: 100%;
+            vertical-align: middle;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        p {
+            line-height: 1.8;
+        }
+
+        /* STYLE */
+        body {
+            padding: 0;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h2 {
+            padding: 50px 0;
+            color: #ffffff;
+            font-size: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+        }
+
+        h2::before {
+            content: "#";
+            display: inline-block;
+            margin-right: 5px;
+            color: #ff9db0;
+            font-weight: 300;
+            font-size: 2.2rem;
+        }
+
+        h3 {
+            position: relative;
+            margin: 30px 20px;
+            padding-bottom: 15px;
+            color: #303030;
+            font-size: 1.6rem;
+            border-bottom: 1px solid #ededed;
+        }
+
+        blockquote {
+            margin: 20px;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        strong {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .code-wrap {
+            position: relative;
+            background: #2f303b;
+            margin: 15px 0 0 0;
+        }
+
+        .code-wrap>p {
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 2px 15px;
+            font-size: 0.7rem;
+            color: #ffffff;
+            text-align: center;
+            background: #61c8cc;
+        }
+
+        code {
+            background: #ededed;
+        }
+
+        .language-html>div,
+        .language-css>div,
+        .language-js>div {
+            color: #fff;
+            padding: 30px 20px;
+            background: #2f303b;
+        }
+
+        code.language-bash div {
+            margin-top: -20px;
+            padding: 30px 20px;
+            font-size: 1rem;
+            color: #ffffff;
+            background: #2f303b;
+            box-sizing: border-box;
+        }
+
+        code::after {
+            content: "";
+            display: block;
+        }
+
+        code.code-inlineBlock::after {
+            content: "";
+            display: inline-block;
+        }
+
+        .excute-text {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #ed234b;
+        }
+
+        /* 좌, 우 여백 */
+        ol,
+        ul {
+            margin: 20px;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        ol li {
+            margin-left: 15px;
+        }
+
+        li {
+            font-size: 0.85rem;
+        }
+
+        table,
+        h4,
+        h5,
+        h6,
+        p,
+        img,
+        pre {
+            padding: 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 id="검색리스트-dropdown-구현-및-선택된-이미지-표시하기">검색리스트 Dropdown 구현 및 선택된 이미지 표시하기</h2>
+    <h3 id="문제-1">문제 1</h3>
+    <h4 id="풀이">풀이</h4>
+    <pre><code class="language-html"><div><span class="hljs-comment">&lt;!-- solution/2.other_1/1. js/index.html --&gt;</span>
+...
+<span class="hljs-tag">&lt;<span class="hljs-name">main</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;padding-top: 50px;&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;row&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;dropdown&quot;</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;input-group mb-3&quot;</span>&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-control&quot;</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Search&quot;</span>&gt;</span>
+                        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;dropdown-menu&quot;</span>&gt;</span>
+                        <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/template&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;dropdown-item-template&quot;</span>&gt;</span><span class="javascript">
+                        &lt;li <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;dropdown-item&quot;</span> data-id=<span class="hljs-string">&quot;&lt;%-id%&gt;&quot;</span>&gt;
+                            <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot; &lt;%-url%&gt;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&lt;%-description%&gt;&quot;</span>&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>
+                                <span class="hljs-tag">&lt;<span class="hljs-name">%-</span> <span class="hljs-attr">description</span> %&gt;</span>
+                            <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                        <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>
+                        </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;row&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;p-t-50&quot;</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;image-info&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;axios/axios.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;lodash.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;main.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+...
+</div></code></pre>
+    <pre><code class="language-js"><div><span class="hljs-comment">// solution/2.other_1/1. js/main.js</span>
+<span class="hljs-keyword">const</span> accessKey = <span class="hljs-string">&quot;hPyF-tz9tHnxeaoTwb7q0GTw10Wxwr85cD63lk7d7UE&quot;</span>;
+<span class="hljs-keyword">const</span> inputEl = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;input&#x27;</span>);
+<span class="hljs-keyword">const</span> dropdownMenuEl = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.dropdown-menu&#x27;</span>);
+<span class="hljs-keyword">const</span> imageInfoEl = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.image-info&#x27;</span>);
+<span class="hljs-keyword">const</span> template = _.template(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#dropdown-item-template&#x27;</span>).textContent);
+
+<span class="hljs-comment">/**
+ * 검색어가 입력됐을때 이벤트
+ */</span>
+<span class="hljs-keyword">const</span> onInputDebounceQuery = _.debounce(<span class="hljs-keyword">async</span> (e) =&gt; {
+    <span class="hljs-keyword">const</span> { <span class="hljs-attr">value</span>: query } = e.target;
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-comment">/**
+         * @see https://github.com/axios/axios#response-schema
+         */</span>
+        <span class="hljs-keyword">const</span> { data } = <span class="hljs-keyword">await</span> axios.get(<span class="hljs-string">&#x27;https://api.unsplash.com/search/photos/&#x27;</span>, {
+            <span class="hljs-attr">params</span>: {
+                <span class="hljs-attr">client_id</span>: accessKey,
+                query
+            }
+        });
+
+        <span class="hljs-keyword">const</span> { results } = data;
+
+        <span class="hljs-comment">/**
+         * 조회 결과가 존재하지 않는 경우 항목을 표시하지 않음
+         */</span>
+        <span class="hljs-keyword">if</span> (!results?.length) {
+            dropdownMenuEl.classList.remove(<span class="hljs-string">&#x27;show&#x27;</span>);
+            <span class="hljs-keyword">return</span>;
+        }
+
+        <span class="hljs-comment">/**
+         * 드롭다운 메뉴에 항목을 추가
+         */</span>
+        dropdownMenuEl.innerHTML = results.map(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> {
+            <span class="hljs-keyword">const</span> { id, <span class="hljs-attr">alt_description</span>: description } = item;
+            <span class="hljs-keyword">const</span> { <span class="hljs-attr">regular</span>: url } = item.urls;
+            <span class="hljs-comment">/**
+             * `lodash` 템플릿을 활용하여 조회된 데이터 항목을 템플릿으로 변환
+             */</span>
+            <span class="hljs-keyword">return</span> template({
+                id, description, url
+            });
+        }).join(<span class="hljs-string">&#x27;&#x27;</span>);
+        dropdownMenuEl.classList.add(<span class="hljs-string">&#x27;show&#x27;</span>);
+    } <span class="hljs-keyword">catch</span> (e) {
+        alert(e.isAxiosError ? <span class="hljs-string">&#x27;데이터 조회중 에러 발생!&#x27;</span> : <span class="hljs-string">&#x27;데이터 처리중 에러 발생!&#x27;</span>);
+    }
+}, <span class="hljs-number">250</span>);
+
+<span class="hljs-comment">/**
+ * 드롭다운 아이템 항목 선택시 이벤트
+ * [&gt;] 아이템 항목이 눌러졌을때의 이벤트를 `dropdownMenu` 엘리먼트에서 위임받아 처리
+ */</span>
+<span class="hljs-keyword">const</span> onClickDropdownItem = <span class="hljs-keyword">async</span> (e) =&gt; {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-comment">/**
+         * 이벤트가 발생한 엘리먼트로부터 가장 인전한 `.dropdown-item` 엘리먼트를 찾음
+         */</span>
+        <span class="hljs-keyword">const</span> dropdownItemEl = e.target.closest(<span class="hljs-string">&#x27;.dropdown-item&#x27;</span>);
+        <span class="hljs-keyword">const</span> id = dropdownItemEl.dataset.id;
+
+        <span class="hljs-keyword">const</span> { data } = <span class="hljs-keyword">await</span> axios.get(<span class="hljs-string">`https://api.unsplash.com/photos/<span class="hljs-subst">${id}</span>`</span>, {
+            <span class="hljs-attr">params</span>: {
+                <span class="hljs-attr">client_id</span>: accessKey,
+            }
+        });
+        <span class="hljs-keyword">const</span> {
+            urls,
+            <span class="hljs-attr">alt_description</span>: description
+        } = data
+        <span class="hljs-keyword">const</span> { <span class="hljs-attr">regular</span>: url } = urls;
+
+        <span class="hljs-comment">/**
+         * 이미지 객체 정보 업데이트
+         */</span>
+        imageInfoEl.src = url
+        imageInfoEl.alt = description
+
+        <span class="hljs-comment">/**
+         * 열려있는 검색결과 내용을 닫고 검색어 입력창에 현재 이미지 내용을 입력
+         */</span>
+        dropdownMenuEl.classList.remove(<span class="hljs-string">&#x27;show&#x27;</span>);
+        inputEl.value = description;
+    } <span class="hljs-keyword">catch</span> (e) {
+        alert(e.isAxiosError ? <span class="hljs-string">&#x27;데이터 조회중 에러 발생!&#x27;</span> : <span class="hljs-string">&#x27;데이터 처리중 에러 발생!&#x27;</span>);
+    }
+}
+
+inputEl.addEventListener(<span class="hljs-string">&#x27;keydown&#x27;</span>, onInputDebounceQuery);
+dropdownMenuEl.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, onClickDropdownItem);
+</div></code></pre>
+    <h3 id="해설">해설</h3>
+    <ul>
+        <li>HTML 파일내 아이템 항목 템플릿을 생성하였습니다. 아래 <code>script</code> 태그로 감싼 태그 영역은 브라우저에서 랜더링되지 않고, 스크립트에서 이 문자열을 읽어
+            <code>lodash</code> 템플릿으로 활용합니다(자세한 내용은 참고자료를 확인해 주세요).
+            <pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/template&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;dropdown-item-template&quot;</span>&gt;</span><span class="javascript">
+&lt;li <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;dropdown-item&quot;</span> data-id=<span class="hljs-string">&quot;&lt;%-id%&gt;&quot;</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot; &lt;%-url%&gt;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&lt;%-description%&gt;&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">%-</span> <span class="hljs-attr">description</span> %&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</div></code></pre>
+        </li>
+        <li>HTML 엘리먼트를 탐색하여 담고있는 객체 네이밍은 다른 변수명과 구분될 수 있도록 <code>~El</code>으로 변경 하였습니다.</li>
+        <li><code>lodash</code>에서 제공하는 <code>debounce</code> 함수를 이용하여 반복되는 입력이더라도 마지막 입력 후 500ms 경과후에 조회가되도록 구현하였습니다.
+            <code>debounce</code>, <code>throttle</code> 함수의 개념과 차이를 알아 두시면 좋습니다.</li>
+        <li>기존 분리되어 구현되어있던 <code>fetch</code> 함수를 사용하지 않고, 이벤트 핸들러 내부에서 모든 구현을 처리하였습니다. 재사용될 가능성이 높거나
+            <code>fetch</code>에서 부가적인 처리가 많아진다면 분리하여 사용하는것도 좋은 방법입니다.</li>
+        <li><code>async/await</code> 비동기 처리를 하실때에는 <code>try~catch</code>를 사용하여 에러발생에 대한 처리를 해주시면 의도하지 않은 동작(예: 서버오류
+            등..)을 방지하거나 대응하실 수 있습니다.</li>
+        <li>DropdownItem 클릭시 모든 항목에 이벤트를 바인딩하지 않고, DropdownMenuEl에 이벤트를 위임하여 처리하였습니다. 이벤트 위임은 항목이 가변적으로 늘어나거나 줄어드는 경우 코드
+            누락으로 인한 Memory Leaks을 방지할 수 있고, 항목이 많아지는 경우 메모리 사용량을 줄이고 효율적으로 동작할 수 있게 합니다.</li>
+    </ul>
+    <h3 id="참고자료">참고자료</h3>
+    <ul>
+        <li><a href="https://lodash.com/docs/4.17.15#template">https://lodash.com/docs/4.17.15#template</a></li>
+        <li><a href="https://lodash.com/docs/4.17.15#debounce">https://lodash.com/docs/4.17.15#debounce</a></li>
+        <li><a href="https://lodash.com/docs/4.17.15#throttle">https://lodash.com/docs/4.17.15#throttle</a></li>
+        <li><a href="https://ui.toast.com/weekly-pick/ko_20160826">https://ui.toast.com/weekly-pick/ko_20160826</a></li>
+    </ul>
+    <h3 id="문제-2">문제 2</h3>
+    <h4 id="풀이-1">풀이</h4>
+    <pre><code class="language-html"><div><span class="hljs-comment">&lt;!-- solution/2.other_1/2. jq/index.html --&gt;</span>
+<span class="hljs-comment">&lt;!-- 1번 문제풀이 내용과 동일합니다 --&gt;</span>
+</div></code></pre>
+    <pre><code class="language-js"><div><span class="hljs-comment">// solution/2.other_1/2. jq/main.js</span>
+<span class="hljs-keyword">const</span> accessKey = <span class="hljs-string">&quot;hPyF-tz9tHnxeaoTwb7q0GTw10Wxwr85cD63lk7d7UE&quot;</span>;
+<span class="hljs-keyword">const</span> $input = $(<span class="hljs-string">&#x27;input&#x27;</span>);
+<span class="hljs-keyword">const</span> $dropdownMenu = $(<span class="hljs-string">&#x27;.dropdown-menu&#x27;</span>);
+<span class="hljs-keyword">const</span> $imageInfo = $(<span class="hljs-string">&#x27;.image-info&#x27;</span>);
+<span class="hljs-keyword">const</span> template = _.template($(<span class="hljs-string">&#x27;#dropdown-item-template&#x27;</span>).text());
+
+<span class="hljs-comment">/**
+ * 검색어가 입력됐을때 이벤트
+ */</span>
+<span class="hljs-keyword">const</span> onInputDebounceQuery = _.debounce(<span class="hljs-keyword">async</span> (e) =&gt; {
+    <span class="hljs-keyword">const</span> { <span class="hljs-attr">value</span>: query } = e.target;
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-comment">/**
+         * @see https://github.com/axios/axios#response-schema
+         */</span>
+        <span class="hljs-keyword">const</span> requestUrl = <span class="hljs-string">`https://api.unsplash.com/search/photos/?query=<span class="hljs-subst">${query}</span>&amp;client_id=<span class="hljs-subst">${accessKey}</span>`</span>;
+        <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> $.ajax(requestUrl, {
+            <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;GET&#x27;</span>
+        });
+
+        <span class="hljs-keyword">const</span> { results } = data;
+
+        <span class="hljs-comment">/**
+         * 조회 결과가 존재하지 않는 경우 항목을 표시하지 않음
+         */</span>
+        <span class="hljs-keyword">if</span> (!results?.length) {
+            $dropdownMenu.removeClass(<span class="hljs-string">&#x27;show&#x27;</span>);
+            <span class="hljs-keyword">return</span>;
+        }
+
+        <span class="hljs-comment">/**
+         * 드롭다운 메뉴에 항목을 추가
+         */</span>
+        $dropdownMenu.html(
+            results.map(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> {
+                <span class="hljs-keyword">const</span> { id, <span class="hljs-attr">alt_description</span>: description } = item;
+                <span class="hljs-keyword">const</span> { <span class="hljs-attr">regular</span>: url } = item.urls;
+                <span class="hljs-comment">/**
+                 * `lodash` 템플릿을 활용하여 조회된 데이터 항목을 템플릿으로 변환
+                 */</span>
+                <span class="hljs-keyword">return</span> template({
+                    id, description, url
+                });
+            }).join(<span class="hljs-string">&#x27;&#x27;</span>)
+        );
+        $dropdownMenu.addClass(<span class="hljs-string">&#x27;show&#x27;</span>);
+    } <span class="hljs-keyword">catch</span> (e) {
+        alert(e.status !== <span class="hljs-number">200</span> ? <span class="hljs-string">&#x27;데이터 조회중 에러 발생!&#x27;</span> : <span class="hljs-string">&#x27;데이터 처리중 에러 발생!&#x27;</span>);
+    }
+}, <span class="hljs-number">250</span>);
+
+<span class="hljs-comment">/**
+ * 드롭다운 아이템 항목 선택시 이벤트
+ */</span>
+<span class="hljs-keyword">const</span> onClickDropdownItem = <span class="hljs-keyword">async</span> (e) =&gt; {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">const</span> $dropdownItem = $(e.currentTarget);
+        <span class="hljs-comment">/**
+         * @see https://api.jquery.com/data/
+         */</span>
+        <span class="hljs-keyword">const</span> id = $dropdownItem.data(<span class="hljs-string">&#x27;id&#x27;</span>);
+
+        <span class="hljs-keyword">const</span> requestUrl = <span class="hljs-string">`https://api.unsplash.com/photos/<span class="hljs-subst">${id}</span>/?client_id=<span class="hljs-subst">${accessKey}</span>`</span>;
+        <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> $.ajax(requestUrl, {
+            <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;GET&#x27;</span>
+        });
+        <span class="hljs-keyword">const</span> {
+            urls,
+            <span class="hljs-attr">alt_description</span>: description
+        } = data
+        <span class="hljs-keyword">const</span> { <span class="hljs-attr">regular</span>: url } = urls;
+
+        <span class="hljs-comment">/**
+         * 이미지 객체 정보 업데이트
+         * @see https://api.jquery.com/attr/
+         */</span>
+        $imageInfo.attr(<span class="hljs-string">&#x27;src&#x27;</span>, url);
+        $imageInfo.attr(<span class="hljs-string">&#x27;alt&#x27;</span>, description);
+
+        <span class="hljs-comment">/**
+         * 열려있는 검색결과 내용을 닫고 검색어 입력창에 현재 이미지 내용을 입력
+         * @see https://api.jquery.com/addclass/
+         * @see https://api.jquery.com/removeclass/
+         */</span>
+        $dropdownMenu.removeClass(<span class="hljs-string">&#x27;show&#x27;</span>);
+        <span class="hljs-comment">/**
+         * @see https://api.jquery.com/val/
+         */</span>
+        $input.val(description);
+    } <span class="hljs-keyword">catch</span> (e) {
+        alert(e.isAxiosError ? <span class="hljs-string">&#x27;데이터 조회중 에러 발생!&#x27;</span> : <span class="hljs-string">&#x27;데이터 처리중 에러 발생!&#x27;</span>);
+    }
+}
+
+$input.on(<span class="hljs-string">&#x27;keydown&#x27;</span>, onInputDebounceQuery);
+<span class="hljs-comment">/**
+ * [!] 아이템 항목이 눌러졌을때의 이벤트를 `dropdownMenu` 엘리먼트에서 위임받아 처리
+ */</span>
+$dropdownMenu.on(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-string">&#x27;.dropdown-item&#x27;</span>, onClickDropdownItem);
+</div></code></pre>
+    <h3 id="해설-1">해설</h3>
+    <ul>
+        <li>1번 문제풀이 내용과 대부분 동작은 비슷하지만 jQuery 라이브러리를 활용하여 DOM을 제어하고 ajax 유틸을 활용하여 코드가 더 간결해졌습니다.</li>
+        <li>jQuery를 이용할 경우 이벤트 위임을 간단하게 구현하실 수 있습니다(코드 내용을 참고해 주세요)</li>
+        <li>jQuery 내부적으로 XHR 처리할 수 있는 <code>$.ajax</code>를 지원하여 <code>axios</code>대신 사용하실수 있습니다.</li>
+    </ul>
+    <h3 id="참고자료-1">참고자료</h3>
+    <ul>
+        <li><a href="https://api.jquery.com/data/">https://api.jquery.com/data/</a></li>
+        <li><a href="https://api.jquery.com/attr/">https://api.jquery.com/attr/</a></li>
+        <li><a href="https://api.jquery.com/addclass/">https://api.jquery.com/addclass/</a></li>
+        <li><a href="https://api.jquery.com/removeclass/">https://api.jquery.com/removeclass/</a></li>
+        <li><a href="https://api.jquery.com/val/">https://api.jquery.com/val/</a></li>
+        <li><a href="https://api.jquery.com/on/">https://api.jquery.com/on/</a></li>
+        <li><a href="https://api.jquery.com/html/">https://api.jquery.com/html/</a></li>
+        <li><a href="https://api.jquery.com/text/">https://api.jquery.com/text/</a></li>
+    </ul>
+    <h3 id="결론">결론</h3>
+    <ul>
+        <li>jQuery, lodash 등과 같은 라이브러리를 사용하면 코드를 더 쉽고 빠르게 작성하실수 있습니다. 라이브러리를 사용하는것도 좋지만 어떻게 동작하는지 원리를 잘 알고 사용하시면 더 좋을것
+            같습니다.</li>
+        <li>사용하시는 라이브러리 API목록을 잘 살펴보시고 알아두시면 나중에 필요한 순간에 빠르게 코드를 작성하실수 있습니다. 오픈소스로 만들어진 라이브러리는 여러명에 의해 확인되고 검증된 기능을 제공하기
+            때문에 더 안정적이고 더 효율적일 수 있습니다.</li>
+    </ul>
+</body>
+
+</html>

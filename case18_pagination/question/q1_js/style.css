@@ -1,0 +1,40 @@
+.commentWrap {
+    padding: 7px 10px;
+    text-align: left;
+}
+
+.commentWrap img {
+    vertical-align: middle;
+    margin-right: 10px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.commentWrap .createdAt {
+    float: right;
+    vertical-align: middle;
+}
+
+.commentWrap .content {
+    margin: 10px 0;
+}
+
+.pageWrap {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.pageWrap button {
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border: 1px solid lightgray;
+    margin-right: 3px;
+}
+
+.pageWrap button.active {
+    background: gray;
+    color: #fff;
+}

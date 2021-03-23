@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case13 : Instant Search - 타 시니어 개발자 해설</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css" />
+    <style>
+        /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. 루트 폴더에 README_OOO.md 생성 (OOO : Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+        
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+        html {
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: "Noto Sans KR", sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul,
+        ol,
+        li,
+        dl,
+        dt,
+        dd,
+        p,
+        table {
+            margin: 0;
+            padding: 0;
+            color: #494949;
+            letter-spacing: -0.025rem;
+            box-sizing: border-box;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 600;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: inherit;
+        }
+
+        a img {
+            border: none;
+        }
+
+        img {
+            max-width: 100%;
+            vertical-align: middle;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        p {
+            line-height: 1.8;
+        }
+
+        /* STYLE */
+        body {
+            padding: 0;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h2 {
+            padding: 50px 0;
+            color: #ffffff;
+            font-size: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+        }
+
+        h2::before {
+            content: "#";
+            display: inline-block;
+            margin-right: 5px;
+            color: #ff9db0;
+            font-weight: 300;
+            font-size: 2.2rem;
+        }
+
+        h3 {
+            position: relative;
+            margin: 30px 20px;
+            padding-bottom: 15px;
+            color: #303030;
+            font-size: 1.6rem;
+            border-bottom: 1px solid #ededed;
+        }
+
+        blockquote {
+            margin: 20px;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        strong {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .code-wrap {
+            position: relative;
+            background: #2f303b;
+            margin: 15px 0 0 0;
+        }
+
+        .code-wrap>p {
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 2px 15px;
+            font-size: 0.7rem;
+            color: #ffffff;
+            text-align: center;
+            background: #61c8cc;
+        }
+
+        code {
+            background: #ededed;
+        }
+
+        .language-html>div,
+        .language-css>div,
+        .language-js>div {
+            color: #fff;
+            padding: 30px 20px;
+            background: #2f303b;
+        }
+
+        code.language-bash div {
+            margin-top: -20px;
+            padding: 30px 20px;
+            font-size: 1rem;
+            color: #ffffff;
+            background: #2f303b;
+            box-sizing: border-box;
+        }
+
+        code::after {
+            content: "";
+            display: block;
+        }
+
+        code.code-inlineBlock::after {
+            content: "";
+            display: inline-block;
+        }
+
+        .excute-text {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #ed234b;
+        }
+
+        /* 좌, 우 여백 */
+        ol,
+        ul {
+            margin: 20px;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        ol li {
+            margin-left: 15px;
+        }
+
+        li {
+            font-size: 0.85rem;
+        }
+
+        table,
+        h4,
+        h5,
+        h6,
+        p,
+        img,
+        pre {
+            padding: 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 id="case16--instant-search---타-시니어-개발자-해설">Case13 : Instant Search - 타 시니어 개발자 해설</h2>
+    <ul>
+        <li><strong>[!] 기존 문제 내용을 조금 다른 관점에서 풀어보았습니다(코드구조 변경 재작성). 사용된 라이브러리(RxJS), 학습 키워드 및 개발환경은 동일합니다.</strong></li>
+    </ul>
+    <h4 id="풀이">풀이</h4>
+    <pre><code class="language-js"><div><span class="hljs-comment">// src/index_other_1.js</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./style.css&#x27;</span>;
+<span class="hljs-keyword">import</span> { InstantSearch } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./solution/other_1/instant-search&#x27;</span>;
+<span class="hljs-comment">/**
+ * 더미 데이터
+ */</span>
+<span class="hljs-keyword">const</span> worldItems = [
+    {
+        <span class="hljs-attr">word</span>: <span class="hljs-string">&#x27;서울&#x27;</span>
+    },
+    ...
+];
+
+<span class="hljs-comment">/**
+ * 단어 목록을 노출할 엘리먼트
+ */</span>
+<span class="hljs-keyword">const</span> wordListEl = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#wordlist&#x27;</span>);
+
+<span class="hljs-comment">/**
+ * 데이터 입력으로 템플릿(HTML) 문자열을 생성하는 함수
+ */</span>
+<span class="hljs-keyword">const</span> makeWrodListHtml = <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+    <span class="hljs-keyword">let</span> itemList = <span class="hljs-string">&#x27;&#x27;</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; data.length; i++) {
+        itemList += <span class="hljs-string">`
+        &lt;div&gt;
+            &lt;span&gt;<span class="hljs-subst">${data[i].word}</span>&lt;/span&gt;
+        &lt;/div&gt;`</span>
+    }
+    <span class="hljs-keyword">return</span> itemList;
+}
+
+<span class="hljs-comment">/**
+ * 내부 구현이 서버 데이터를 불러오는 로직으로 변경될 경우 응답을 동일하게 구현할 수 있도록 비동기 응답 구현
+ */</span>
+<span class="hljs-keyword">const</span> selectDataItems = <span class="hljs-function">(<span class="hljs-params">query</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> selectedDataItems = query ? worldItems.filter(<span class="hljs-function">(<span class="hljs-params">{ word }</span>) =&gt;</span> word.startsWith(query)) : worldItems
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve(selectedDataItems);
+}
+
+<span class="hljs-keyword">const</span> renderWordList = <span class="hljs-function">(<span class="hljs-params">query = <span class="hljs-string">&#x27;&#x27;</span></span>) =&gt;</span> {
+    <span class="hljs-comment">/**
+     * async/await 사용 가능한 환경에서는 더 간단하게 코드를 구현할 수 있습니다.
+     */</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span> {
+        selectDataItems(query).then(<span class="hljs-function">(<span class="hljs-params">wordItems</span>) =&gt;</span> {
+            <span class="hljs-keyword">const</span> wordListHtml = makeWrodListHtml(wordItems);
+            wordListEl.innerHTML = wordListHtml;
+            resolve(wordListEl);
+        });
+    });
+};
+
+<span class="hljs-keyword">const</span> bootstrap = <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-comment">/**
+     * 단어 목록이 노출될 엘리먼트
+     */</span>
+    <span class="hljs-keyword">const</span> instantSearch = <span class="hljs-keyword">new</span> InstantSearch({
+        <span class="hljs-attr">wrapperSelector</span>: <span class="hljs-string">&#x27;#instant-search&#x27;</span>,
+        <span class="hljs-attr">classNames</span>: <span class="hljs-string">&#x27;instant-search-input&#x27;</span>,
+        <span class="hljs-attr">placeholder</span>: <span class="hljs-string">&#x27;please enter keyword&#x27;</span>
+    });
+
+    instantSearch.subscribe(<span class="hljs-function">(<span class="hljs-params">{ target }</span>) =&gt;</span> {
+        <span class="hljs-keyword">const</span> { <span class="hljs-attr">value</span>: query } = tar<span class="hljs-keyword">get</span>
+        <span class="hljs-title">renderWordList</span>(<span class="hljs-params">query</span>);
+    });
+
+    // 최초에 전체 리스트를 출력.
+    <span class="hljs-title">renderWordList</span>();
+};
+
+// <span class="hljs-title">src</span>/<span class="hljs-title">solution</span>/<span class="hljs-title">other_1</span>/<span class="hljs-title">instant</span>-<span class="hljs-title">search</span>/<span class="hljs-title">index</span>.<span class="hljs-title">js</span>
+...
+<span class="hljs-title">export</span> <span class="hljs-title">class</span> <span class="hljs-title">InstantSearch</span> {
+    <span class="hljs-keyword">constructor</span>({
+        wrapperSelector,
+        placeholder,
+        classNames,
+        debounceDelay = <span class="hljs-number">500</span>
+    }) {
+        <span class="hljs-comment">/**
+         * 멤버 변수로 등록
+         */</span>
+        <span class="hljs-built_in">this</span>._debounceDelay = debounceDelay;
+        <span class="hljs-comment">/**
+         * &lt;해설&gt;
+         * `initialize` 함수를 분리하는것도 좋지만 `constructor` 생성자 자체가 그 역할을 하기 때문에 따로 분리하지 않았습니다.
+         */</span>
+        <span class="hljs-keyword">const</span> eventStream = <span class="hljs-keyword">new</span> Subject();
+        <span class="hljs-keyword">const</span> inputEl = <span class="hljs-built_in">this</span>._makeSearchInputEl(classNames, placeholder);
+        <span class="hljs-built_in">document</span>.querySelector(wrapperSelector).append(inputEl);
+        <span class="hljs-comment">/**
+         * 입력된 키 이벤트를 `eventStream` 스트림으로 전송
+         */</span>
+        inputEl.addEventListener(<span class="hljs-string">&#x27;keyup&#x27;</span>, eventStream.next.bind(eventStream));
+        <span class="hljs-comment">/**
+         * `destroy` 메서드에서 참조 가능하도록 멤버변수로 등록
+         */</span>
+        <span class="hljs-built_in">this</span>._eventStream = eventStream;
+        <span class="hljs-built_in">this</span>._inputEl = inputEl;
+    }
+    <span class="hljs-comment">/**
+     * &lt;해설&gt;
+     * 함수의 이름만 보고 함수가 하는 역할을 알 수 있도록 하는것이 좋습니다.
+     * [&gt;] 하나의 함수에서 너무 많은일을 하지 않도록 합니다.
+     * [&gt;] 함수의 입출력 값이 명확하다면 나중에 테스트 코드를 쉽게 만드실 수 있습니다.
+     */</span>
+    _makeSearchInputEl(classNames, placeholder = <span class="hljs-string">&#x27;Please enter&#x27;</span>) {
+        <span class="hljs-keyword">const</span> inputEl = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&#x27;input&#x27;</span>);
+        inputEl.setAttribute(<span class="hljs-string">&#x27;type&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>);
+        inputEl.setAttribute(<span class="hljs-string">&#x27;placeholder&#x27;</span>, placeholder);
+        inputEl.classList.add(classNames);
+        <span class="hljs-keyword">return</span> inputEl;
+    }
+    <span class="hljs-comment">/**
+     * `subscribe` 메서드를 이용하여 이벤트 쿠독 콜백 등록
+     */</span>
+    subscribe(callbackFn) {
+        <span class="hljs-keyword">const</span> { <span class="hljs-attr">_eventStream</span>: eventStream, <span class="hljs-attr">_debounceDelay</span>: debounceDelay } = <span class="hljs-built_in">this</span>;
+        <span class="hljs-keyword">return</span> eventStream.pipe(debounceTime(debounceDelay)).subscribe(callbackFn);
+    }
+    <span class="hljs-comment">/**
+     * 검색 엘리먼트를 제거하고, 이벤트 스트림을 종료
+     */</span>
+    destroy() {
+        <span class="hljs-built_in">this</span>._eventStream.complete();
+        <span class="hljs-built_in">this</span>._inputEl.remove();
+    }
+}
+...
+</div></code></pre>
+    <h5 id="해설">해설</h5>
+    <blockquote>
+        <p>용어: 클래스 내부에 사용되는 함수는 '메소드', 클래스 내부에서 선언되어 여러 메소드에서 참조되어 사용되는 변수들을 멤버변수라고 합니다.</p>
+    </blockquote>
+    <ul>
+        <li>기존 문제 코드에서 변수 및 함수 네이밍을 다르게 작성해 보았습니다.</li>
+        <li><strong>[!] 함수의 이름이나 구현 범위는 꼭 정답이 있는것은 아닙니다.</strong></li>
+        <li>함수의 경우 이름만 보고 함수가 하는 역할을 알 수 있도록 개선해 보았습니다.</li>
+        <li>하나의 함수에서 너무 많은 일을 하지 않도록 하였습니다.</li>
+        <li>함수의 입출력 값이 명확하다면 테스트가 쉬워집니다.</li>
+        <li>그렇다고 함수가 너무 작은단위로 파편화 되지 않게 주의하세요, 함수가 실행될때 마다 발생하는 스코프를 생성하는 시간이 쌓이면 성능에 영향을 줄 수
+            있습니다.</li>
+
+        <li>내부적으로 사용되는 prviate 멤버변수, 메소드의 이름은 <code class="code-inlineBlock">_(언더바)</code>로 네이밍 하였습니다.</li>
+
+        <li>일반적으로 오픈소스 라이브러리에서 자주 보이는 패턴이기도 한데 언더바로 시작하는 필드는 찾아보시면, 대부분 내부 처리를 위해 만든 필드이거나 변경/삭제 될 수 있기 때문에 꼭
+            확인해 보시는게 좋습니다.</li>
+        <li>public과 private 필드 선언은 자바스크립트 표준화 위원회에 실험적 기능 (stage 3) TC39 로 제안되어있습니다. 현재 이를 지원하는 브라우져는 제한적인
+            상태입니다만, Babel 과 같은 build 시스템을 사용한다면 이 기능을 사용해볼 수 있습니다.</li>
+
+        <li><strong>InstantSearch</strong> 클래스로 생성된 인스턴스의 <code class="code-inlineBlock">subscribe</code> 기능을 이용하여 키 입력
+            이벤트를 구독할 수 있습니다.</li>
+
+        <li><code class="code-inlineBlock">InstantSearch</code> 클래스는 내부적으로 이벤트 스트림(Rx.Subject)를 가지고 있고, 구독하는 모든
+            대상에게 이벤트 스트림을 전달합니다.</li>
+
+    </ul>
+    <h5 id="참고자료">참고자료</h5>
+    <ul>
+        <li><a
+                href="http://reactivex.io/documentation/ko/subject.html">http://reactivex.io/documentation/ko/subject.html</a>
+        </li>
+        <li><a
+                href="https://rxjs-dev.firebaseapp.com/api/operators/debounceTime">https://rxjs-dev.firebaseapp.com/api/operators/debounceTime</a>
+        </li>
+        <li><a
+                href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes">https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes</a>
+        </li>
+    </ul>
+    <h5 id="결론">결론</h5>
+    <ul>
+        <li>RxJS를 잘 모른다면 조금 어려울 수 있는 문제 같습니다. 다양한 라이브러리를 사용해 보는것도 좋은것 같습니다. 대부분의 라이브러리나 프레임워크에는 만들게된 동기(Motivation)나,
+            지향점, 철학 또는 해결하고자 하는 목적이 있는데 라이브러리를 사용하기전에 한번 찾아보고 공감이 되신다면 금방 익숙해질것 같습니다.</li>
+    </ul>
+</body>
+
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case14 : Stopwatch - 출제자 해설</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css"
+    />
+    <style>
+      /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. 루트 폴더에 README_OOO.md 생성 (OOO : Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+        
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+      html {
+        overflow-x: hidden;
+      }
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      ul,
+      ol,
+      li,
+      dl,
+      dt,
+      dd,
+      p,
+      table {
+        margin: 0;
+        padding: 0;
+        color: #494949;
+        letter-spacing: -0.025rem;
+        box-sizing: border-box;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 600;
+      }
+      a {
+        color: inherit;
+        text-decoration: inherit;
+      }
+
+      a img {
+        border: none;
+      }
+
+      img {
+        max-width: 100%;
+        vertical-align: middle;
+      }
+
+      ul li {
+        list-style: none;
+      }
+      p {
+        line-height: 1.8;
+      }
+
+      /* STYLE */
+      body {
+        padding: 0;
+        margin: 0;
+        line-height: 1.6;
+      }
+      h2 {
+        padding: 50px 0;
+        color: #ffffff;
+        font-size: 2rem;
+        text-align: center;
+        background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+      }
+      h2::before {
+        content: "#";
+        display: inline-block;
+        margin-right: 5px;
+        color: #ff9db0;
+        font-weight: 300;
+        font-size: 2.2rem;
+      }
+      h3 {
+        position: relative;
+        margin: 30px 20px;
+        padding-bottom: 15px;
+        color: #303030;
+        font-size: 1.6rem;
+        border-bottom: 1px solid #ededed;
+      }
+
+      blockquote {
+        margin: 20px;
+        padding: 20px;
+        background: #f2f2f2;
+      }
+
+      strong {
+        display: block;
+        margin-top: 10px;
+      }
+
+      .code-wrap {
+        position: relative;
+        background: #2f303b;
+        margin: 15px 0 0 0;
+      }
+      .code-wrap > p {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 2px 15px;
+        font-size: 0.7rem;
+        color: #ffffff;
+        text-align: center;
+        background: #61c8cc;
+      }
+      code {
+        background: #ededed;
+      }
+
+      .language-css > div,
+      .language-js > div {
+        color: #fff;
+        padding: 30px 20px;
+        background: #2f303b;
+      }
+      code.language-bash div {
+        margin-top: -20px;
+        padding: 30px 20px;
+        font-size: 1rem;
+        color: #ffffff;
+        background: #2f303b;
+        box-sizing: border-box;
+      }
+      code::after {
+        content: "";
+        display: block;
+      }
+
+      .excute-text {
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: #ed234b;
+      }
+      /* 좌, 우 여백 */
+      ol,
+      ul {
+        margin: 20px;
+        padding: 20px;
+        background: #f2f2f2;
+      }
+      ol li {
+        margin-left: 15px;
+      }
+      li {
+        font-size: 0.85rem;
+      }
+      table,
+      h4,
+      h5,
+      h6,
+      p,
+      img,
+      pre {
+        padding: 0 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 id="case2--infinite-scroll---출제자-해설">
+      Case14 : Stopwatch - 출제자 해설
+    </h2>
+    <h3 id="q1-vanillajs-로-코드를-작성해보세요">
+      q1. vanilla.js 로 코드를 작성해보세요.
+    </h3>
+    <blockquote>
+      <p>중점포인트</p>
+    </blockquote>
+    <ul>
+      <li>setInterval , setTimeout 의 이해도를 체크한다.</li>
+      <li>setTimeout 을 사용할시</li>
+    </ul>
+    <ul>
+      <li>재귀호출로 처리한다</li>
+      <li>첫번째 함수를 전역으로 함에 유의한다.</li>
+    </ul>
+    <h4 id="a">A)</h4>
+    <p>Timer 객체를 만든다.</p>
+    <blockquote>
+      <p>
+        Timer 객체를 만드는 이유는 시작 버튼 클릭시 아래와 같이 한줄로 가독성
+        좋게 이벤트를 만들기 위함이다.
+      </p>
+    </blockquote>
+    <pre><code class="language-js"><div>Timer.startTimer();
+</div></code></pre>
+    <ul>
+      <li>기본 변수는 아래와 같다.</li>
+    </ul>
+    <pre><code class="language-js"><div>isPending :  <span class="hljs-literal">true</span>, <span class="hljs-comment">// true 면 멈춤 false 면 진행</span>
+<span class="hljs-attr">currentSec</span> :  <span class="hljs-number">0</span>, <span class="hljs-comment">// 현재 초</span>
+<span class="hljs-attr">currentMin</span> :  <span class="hljs-number">0</span>, <span class="hljs-comment">// 현재 분</span>
+</div></code></pre>
+    <p>시작 버튼을 누를시</p>
+    <pre><code class="language-js"><div>startTimer :  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+
+<span class="hljs-keyword">if</span>(!<span class="hljs-built_in">this</span>.isPending){
+
+<span class="hljs-built_in">this</span>.currentSec+=<span class="hljs-number">1</span>;
+
+<span class="hljs-keyword">if</span>(<span class="hljs-built_in">this</span>.currentSec==<span class="hljs-number">60</span>){
+
+<span class="hljs-built_in">this</span>.currentSec=<span class="hljs-number">0</span>;
+
+<span class="hljs-built_in">this</span>.currentMin+=<span class="hljs-number">1</span>;
+
+}
+
+<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#min&#x27;</span>).innerHTML = (<span class="hljs-string">&#x27;0&#x27;</span> + <span class="hljs-built_in">this</span>.currentMin).slice(<span class="hljs-number">-2</span>);
+
+<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#sec&#x27;</span>).innerHTML = (<span class="hljs-string">&#x27;0&#x27;</span> + <span class="hljs-built_in">this</span>.currentSec).slice(<span class="hljs-number">-2</span>);
+
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-string">&quot;Timer.startTimer()&quot;</span>, <span class="hljs-number">1000</span>);
+
+}
+
+},
+</div></code></pre>
+    <p>
+      재귀 호출을 진행하면서, pending이 false 면 계속 진행 true 인 경우, 재귀
+      호출을 멈춘다.
+    </p>
+    <pre><code class="language-js"><div>(<span class="hljs-string">&quot;0&quot;</span> + <span class="hljs-built_in">this</span>.currentMin).slice(<span class="hljs-number">-2</span>);
+</div></code></pre>
+    <p>
+      1초인경우 01 을 붙여주기 위함인데 12초면 012 이다. 이를 뒤에서부터 두자리
+      끊어서 12로 나타낸다.
+    </p>
+    <pre><code class="language-js"><div>pauseTimer :  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+
+<span class="hljs-built_in">this</span>.isPending = <span class="hljs-literal">true</span>;
+
+},
+<span class="hljs-attr">resetTimer</span> :  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+
+<span class="hljs-built_in">this</span>.isPending = <span class="hljs-literal">true</span>;
+
+<span class="hljs-built_in">this</span>.currentSec = <span class="hljs-number">0</span>;
+
+<span class="hljs-built_in">this</span>.currentMin = <span class="hljs-number">0</span>;
+
+<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#min&#x27;</span>).innerHTML = <span class="hljs-string">&quot;00&quot;</span>;
+
+<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#sec&#x27;</span>).innerHTML = <span class="hljs-string">&quot;00&quot;</span>;
+
+}
+</div></code></pre>
+    <p>
+      pauseTimer(멈춤) =&gt; isPending 을 false resetTimer(리셋) =&gt; isPending
+      을 false 하고, 시계를 00:00 으로 초기화
+    </p>
+    <pre><code class="language-js"><div><span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">&quot;DOMContentLoaded&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;#start&quot;</span>).addEventListener(<span class="hljs-string">&quot;click&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">if</span> (Timer.isPending) {
+      Timer.isPending = <span class="hljs-literal">false</span>;
+
+      Timer.startTimer();
+    }
+  });
+
+  <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;#pause&quot;</span>).addEventListener(<span class="hljs-string">&quot;click&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    Timer.pauseTimer();
+  });
+
+  <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;#reset&quot;</span>).addEventListener(<span class="hljs-string">&quot;click&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    Timer.resetTimer();
+  });
+});
+</div></code></pre>
+    <p>
+      DOMContentLoaded 문서가 로드되고 각 버튼을 클릭시 타이머의 객체의 함수를
+      콜한다.
+    </p>
+    <blockquote>
+      <p>
+        시작을 누를시 if 로 체크하는 것은 두번 누르더라도 반복해서 증가함을
+        방지한다. 궁금하면 if 를 없애고 돌려본다.
+      </p>
+    </blockquote>
+    <pre><code class="language-js"><div><span class="hljs-keyword">if</span> (Timer.isPending) {
+  Timer.isPending = <span class="hljs-literal">false</span>;
+
+  Timer.startTimer();
+}
+</div></code></pre>
+    <h5 id="추가로-생각해볼-문제">(추가로 생각해볼 문제)</h5>
+    <ul>
+      <li>setInterval 으로 처리 한다면 어떻게 할수 있을까 고민해본다.</li>
+    </ul>
+    <h3 id="q2-jquery-로-코드를-작성해보세요">
+      q2. jQuery 로 코드를 작성해보세요.
+    </h3>
+    <blockquote>
+      <p>중점포인트</p>
+    </blockquote>
+    <p>
+      vanilia.js 와의 차이점 jQuery로 문서 로드 시점, jQuery 이벤트 할당으로
+      처리 했는지
+    </p>
+    <h4 id="a-1">A)</h4>
+    <blockquote>
+      <p>html 안에 텍스트 넣기</p>
+    </blockquote>
+    <pre><code class="language-js"><div>$(<span class="hljs-string">&quot;#min&quot;</span>).html(<span class="hljs-string">&quot;00&quot;</span>);
+</div></code></pre>
+    <pre><code class="language-js"><div>$(<span class="hljs-built_in">document</span>).ready(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  $(<span class="hljs-string">&quot;#start&quot;</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">if</span> (Timer.isPending) {
+      Timer.isPending = <span class="hljs-literal">false</span>;
+
+      Timer.startTimer();
+    }
+  });
+
+  $(<span class="hljs-string">&quot;#pause&quot;</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    Timer.pauseTimer();
+  });
+
+  $(<span class="hljs-string">&quot;#reset&quot;</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    Timer.resetTimer();
+  });
+});
+</div></code></pre>
+    <p>문서를 로드후에 각 click 이벤트를 할당한다.</p>
+    <h3 id="q3-react-로-코드를-작성해보세요">
+      q3. React 로 코드를 작성해보세요.
+    </h3>
+    <blockquote>
+      <p>중점포인트</p>
+    </blockquote>
+    <ul>
+      <li>
+        state의 값이 변화해서 랜더링이 되더라도 변수의 변화값을 유지하고 있는지
+      </li>
+      <li>useEffect 의 두번째 인자를 잘 이해하고 있는지</li>
+      <li>useState 의 콜백 이해</li>
+      <li>setInterval 을 React로 제어하는 방법</li>
+    </ul>
+    <h4 id="a-2">A)</h4>
+    <p>
+      &lt;순서&gt; 시작, 중지를 누르면 pending 을 변화 시키고 -&gt; useEffect 로
+      감지해서 타이머 진행 -&gt; sec가 1씩 증가 -&gt; useEffect 로 감지해서 화면
+      변화
+    </p>
+    <pre><code><code><div>const  intervalId = useRef(null)
+</div></code></code></pre>
+    <ul>
+      <li>
+        컴포넌트가 랜더링 되더라도 변화하는 값을 저장하기 해서 useRef 로
+        처리한다.
+      </li>
+      <li>
+        useRef 는 현재 상태 값을 intervalId.current 처럼 current 값으로
+        처리한다.
+      </li>
+      <li>
+        해당 useRef 가 궁금하면 console.log(intervalId) 로 찍어본다.
+        <blockquote>
+          <p>
+            아래와 같이 intervalId.current 로 setInterval 의 값을 저장하고,
+            clearInterval 로 해제한다.
+          </p>
+        </blockquote>
+      </li>
+    </ul>
+    <pre><code class="language-js"><div>useEffect(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">if</span> (!pending) {
+    intervalId.current = <span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> setSec(<span class="hljs-function">(<span class="hljs-params">sec</span>) =&gt;</span> sec + <span class="hljs-number">1</span>), <span class="hljs-number">1000</span>);
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-built_in">clearInterval</span>(intervalId.current);
+  }
+}, [pending]);
+</div></code></pre>
+    <ul>
+      <li>타이머의 제어는 pending의 상태로 분기해서 처리한다.</li>
+      <li>pending : false =&gt; 타이머 진행</li>
+      <li>pending : true =&gt; 타이머 멈춤</li>
+      <li>
+        pending 의 상태가 변화 하면 useEffect 로 감지하는데 두번째 인자로
+        체크한다.
+      </li>
+      <li>
+        하나의 상태가 변화하는 것을 감지해서 위와 같이 [pending]으로 ​ 처리한다.
+        <blockquote>
+          <p>
+            아래와 같이 여러개의 상태를 useEffect 로 감지해서 처리하지 않는다.
+          </p>
+        </blockquote>
+      </li>
+    </ul>
+    <pre><code class="language-js"><div>useEffect(<span class="hljs-function">() =&gt;</span> {
+  setSec(<span class="hljs-number">0</span>);
+  setMin(<span class="hljs-number">0</span>);
+});
+</div></code></pre>
+    <pre><code class="language-js"><div>useEffect(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">if</span> (sec === <span class="hljs-number">60</span>) {
+    setSec(<span class="hljs-number">0</span>);
+    setMin(<span class="hljs-function">(<span class="hljs-params">min</span>) =&gt;</span> min + <span class="hljs-number">1</span>);
+  }
+}, [sec]);
+</div></code></pre>
+    <ul>
+      <li>sec 의 변화를 감지하는데, 60초가 되면 분1증가 초는 0으로 초기화 ​</li>
+    </ul>
+    <h5 id="추가로-생각해볼-문제-1">(추가로 생각해볼 문제)</h5>
+    <ul>
+      <li>setTimeout 으로 처리 한다면 어떻게 할수 있을까 고민해본다.</li>
+    </ul>
+    <p>​</p>
+  </body>
+</html>

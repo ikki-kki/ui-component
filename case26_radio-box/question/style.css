@@ -1,0 +1,22 @@
+body {
+    margin-top: 50px;
+}
+
+.CurrentItem {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+}
+
+form p {
+    text-align: center;
+}
+
+form div {
+    display: flex;
+    justify-content: center;
+}
+
+.SubmitButtonContainer {
+    margin-top: 10px;
+}

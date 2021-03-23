@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case26 : RadioBox - 출제자 해설</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css" />
+  <style>
+    /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. 루트 폴더에 README_OOO.md 생성 (OOO : Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+        
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+    html {
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Noto Sans KR", sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    ul,
+    ol,
+    li,
+    dl,
+    dt,
+    dd,
+    p,
+    table {
+      margin: 0;
+      padding: 0;
+      color: #494949;
+      letter-spacing: -0.025rem;
+      box-sizing: border-box;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: 600;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: inherit;
+    }
+
+    a img {
+      border: none;
+    }
+
+    img {
+      max-width: 100%;
+      vertical-align: middle;
+    }
+
+    ul li {
+      list-style: none;
+    }
+
+    p {
+      line-height: 1.8;
+    }
+
+    /* STYLE */
+    body {
+      padding: 0 0 40px 0;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    h2 {
+      padding: 50px 0;
+      color: #ffffff;
+      font-size: 2rem;
+      text-align: center;
+      background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+    }
+
+    h2::before {
+      content: "#";
+      display: inline-block;
+      margin-right: 5px;
+      color: #ff9db0;
+      font-weight: 300;
+      font-size: 2.2rem;
+    }
+
+    h3 {
+      position: relative;
+      margin: 30px 20px;
+      padding-bottom: 15px;
+      color: #303030;
+      font-size: 1.6rem;
+      border-bottom: 1px solid #ededed;
+    }
+
+    blockquote {
+      margin: 20px;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+
+    strong {
+      display: block;
+      margin-top: 10px;
+    }
+
+    .code-wrap {
+      position: relative;
+      background: #2f303b;
+      margin: 15px 0 0 0;
+    }
+
+    .code-wrap>p {
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 2px 15px;
+      font-size: 0.7rem;
+      color: #ffffff;
+      text-align: center;
+      background: #61c8cc;
+    }
+
+    code {
+      background: #ededed;
+    }
+
+    .language-html>div,
+    .language-css>div,
+    .language-js>div {
+      color: #fff;
+      padding: 30px 20px;
+      background: #2f303b;
+    }
+
+    code.language-bash div {
+      margin-top: -20px;
+      padding: 30px 20px;
+      font-size: 1rem;
+      color: #ffffff;
+      background: #2f303b;
+      box-sizing: border-box;
+    }
+
+    code::after {
+      content: "";
+      display: block;
+    }
+
+    code.code-inlineBlock::after {
+      content: "";
+      display: inline-block;
+    }
+
+    .excute-text {
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: #ed234b;
+    }
+
+    /* 좌, 우 여백 */
+    ol,
+    ul {
+      margin: 20px;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+
+    ol li {
+      margin-left: 15px;
+    }
+
+    li {
+      font-size: 0.85rem;
+    }
+
+    table,
+    h4,
+    h5,
+    h6,
+    p,
+    img,
+    pre {
+      padding: 0 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2 id="case26--radiobox---출제자-해설">Case26 : RadioBox - 출제자 해설</h2>
+  <h3 id="javascript---각각의-이벤트-리스트에-코드를-작성하여-위-기능이-동작되는-콤보-박스를-완성하시오">Javascript - 각각의 이벤트 리스트에 코드를 작성하여 위 기능이 동작되는 콤보
+    박스를 완성하시오.</h3>
+  <h4 id="a">A)</h4>
+  <pre><code class="language-js"><div><span class="hljs-keyword">const</span> toggleItemList = <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">const</span> isVisible = $itemList.style.visibility === <span class="hljs-string">&quot;visible&quot;</span>;
+  $itemList.style.visibility = isVisible ? <span class="hljs-string">&quot;hidden&quot;</span> : <span class="hljs-string">&quot;visible&quot;</span>;
+};
+
+$inputTag.addEventListener(<span class="hljs-string">&quot;keyup&quot;</span>, <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> { value } = event.target;
+  <span class="hljs-keyword">if</span> (!value) {
+    <span class="hljs-keyword">return</span>;
+  }
+
+  <span class="hljs-keyword">if</span> (event.key === <span class="hljs-string">&quot;Enter&quot;</span>) {
+    items.push(value);
+    <span class="hljs-built_in">document</span>.dispatchEvent(<span class="hljs-keyword">new</span> CustomEvent(ITEM_ADDED_EVENTNAME));
+    $itemList.innerHTML = items.map(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> <span class="hljs-string">`&lt;li&gt;<span class="hljs-subst">${item}</span>&lt;/li&gt;`</span>).join(<span class="hljs-string">&quot;&quot;</span>);
+  }
+});
+
+$arrowDown.addEventListener(<span class="hljs-string">&quot;click&quot;</span>, <span class="hljs-function">() =&gt;</span> {
+  toggleItemList();
+});
+
+$itemList.addEventListener(<span class="hljs-string">&quot;click&quot;</span>, <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
+  <span class="hljs-keyword">if</span> (event.target.nodeName !== <span class="hljs-string">&quot;LI&quot;</span>) {
+    <span class="hljs-keyword">return</span>;
+  }
+
+  $inputTag.value = event.target.innerText;
+  <span class="hljs-comment">// 실무에선 변수로 활용</span>
+  $currentItem.textContent = <span class="hljs-string">`현재 아이템: <span class="hljs-subst">${event.target.innerText}</span>`</span>;
+  toggleItemList();
+});
+
+<span class="hljs-built_in">document</span>.addEventListener(ITEM_ADDED_EVENTNAME, <span class="hljs-function">() =&gt;</span> {
+  $notification.classList.add(<span class="hljs-string">&quot;Notification--show&quot;</span>);
+  $notification.classList.remove(<span class="hljs-string">&quot;Notification--hide&quot;</span>);
+
+  <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function">() =&gt;</span> {
+    $notification.classList.add(<span class="hljs-string">&quot;Notification--hide&quot;</span>);
+    $notification.classList.remove(<span class="hljs-string">&quot;Notification--show&quot;</span>);
+  }, <span class="hljs-number">3000</span>);
+});
+</div></code></pre>
+  <h5 id="해설">해설</h5>
+  <ol>
+    <li>
+      <p>form tag를 활용해 라디오 박스를 만든다고 가정합니다.</p>
+    </li>
+    <li>
+      <p>form과 form이 다루는 데이터를 표현해줄 dom을 html 상에 만들어야 합니다.</p>
+    </li>
+    <li>
+      <p>form이 전체적으로 어떤 데이터를 다루는지(갯수, 종류 등) 알아야 검사 코드를 만들 수 있습니다.</p>
+    </li>
+  </ol>
+  <ul>
+    <li>이를 위해 이 정보를 나타내는 객체나 배열을 활용할 수 있습니다. 예제 코드에선 formMap 이라는 객체를 만듭니다.</li>
+  </ul>
+  <ol start="4">
+    <li>확인 버튼이 클릭되면 서버로 데이터를 보내기 전에 데이터의 유효성 검사를 해야합니다.</li>
+  </ol>
+  <ul>
+    <li>이를 위해 form tag에 submit 이벤트를 수신하는 event handler를 등록해야 합니다.</li>
+    <li>이 핸들러 안에서 검사를 진행합니다.
+      <ul>
+        <li>이 검사를 할때 위에서 만든 formMap 이라는 객체를 활용합니다.</li>
+        <li>현업에서 검사 코드에는 모든 항목에 대한 입력이나 선택을 했는지, 입력 값의 타입이 정확한지, 입력 값이 요구사항의 조건을 만족하는지 등이 포함될 수 있습니다.</li>
+      </ul>
+    </li>
+    <li>검사를 통과하지 못했다면 사용자가 모든 항목에 대해서 입력 및 선택을 할 수 있도록 안내하는 UI를 만들어 보여줍니다.</li>
+    <li>검사를 통과했다면 작성 완료된 form 데이터를 보여줍니다(현업에선 API call을 합니다).</li>
+  </ul>
+  <ol start="5">
+    <li>
+      <p>이때 form tag는 type이 submit인 버튼이 클릭되면 기본적으로 페이지 새로고침을 하는데, 이 동작이 서비스에서 불필요한 경우엔 이 동작을 하지 않을 필요가 있습니다. 이를 위해 핸들러에서
+        넘어온 event 객체의 preventDefault 함수를 실행해서 기본 동작을 멈춥니다.</p>
+    </li>
+    <li>
+      <p>핸들러 내부에서 form이 가진 데이터를 확인하기 위해서 FormData 클래스를 활용합니다. 이때 이 클래스로 만든 인스턴스는 타입이 FormData 입니다. iterator protocol이
+        FormData 내부에 정의되어 있기 때문에 for of loop 이용해 데이터 항목들을 순회할 수 있습니다. for loop를 사용하는 것이 꺼려진다면 Array의 from 함수를 이용해 배열로
+        만들어 쉽게 순회할 수도 있습니다.</p>
+    </li>
+  </ol>
+</body>
+
+</html>

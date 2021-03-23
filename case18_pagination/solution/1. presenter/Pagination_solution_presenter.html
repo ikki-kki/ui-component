@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case18 : Pagination - 출제자 해설</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css" />
+  <style>
+    /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. 루트 폴더에 README_OOO.md 생성 (OOO : Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+        
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+    html {
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Noto Sans KR", sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    ul,
+    ol,
+    li,
+    dl,
+    dt,
+    dd,
+    p,
+    table {
+      margin: 0;
+      padding: 0;
+      color: #494949;
+      letter-spacing: -0.025rem;
+      box-sizing: border-box;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: 600;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: inherit;
+    }
+
+    a img {
+      border: none;
+    }
+
+    img {
+      max-width: 100%;
+      vertical-align: middle;
+    }
+
+    ul li {
+      list-style: none;
+    }
+
+    p {
+      line-height: 1.8;
+    }
+
+    /* STYLE */
+    body {
+      padding: 0;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    h2 {
+      padding: 50px 0;
+      color: #ffffff;
+      font-size: 2rem;
+      text-align: center;
+      background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+    }
+
+    h2::before {
+      content: "#";
+      display: inline-block;
+      margin-right: 5px;
+      color: #ff9db0;
+      font-weight: 300;
+      font-size: 2.2rem;
+    }
+
+    h3 {
+      position: relative;
+      margin: 30px 20px;
+      padding-bottom: 15px;
+      color: #303030;
+      font-size: 1.6rem;
+      border-bottom: 1px solid #ededed;
+    }
+
+    blockquote {
+      margin: 20px;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+
+    strong {
+      display: block;
+      margin-top: 10px;
+    }
+
+    .code-wrap {
+      position: relative;
+      background: #2f303b;
+      margin: 15px 0 0 0;
+    }
+
+    .code-wrap>p {
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 2px 15px;
+      font-size: 0.7rem;
+      color: #ffffff;
+      text-align: center;
+      background: #61c8cc;
+    }
+
+    code {
+      background: #ededed;
+    }
+
+    .language-css>div,
+    .language-js>div {
+      color: #fff;
+      padding: 30px 20px;
+      background: #2f303b;
+    }
+
+    code.language-bash div {
+      margin-top: -20px;
+      padding: 30px 20px;
+      font-size: 1rem;
+      color: #ffffff;
+      background: #2f303b;
+      box-sizing: border-box;
+    }
+
+    code::after {
+      content: "";
+      display: block;
+    }
+
+    code.code-inlineBlock::after {
+      content: "";
+      display: inline-block;
+    }
+
+    .excute-text {
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: #ed234b;
+    }
+
+    /* 좌, 우 여백 */
+    ol,
+    ul {
+      margin: 20px;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+
+    ol li {
+      margin-left: 15px;
+    }
+
+    li {
+      font-size: 0.85rem;
+    }
+
+    table,
+    h4,
+    h5,
+    h6,
+    p,
+    img,
+    pre {
+      padding: 0 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2 id="case9--pagination---출제자-해설">Case18 : Pagination - 출제자 해설</h2>
+  <h3 id="q1--vanillajs-로-코드를-작성해보세요">q1. vanilla.js 로 코드를 작성해보세요.</h3>
+  <p>​</p>
+  <blockquote>
+    <p>중점포인트</p>
+  </blockquote>
+  <ul>
+    <li>페이지 번호를 동적으로 생성했을 때, 이벤트를 할당하기</li>
+    <li>페이지네이션 페이지번호를 주었을 때, 나오는 게시물수 컨트롤하기</li>
+    <li>활성화 된 버튼 처리하기
+      ​</li>
+  </ul>
+  <h4 id="a">A)</h4>
+  <pre><code class="language-js"><div><span class="hljs-function"><span class="hljs-keyword">function</span>  <span class="hljs-title">Pagination</span>(<span class="hljs-params"></span>)</span>{
+​
+<span class="hljs-comment">// 초기값 셋팅</span>
+<span class="hljs-built_in">this</span>.current_page = <span class="hljs-number">1</span>;
+<span class="hljs-built_in">this</span>.limit = <span class="hljs-number">5</span>;
+<span class="hljs-built_in">this</span>.total_page = <span class="hljs-built_in">Math</span>.ceil( comments.length / <span class="hljs-built_in">this</span>.limit );
+}
+</div></code></pre>
+  <p>총 페이지 수는 commets 배열의 길이를 한페이지에 보여질 게시물수로 나눈다.
+    ex) 한페이지에 5개씩 보이고 총 게시물 수가 23 개라면
+    23/5 를 올림 계산해서 5페이지가 나온다.
+    올림을 하는 이유는 마지막 페이지에 게시물 수가 3개라도 1페이지로 치기 때문이다.
+    ​</p>
+  <pre><code class="language-js"><div>Pagination.prototype.getComments = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">page</span>)</span>{
+​
+<span class="hljs-keyword">var</span>  start = ( page - <span class="hljs-number">1</span> ) * <span class="hljs-built_in">this</span>.limit;
+<span class="hljs-built_in">this</span>.current_page = page;
+<span class="hljs-keyword">var</span>  limit = start + <span class="hljs-built_in">this</span>.limit;
+<span class="hljs-keyword">return</span>  comments.filter( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> _ , index </span>)</span>{
+    <span class="hljs-keyword">if</span>(index &gt;= start &amp;&amp; index &lt; limit ) <span class="hljs-keyword">return</span>  <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">else</span>  <span class="hljs-keyword">return</span>  <span class="hljs-literal">false</span>;
+​
+});
+​
+}
+​
+</div></code></pre>
+  <p>Parameter 각 페이지를 인자로 주었을때
+    Return 해당하는 게시물 수
+    ​
+    시작지점부터 한페이지에 보여질 게시물 수를 보여준다</p>
+  <ul>
+    <li>1 page ) 0번부터 5(한페지에 보여줄숫자)까지의 게시물을 보여주면된다. start : 23*(1페이지-1) * limit</li>
+    <li>2 page ) (2-1) * 5</li>
+    <li>3 page ) (3-1) * 5
+      각 시작지점은 위와 같고 5개의 게시물씩 보여주면 된다.
+      ​</li>
+  </ul>
+  <blockquote>
+    <p>아래와 같이 처리 하는 것은 배열의 인덱스가 시작지점부터 한페이지에 보여질 게시물 수의 인덱스로 처리하기 위함이다.</p>
+  </blockquote>
+  <pre><code class="language-js"><div><span class="hljs-keyword">return</span>  comments.filter( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> _ , index </span>)</span>{
+​   <span class="hljs-keyword">if</span>(index &gt;= start &amp;&amp; index &lt; limit ) <span class="hljs-keyword">return</span>  <span class="hljs-literal">true</span>;
+​   <span class="hljs-keyword">else</span>  <span class="hljs-keyword">return</span>  <span class="hljs-literal">false</span>;
+});
+</div></code></pre>
+  <blockquote>
+    <p>게시물 배열을 넘겼을 때 html 태그에 맞춰서 출력해주는 함수를 구현한다.
+      ​</p>
+  </blockquote>
+  <pre><code class="language-js"><div>Pagination.prototype.getCommentFormat = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">comments</span>) </span>{
+  <span class="hljs-keyword">return</span> comments.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">acc, comment</span>) </span>{
+    <span class="hljs-keyword">return</span> (
+      acc +
+      <span class="hljs-string">`&lt;div class=&quot;commentWrap&quot;&gt;
+            &lt;img src=&quot;`</span> +
+      comment.profile_url +
+      <span class="hljs-string">`&quot; alt=&quot;&quot; /&gt;
+            `</span> +
+      comment.author +
+      <span class="hljs-string">`
+            &lt;div class=&quot;createdAt&quot;&gt;
+                `</span> +
+      comment.createdAt +
+      <span class="hljs-string">`
+            &lt;/div&gt;
+            &lt;div class=&quot;content&quot;&gt;
+                `</span> +
+      comment.content +
+      <span class="hljs-string">`
+            &lt;/div&gt;
+            &lt;hr /&gt;
+        &lt;/div&gt;`</span>
+    );
+  }, <span class="hljs-string">&quot;&quot;</span>);
+};
+</div></code></pre>
+  <p>아래와 같이 처리 하는것은 html 양식에 맞춰 순회하면서 acc 에 누적해서 리턴해주기 위함이다.</p>
+  <pre><code class="language-js"><div><span class="hljs-keyword">return</span>  comments.reduce( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">acc, comment </span>)</span>{
+</div></code></pre>
+  <p>​</p>
+  <blockquote>
+    <p>총 페이지의 숫자를 입력시 페이지를 화면에 뿌려주는 함수를 구현한다.
+      ​</p>
+  </blockquote>
+  <pre><code class="language-js"><div>Pagination.prototype.getPageListFormat = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">var</span> result = <span class="hljs-string">&quot;&quot;</span>;
+
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> num = <span class="hljs-number">1</span>; num &lt;= <span class="hljs-built_in">this</span>.total_page; num++) {
+    <span class="hljs-keyword">var</span> className = num == <span class="hljs-built_in">this</span>.current_page ? <span class="hljs-string">&quot;active&quot;</span> : <span class="hljs-string">&quot;&quot;</span>;
+    result += <span class="hljs-string">&#x27;&lt;button class=&quot;&#x27;</span> + className + <span class="hljs-string">&#x27;&quot;&gt;&#x27;</span> + num + <span class="hljs-string">&quot;&lt;/button&gt;&quot;</span>;
+  }
+
+  <span class="hljs-keyword">return</span> result;
+};
+</div></code></pre>
+  <p>​
+    ​</p>
+  <pre><code class="language-js"><div><span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">&quot;DOMContentLoaded&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">var</span> pagination = <span class="hljs-keyword">new</span> Pagination();
+
+  <span class="hljs-keyword">var</span> commentContainer = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;#commentContainer&quot;</span>);
+  <span class="hljs-keyword">var</span> pageContainer = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;#pageContainer&quot;</span>);
+
+  commentContainer.innerHTML = pagination.getCommentFormat(
+    pagination.getComments(<span class="hljs-number">1</span>)
+  );
+  pageContainer.innerHTML = pagination.getPageListFormat();
+
+</div></code></pre>
+  <ol>
+    <li>문서가 로드 된 뒤 1페이지에 해당하는 게시물을 보여준다</li>
+    <li>페이지 리스트들을 보여주고, 1페이지를 활성화한다.
+      ​
+      ​</li>
+  </ol>
+  <pre><code class="language-js"><div>  <span class="hljs-built_in">document</span>.addEventListener(
+    <span class="hljs-string">&quot;click&quot;</span>,
+    <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+      <span class="hljs-comment">// If the clicked element doesn&#x27;t have the right selector, bail</span>
+      <span class="hljs-keyword">if</span> (event.target.matches(<span class="hljs-string">&quot;#pageContainer button&quot;</span>)) {
+        <span class="hljs-keyword">var</span> page = event.target.innerHTML;
+        commentContainer.innerHTML = pagination.getCommentFormat(
+          pagination.getComments(page)
+        );
+        pageContainer.innerHTML = pagination.getPageListFormat();
+        <span class="hljs-keyword">return</span>;
+      }
+    },
+    <span class="hljs-literal">false</span>
+  );
+});
+​
+</div></code></pre>
+  <ol>
+    <li>각 페이지 버튼을 클릭했을 때, 페이지에 해당하는 게시물을 뿌려주고</li>
+    <li>하단 페이지리스트를 뿌려준다.</li>
+    <li>event.target.matches 로 처리한것은 각 클릭시 하단도 새로 리프레시 되므로 문서가 로드하고나서 이벤트를 할당하지 않고 클릭하고나서 해당 셀렉터 인지 확인한 후에 작동하게 한다.
+      ​</li>
+  </ol>
+  <h5 id="생각해볼-점">생각해볼 점</h5>
+  <p>pagination 객체로 생성했는데,
+    html 안에 데이터를 넣어주는 부분도
+    pagination 함수안에 넣어줄지 말지 어느부분이 설계상 더 좋을지 고민해보기
+    ​</p>
+  <blockquote>
+    <p>아래부분</p>
+  </blockquote>
+  <pre><code class="language-js"><div>pagination.getCommentFormat(pagination.getComments(<span class="hljs-number">1</span>));
+</div></code></pre>
+  <p>​</p>
+  <h3 id="q2--jquery-로-코드를-작성해보세요">q2. jQuery 로 코드를 작성해보세요.</h3>
+  <p>​</p>
+  <blockquote>
+    <p>중점포인트</p>
+  </blockquote>
+  <ol>
+    <li>jQuery 문서로드 처리하기</li>
+    <li>jQuery로 동적으로 엘리멘트 생성시, 이벤트를 할당하는 방법
+      ​</li>
+  </ol>
+  <h4 id="a-1">A)</h4>
+  <ul>
+    <li>vanilia.js 와 구현은 비슷하다</li>
+    <li>문서 로드시 $(document).ready 로 처리 하고
+      ​</li>
+  </ul>
+  <blockquote>
+    <p>아래와 같이 on click 으로 동적 처리를 실행한다.</p>
+  </blockquote>
+  <pre><code class="language-js"><div>
+  $(<span class="hljs-built_in">document</span>).on(<span class="hljs-string">&quot;click&quot;</span>, <span class="hljs-string">&quot;#pageContainer button&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> page = $(<span class="hljs-built_in">this</span>).html();
+    commentContainer.html(
+      pagination.getCommentFormat(pagination.getComments(page))
+    );
+    pageContainer.html(pagination.getPageListFormat());
+  });
+
+</div></code></pre>
+  <p>​</p>
+  <h3 id="q3--react-로-코드를-작성해보세요">q3. React 로 코드를 작성해보세요.</h3>
+  <p>​</p>
+  <blockquote>
+    <p>중점포인트</p>
+  </blockquote>
+  <ul>
+    <li>각 클릭시 React로 상태를 어떻게 처리하는지
+      ​</li>
+  </ul>
+  <h4 id="a-2">A)</h4>
+  <ul>
+    <li>Redux toolkit 을 사용했다.</li>
+    <li>actions 와 reducers는 아래와 같이 작성한다.</li>
+  </ul>
+  <pre><code class="language-js"><div><span class="hljs-keyword">export</span>  <span class="hljs-keyword">const</span> { getComments } = slice.actions;
+<span class="hljs-keyword">export</span>  <span class="hljs-keyword">const</span>  commentsReducer = slice.reducer;
+</div></code></pre>
+  <p>​</p>
+  <pre><code class="language-js"><div>getComments( state, action ) {
+​
+<span class="hljs-keyword">const</span>  start = ( action.payload.page - <span class="hljs-number">1</span> ) * state.limit;
+<span class="hljs-keyword">const</span>  limit = start + state.limit;
+​
+state.data = state.comments.filter(
+​
+( _ , index ) =&gt; {
+  <span class="hljs-keyword">if</span>(index &gt;= start &amp;&amp; index &lt; limit ) <span class="hljs-keyword">return</span>  <span class="hljs-literal">true</span>;
+​  <span class="hljs-keyword">else</span>  <span class="hljs-keyword">return</span>  <span class="hljs-literal">false</span>;
+}
+);
+​
+state.current_page = action.payload.page;
+}
+
+</div></code></pre>
+  <ul>
+    <li>위에 vanila.js 와 같이 페이지 네이션을 처리한다.</li>
+    <li>getComments 라는 액션을 생성한다.</li>
+    <li>initialState 에 data 라는 변수를 생성한 이유는 comments 임시 데이터는 유지하고 보여질 부분만 그때그때 data 변수를 생성한다.
+      ​- 게시물을 보여주는 부분은 data를 참조해서 본다.
+      ​</li>
+  </ul>
+  <h5 id="추가로-생각해볼-점">추가로 생각해볼 점</h5>
+  <p>useState 로 redux 없이 구현해보기</p>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+html, body {
+  font-family: 'Open Sans', sans-serif;
+  padding: 0;
+  margin: 0;
+}
+body {
+  background-color: #f6f6f6;
+  min-height: 100vh;
+  height: 100vh;
+  padding: 35px;
+  position: relative;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.body-blackout {
+  position: absolute;
+  z-index: 1010;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .65);
+  display: none;
+}
+.body-blackout.is-blacked-out {
+  display: block;
+}
+.popup-trigger {
+  display: inline-block;
+}
+.popup-modal {
+
+  display: none;
+  /* jquery modal default hidden */
+  overflow: visible !important;
+  
+}
+
+.popup-modal .close-modal {
+  /* jquery default close button none */
+  display: none !important;
+}
+
+.popup-modal__close {
+  position: absolute;
+  font-size: 5rem;
+  right: -10px;
+  top: -10px;
+  cursor: pointer;
+}

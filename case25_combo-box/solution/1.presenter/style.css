@@ -1,0 +1,105 @@
+* {
+    box-sizing: border-box;
+}
+
+.CurrentItem {
+    display: block;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.ComboBox {
+    position: relative;
+    display: flex;
+    margin: 50px auto 0 auto;
+    width: 150px;
+    height: 30px;
+}
+
+.ComboBox input {
+    width: 130px;
+    height: 100%;
+}
+
+.ComboBox img {
+    width: 20px;
+    height: 100%;
+    cursor: pointer;
+    border: 1px solid black;
+    border-left: none;
+}
+
+.ComboBox img:hover {
+    background-color: cornsilk;
+}
+
+.ComboBox__list {
+    position: absolute;
+    bottom: -100px;
+    display: flex;
+    flex-direction: column;
+    list-style: circle;
+    width: 100%;
+    height: 100px;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+    overflow-x: scroll;
+    border: 1px solid black;
+}
+
+.ComboBox__list li {
+    cursor: pointer;
+}
+
+.ComboBox__list li:hover {
+    background-color: ivory;
+}
+
+.Notification {
+    position: absolute;
+    top: 10px;
+    right: -212px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    background-color: deepskyblue;
+}
+
+.Notification--show {
+    animation: showSlide 1s ease forwards;
+}
+
+.Notification--hide {
+    animation: hideSlide 1s ease forwards;
+}
+
+@keyframes showSlide {
+    0% {
+        transform: translateX(-30px);
+    }
+
+    15% {
+        transform: translateX(-250px);
+    }
+
+    100% {
+        transform: translateX(-222px);
+    }
+}
+
+@keyframes hideSlide {
+    0% {
+        transform: translateX(-222px);
+    }
+
+    15% {
+        transform: translateX(-250px);
+    }
+
+    100% {
+        transform: translateX(212px);
+    }
+}

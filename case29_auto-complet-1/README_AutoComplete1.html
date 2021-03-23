@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case29 : Auto Complete 1</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css" />
+    <style>
+        /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. 루트 폴더에 README_OOO.md 생성 (OOO : Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+        
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+        html {
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: "Noto Sans KR", sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul,
+        ol,
+        li,
+        dl,
+        dt,
+        dd,
+        p,
+        table {
+            margin: 0;
+            padding: 0;
+            color: #494949;
+            letter-spacing: -0.025rem;
+            box-sizing: border-box;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 600;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: inherit;
+        }
+
+        a img {
+            border: none;
+        }
+
+        img {
+            max-width: 100%;
+            vertical-align: middle;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        p {
+            line-height: 1.8;
+        }
+
+        /* STYLE */
+        body {
+            padding: 0;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h2 {
+            padding: 50px 0;
+            color: #ffffff;
+            font-size: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+        }
+
+        h2::before {
+            content: "#";
+            display: inline-block;
+            margin-right: 5px;
+            color: #ff9db0;
+            font-weight: 300;
+            font-size: 2.2rem;
+        }
+
+        h3 {
+            position: relative;
+            margin: 30px 20px;
+            padding-bottom: 15px;
+            color: #303030;
+            font-size: 1.6rem;
+            border-bottom: 1px solid #ededed;
+        }
+
+        blockquote {
+            margin: 20px;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        strong {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .code-wrap {
+            position: relative;
+            background: #2f303b;
+            margin: 15px 0 0 0;
+        }
+
+        .code-wrap>p {
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 2px 15px;
+            font-size: 0.7rem;
+            color: #ffffff;
+            text-align: center;
+            background: #61c8cc;
+        }
+
+        code {
+            background: #ededed;
+        }
+
+        .language-html>div,
+        .language-css>div,
+        .language-js>div {
+            color: #fff;
+            padding: 30px 20px;
+            background: #2f303b;
+        }
+
+        code.language-bash div {
+            margin-top: -20px;
+            padding: 30px 20px;
+            font-size: 1rem;
+            color: #ffffff;
+            background: #2f303b;
+            box-sizing: border-box;
+        }
+
+        code::after {
+            content: "";
+            display: block;
+        }
+
+        code.code-inlineBlock::after {
+            content: "";
+            display: inline-block;
+        }
+
+        .excute-text {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #ed234b;
+        }
+
+        /* 좌, 우 여백 */
+        ol,
+        ul {
+            margin: 20px;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        ol li {
+            margin-left: 15px;
+        }
+
+        li {
+            font-size: 0.85rem;
+        }
+
+        table,
+        h4,
+        h5,
+        h6,
+        p,
+        img,
+        pre {
+            padding: 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 id="case14--auto-complete-1">Case29 : Auto Complete 1</h2>
+    <h3 id="케이스-주제">케이스 주제</h3>
+    <ul>
+        <li>검색어 자동완성 기능 만들기</li>
+    </ul>
+    <p>(현업에서 서비스를 만들때 화장품을 검색하거나 영상을 검색할때 등에 사용할 검색 자동완성 기능을 요구하는 경우가 많이 있습니다. 사용자는 이 기능으로 내가 검색한 내용과 관련된 다른 검색어들을 알 수
+        있게 되어 사용자에게 정보 편의성이 주어지고 서비스 입장에서는 사용자로부터 더 많은 검색을 이끌어낼 수 있습니다.)</p>
+    <p>Q. 아래와 같은 스펙을 가진 검색 자동완성 기능을 만들어보세요.</p>
+    <h3 id="기능-요구사항">기능 요구사항</h3>
+    <ol>
+        <li>하나의 input tag를 만든다.</li>
+        <li>이 input에 키보드 타이핑이 될때 현재 검색어 기준으로 관련 검색어 API를 호출한다.</li>
+    </ol>
+    <ul>
+        <li>이때 API 호출은 즉각 실행하길 바라는 경우</li>
+        <li>타이핑을 멈추고 0.5초 등의 시간이 지나고 요청하는 경우가 있다.</li>
+    </ul>
+    <ol start="3">
+        <li>검색어 API가 진행 중일때 input tag 우측에 loading 중임을 표시한다.</li>
+        <li>검색어 API Response가 도착하면 그 내용을 input tag 아래에 리스트로 보여준다.</li>
+    </ol>
+    <h3 id="기능-작동-이미지">기능 작동 이미지</h3>
+    <p><img src="./example.gif" alt="example_image"></p>
+    <h3 id="문제">문제</h3>
+    <p>q1. Javascript</p>
+    <ul>
+        <li>가장 마지막 타이핑이 일어나고 0.5초 뒤에 API Request를 실행하도록 하는 debounce logic을 작성하시오.</li>
+    </ul>
+    <p>q2. RxJS를 이용해 스트림 구조로 동일한 기능을 작성하시오</p>
+    <h3 id="주요-학습-키워드">주요 학습 키워드</h3>
+    <ul>
+        <li>fetch와 async, await를 이용한 API호출</li>
+        <li>지연시간을 적용하여 마지막 이벤트만 발생시키는 debounce를 이용해,
+            마지막으로 타이핑을 한 순간에 API를 호출 할 수 있는 기능 구현</li>
+        <li>slice, map 함수를 사용하여 특정조건에 맞는 검색어를 특정갯수만큼 노출 시키는 기능 구현</li>
+    </ul>
+    <h3 id="작성해주셔야-하는-question-파일경로">작성해주셔야 하는 question 파일경로</h3>
+    <p><strong>q1</strong>
+        <code>./question/1. Vanilla JavaScript/src/app.js</code></p>
+    <p><strong>q2</strong>
+        <code>./question/2. RxJS/src/app.js</code></p>
+    <h3 id="실행-방법-및-의존성-모듈-설치">실행 방법 및 의존성 모듈 설치</h3>
+    <p><strong>q1</strong>
+        경로
+        <code>./question/1. Vanilla JavaScript</code></p>
+    <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+    <code class="language-bash"><div>  $ npm install
+  $ npm start
+</div></code></pre>
+    </div>
+    <p><strong>q2</strong>
+        경로
+        <code>./question/2. RxJS</code></p>
+
+    <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+    <code class="language-bash"><div>  $ npm install
+  $ npm start
+</div></code></pre>
+    </div>
+    <h4 id="solution2other-풀이-실행-시"><code>./solution/2.other</code> 풀이 실행 시</h4>
+    <p><strong>q1</strong>
+        경로
+        <code>./solution/2.other/1. Vanilla JavaScript</code>
+        index.html 열기</p>
+    <p><strong>q2</strong>
+        경로
+        <code>./solution/2.other/2. RxJS</code></p>
+    <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+    <code class="language-bash"><div>  $ npm install
+  $ npm run dev
+</div></code></pre>
+    </div>
+</body>
+
+</html>

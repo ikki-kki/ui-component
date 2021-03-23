@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case15 : ModalWindow - 출제자 해설</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css"
+  />
+  <style>
+    /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. 루트 폴더에 README_OOO.md 생성 (OOO : Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+        
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+    html {
+      overflow-x: hidden;
+    }
+    body {
+      font-family: "Noto Sans KR", sans-serif;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    ul,
+    ol,
+    li,
+    dl,
+    dt,
+    dd,
+    p,
+    table {
+      margin: 0;
+      padding: 0;
+      color: #494949;
+      letter-spacing: -0.025rem;
+      box-sizing: border-box;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: 600;
+    }
+    a {
+      color: inherit;
+      text-decoration: inherit;
+    }
+
+    a img {
+      border: none;
+    }
+
+    img {
+      max-width: 100%;
+      vertical-align: middle;
+    }
+
+    ul li {
+      list-style: none;
+    }
+    p {
+      line-height: 1.8;
+    }
+
+    /* STYLE */
+    body {
+      padding: 0;
+      margin: 0;
+      line-height: 1.6;
+    }
+    h2 {
+      padding: 50px 0;
+      color: #ffffff;
+      font-size: 2rem;
+      text-align: center;
+      background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+    }
+    h2::before {
+      content: "#";
+      display: inline-block;
+      margin-right: 5px;
+      color: #ff9db0;
+      font-weight: 300;
+      font-size: 2.2rem;
+    }
+    h3 {
+      position: relative;
+      margin: 30px 20px;
+      padding-bottom: 15px;
+      color: #303030;
+      font-size: 1.6rem;
+      border-bottom: 1px solid #ededed;
+    }
+
+    blockquote {
+      margin: 20px;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+
+    strong {
+      display: block;
+      margin-top: 10px;
+    }
+
+    .code-wrap {
+      position: relative;
+      background: #2f303b;
+      margin: 15px 0 0 0;
+    }
+    .code-wrap > p {
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 2px 15px;
+      font-size: 0.7rem;
+      color: #ffffff;
+      text-align: center;
+      background: #61c8cc;
+    }
+    code {
+      background: #ededed;
+    }
+    .language-html>div,
+    .language-css > div,
+    .language-js > div {
+      color: #fff;
+      padding: 30px 20px;
+      background: #2f303b;
+    }
+    code.language-bash div {
+      margin-top: -20px;
+      padding: 30px 20px;
+      font-size: 1rem;
+      color: #ffffff;
+      background: #2f303b;
+      box-sizing: border-box;
+    }
+    code::after {
+      content: "";
+      display: block;
+    }
+
+    code.code-inlineBlock::after {
+        content: "";
+        display: inline-block;
+      }
+
+    .excute-text {
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: #ed234b;
+    }
+    /* 좌, 우 여백 */
+    ol,
+    ul {
+      margin: 20px;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+    ol li {
+      margin-left: 15px;
+    }
+    li {
+      font-size: 0.85rem;
+    }
+    table,
+    h4,
+    h5,
+    h6,
+    p,
+    img,
+    pre {
+      padding: 0 20px;
+    }
+  </style>
+</head>
+
+<body>
+    <h2 id="case15--modalwindow---출제자-해설">Case15 : ModalWindow - 출제자 해설</h2>
+    <h3 id="q1--vanillajs-로-코드를-작성해보세요">q1. vanilla.js 로 코드를 작성해보세요.</h3>
+    <p>​</p>
+    <h4 id="a--중점포인트">A) 중점포인트</h4>
+    <ul>
+        <li>모달이 떳을 때, 모달안을 클릭해도 안닫힌다.</li>
+        <li>모달 바탕을 클릭 했을 때, 모달도 닫혀야 된다.
+            ​</li>
+    </ul>
+    <pre><code class="language-js"><div><span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.popup-trigger&#x27;</span>).addEventListener(<span class="hljs-string">&#x27;click&#x27;</span> , <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+
+popupModal.classList.add(<span class="hljs-string">&#x27;is--visible&#x27;</span>)
+
+bodyBlackout.classList.add(<span class="hljs-string">&#x27;is-blacked-out&#x27;</span>)
+
+});
+</div></code></pre>
+    <p>팝업 띄우기 클릭시,</p>
+    <ul>
+        <li>popupModal class명에 is--visible 추가</li>
+        <li>bodyBlackout class명에 is-blacked-out 추가</li>
+    </ul>
+    <pre><code class="language-js"><div>popupModal.querySelector(<span class="hljs-string">&#x27;.popup-modal__close&#x27;</span>).addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+
+popupModal.classList.remove(<span class="hljs-string">&#x27;is--visible&#x27;</span>)
+bodyBlackout.classList.remove(<span class="hljs-string">&#x27;is-blacked-out&#x27;</span>)
+
+})
+​
+</div></code></pre>
+    <p>x 버튼 클릭시</p>
+    <ul>
+        <li>popupModal class명에 is--visible 제거</li>
+        <li>bodyBlackout class명에 is-blacked-out 제거</li>
+    </ul>
+    <pre><code class="language-js"><div>bodyBlackout.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+
+
+popupModal.classList.remove(<span class="hljs-string">&#x27;is--visible&#x27;</span>)
+
+bodyBlackout.classList.remove(<span class="hljs-string">&#x27;is-blacked-out&#x27;</span>)
+
+})
+</div></code></pre>
+    <p>바탕을 클릭 시 클래스 리스트에서 제거한다.
+        ​
+        ​
+        바탕을 클릭했을 때 모달이 닫히는 것은
+        z-index 순서를 조절해서 모달이 바탕화면보다 위에 있기 때문이다.</p>
+    <h3 id="q2--jquery-로-코드를-작성해보세요">q2. jQuery 로 코드를 작성해보세요.</h3>
+    <h4 id="a-중점포인트">A) 중점포인트</h4>
+    <ul>
+        <li>q_index.html 만을 건드린다.</li>
+        <li>js 를 작성하지 않는다.</li>
+        <li>문서를 보고 완성
+            ​​</li>
+    </ul>
+    <pre><code class="language-js"><div>​
+&lt;script  src=<span class="hljs-string">&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js&quot;</span>&gt;&lt;/script&gt;
+
+&lt;!-- jQuery Modal --&gt;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>  <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">link</span>  <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>  <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css&quot;</span>  /&gt;</span></span>
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>  <span class="hljs-attr">src</span>=<span class="hljs-string">&#x27;./s2_index.js&#x27;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
+
+</div></code></pre>
+    <p>body 위로 모듈을 불러온다.</p>
+    <pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">a</span>  <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>  <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;modal:close&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">i</span>  <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fa fa-window-close popup-modal__close&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</div></code></pre>
+    <p>modal:close 닫기버튼
+        modal:open 열기버튼
+        기타 css 는 따로 작성할 필요없이 script 에 불러온 내용을 붙여 넣습니다.</p>
+    <h3 id="q3--react-로-코드를-작성해보세요">q3. React 로 코드를 작성해보세요.</h3>
+    <p>​</p>
+    <h4 id="a--중점포인트-1">A) 중점포인트</h4>
+    <p>useState 훅으로 잘 처리 합니다.
+        ​
+        &lt;해설&gt;
+        css 로 props 를 받는 부분을 봅니다</p>
+    <pre><code class="language-css"><div><span class="hljs-selector-tag">display</span>: ${props  =&gt;  props.isVisible ? &quot;block&quot; : &quot;none&quot;  };
+</div></code></pre>
+    <p>​</p>
+    <blockquote>
+        <p>app.js</p>
+    </blockquote>
+    <pre><code class="language-js"><div><span class="hljs-keyword">const</span> [ isVisible , setIsVisible ] = useState(<span class="hljs-literal">false</span>);
+
+<span class="hljs-keyword">const</span>  onSetIsVisible = <span class="hljs-function">(<span class="hljs-params">active</span>) =&gt;</span> {
+setIsVisible(active);
+
+}
+</div></code></pre>
+    <p>useState boolean 으로 모달의 상태를 컨트롤 합니다.</p>
+    <pre><code class="language-js"><div>&lt;BodyBlackout  isVisible={isVisible}  onSetIsVisible={onSetIsVisible}  /&gt;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Modal</span>  <span class="hljs-attr">isVisible</span>=<span class="hljs-string">{isVisible}</span>  <span class="hljs-attr">onSetIsVisible</span>=<span class="hljs-string">{onSetIsVisible}</span>  /&gt;</span></span>
+</div></code></pre>
+    <p>​</p>
+    <h5 id="추가로-생각해볼-점">추가로 생각해볼 점</h5>
+    <p>ModalContainer.js 로 BodyBlackout , Modal 컴포넌트를 포함해서 한번에 넘겨서 처리하도록 만들어 봅니다.</p>
+</body>
+
+</html>

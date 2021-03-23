@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case18 : Pagination - 대기업 S사 프론트엔드 개발자님의 답안</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css" />
+  <style>
+    /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. 루트 폴더에 README_OOO.md 생성 (OOO : Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+        
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+    html {
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Noto Sans KR", sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    ul,
+    ol,
+    li,
+    dl,
+    dt,
+    dd,
+    p,
+    table {
+      margin: 0;
+      padding: 0;
+      color: #494949;
+      letter-spacing: -0.025rem;
+      box-sizing: border-box;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: 600;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: inherit;
+    }
+
+    a img {
+      border: none;
+    }
+
+    img {
+      max-width: 100%;
+      vertical-align: middle;
+    }
+
+    ul li {
+      list-style: none;
+    }
+
+    p {
+      line-height: 1.8;
+    }
+
+    /* STYLE */
+    body {
+      padding: 0;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    h2 {
+      padding: 50px 0;
+      color: #ffffff;
+      font-size: 2rem;
+      text-align: center;
+      background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+    }
+
+    h2::before {
+      content: "#";
+      display: inline-block;
+      margin-right: 5px;
+      color: #ff9db0;
+      font-weight: 300;
+      font-size: 2.2rem;
+    }
+
+    h3 {
+      position: relative;
+      margin: 30px 20px;
+      padding-bottom: 15px;
+      color: #303030;
+      font-size: 1.6rem;
+      border-bottom: 1px solid #ededed;
+    }
+
+    blockquote {
+      margin: 20px;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+
+    strong {
+      display: block;
+      margin-top: 10px;
+    }
+
+    .code-wrap {
+      position: relative;
+      background: #2f303b;
+      margin: 15px 0 0 0;
+    }
+
+    .code-wrap>p {
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 2px 15px;
+      font-size: 0.7rem;
+      color: #ffffff;
+      text-align: center;
+      background: #61c8cc;
+    }
+
+    code {
+      background: #ededed;
+    }
+
+    .language-css>div,
+    .language-js>div {
+      color: #fff;
+      padding: 30px 20px;
+      background: #2f303b;
+    }
+
+    code.language-bash div {
+      margin-top: -20px;
+      padding: 30px 20px;
+      font-size: 1rem;
+      color: #ffffff;
+      background: #2f303b;
+      box-sizing: border-box;
+    }
+
+    code::after {
+      content: "";
+      display: block;
+    }
+
+    code.code-inlineBlock::after {
+      content: "";
+      display: inline-block;
+    }
+
+    .excute-text {
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: #ed234b;
+    }
+
+    /* 좌, 우 여백 */
+    ol,
+    ul {
+      margin: 20px;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+
+    ol li {
+      margin-left: 15px;
+    }
+
+    li {
+      font-size: 0.85rem;
+    }
+
+    table,
+    h4,
+    h5,
+    h6,
+    p,
+    img,
+    pre {
+      padding: 0 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2 id="case9--pagination---대기업-s사-프론트엔드-개발자님의-답안">Case18 : Pagination - 대기업 S사 프론트엔드 개발자님의 답안</h2>
+  <h3 id="q1-문제-상황에-대하여-java-script로-동작을-구현시킬-수-있는-코드를-작성해보세요">q1. 문제 상황에 대하여 Java Script로 동작을 구현시킬 수 있는 코드를 작성해보세요</h3>
+  <h4 id="a">A)</h4>
+  <pre><code class="language-js"><div><span class="hljs-comment">/**
+ * 페이징 객체
+ * <span class="hljs-doctag">@param <span class="hljs-type">{*}</span> </span>commentContainerEl 
+ * <span class="hljs-doctag">@param <span class="hljs-type">{*}</span> </span>paginationContainerEl 
+ * <span class="hljs-doctag">@param <span class="hljs-type">{*}</span> </span>initialItems 
+ */</span>
+<span class="hljs-keyword">const</span> Pagination = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">
+    commentContainerEl,
+    paginationContainerEl,
+    initialItems = []
+</span>) </span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.constructor !== Pagination) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;객체를 생성후 사용해 주세요!&#x27;</span>);
+    }
+    <span class="hljs-comment">/**
+    * 현재 페이지 인덱스(0부터 시작)
+    */</span>
+    <span class="hljs-built_in">this</span>.currentPageIndex = <span class="hljs-number">0</span>;
+    <span class="hljs-comment">/**
+    * 페이지당 최대 노출 목록 갯수
+    */</span>
+    <span class="hljs-built_in">this</span>.maxPageItemCount = <span class="hljs-number">5</span>;
+    <span class="hljs-comment">/**
+     * 초기 데이터 세팅
+     */</span>
+    <span class="hljs-built_in">this</span>.commentItems = initialItems;
+    <span class="hljs-comment">/**
+     * Comment 컨테이너
+     */</span>
+    <span class="hljs-built_in">this</span>.commentContainerEl = commentContainerEl;
+    <span class="hljs-comment">/**
+     * Pagination 컨테이너
+     */</span>
+    <span class="hljs-built_in">this</span>.paginationContainerEl = paginationContainerEl;
+
+    <span class="hljs-comment">/**
+     * 최초 화면을 랜더링
+     */</span>
+    <span class="hljs-built_in">this</span>.render();
+
+    <span class="hljs-keyword">const</span> onClickButtons = <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
+        <span class="hljs-comment">/**
+         *  버튼 컨테이너에서 이벤트를 위임받아 처리
+         */</span>
+        <span class="hljs-keyword">const</span> { target } = event
+        <span class="hljs-keyword">if</span> (target.tagName === <span class="hljs-string">&#x27;BUTTON&#x27;</span>) {
+            <span class="hljs-keyword">const</span> index = <span class="hljs-built_in">Number</span>(target.dataset.index);
+            <span class="hljs-built_in">this</span>.setCurrentPageIndex(index);
+        }
+    };
+
+    <span class="hljs-built_in">this</span>.paginationContainerEl
+        .addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, onClickButtons);
+
+    <span class="hljs-comment">/**
+     * 랜더링된 페이지를 지우고 할당된 데이터를 모두 해제
+     */</span>
+    <span class="hljs-built_in">this</span>.destroy = <span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-built_in">this</span>.currentPageIndex = <span class="hljs-number">0</span>;
+        <span class="hljs-built_in">this</span>.commentItems = <span class="hljs-literal">null</span>;
+
+        <span class="hljs-built_in">this</span>.commentContainerEl.innerHTML = <span class="hljs-string">&#x27;&#x27;</span>;
+        <span class="hljs-built_in">this</span>.paginationContainerEl.innerHTML = <span class="hljs-string">&#x27;&#x27;</span>;
+
+        paginationContainerEl.removeEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, onClickButtons);
+
+        <span class="hljs-built_in">this</span>.commentContainerEl = <span class="hljs-literal">undefined</span>;
+        <span class="hljs-built_in">this</span>.paginationContainerEl = <span class="hljs-literal">undefined</span>;
+    }
+};
+
+<span class="hljs-comment">/**
+ * 데이터 변경
+ * @param {*} commentItems 
+ */</span>
+Pagination.prototype.setPageItems = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">commentItems</span>) </span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.constructor !== Pagination) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;객체를 생성후 사용해 주세요!&#x27;</span>);
+    }
+    <span class="hljs-built_in">this</span>.commentItems = commentItems;
+    <span class="hljs-built_in">this</span>.render();
+};
+
+<span class="hljs-comment">/**
+ * 컨테이너 엘리먼트를 변경
+ * @param {*} commentContainerEl 
+ */</span>
+Pagination.prototype.setCommentContainerEl = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">commentContainerEl</span>) </span>{
+    <span class="hljs-built_in">this</span>.commentContainerEl = commentContainerEl;
+};
+
+<span class="hljs-comment">/**
+ * 페이징 컨테이너 변경
+ * @param {*} paginationContainerEl 
+ */</span>
+Pagination.prototype.setPaginationContainerEl = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">paginationContainerEl</span>) </span>{
+    <span class="hljs-built_in">this</span>.paginationContainerEl = paginationContainerEl;
+}
+
+<span class="hljs-comment">/**
+ * 게시글 목록 생성
+ */</span>
+Pagination.prototype.makeCommentsHtml = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.constructor !== Pagination) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;객체를 생성후 사용해 주세요!&#x27;</span>);
+    }
+    <span class="hljs-keyword">const</span> {
+        commentItems,
+        currentPageIndex,
+        maxPageItemCount
+    } = <span class="hljs-built_in">this</span>;
+    <span class="hljs-keyword">const</span> startIndex = currentPageIndex * maxPageItemCount;
+    <span class="hljs-keyword">return</span> commentItems
+        .slice(startIndex, startIndex + maxPageItemCount)
+        .map(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> {
+            <span class="hljs-keyword">const</span> {
+                id,
+                profile_url,
+                author,
+                content,
+                createdAt
+            } = item;
+            <span class="hljs-keyword">return</span> (
+                <span class="hljs-string">`&lt;div class=&quot;commentWrap&quot; data-id=&quot;<span class="hljs-subst">${id}</span>&quot;&gt;
+                    &lt;img src=&quot;<span class="hljs-subst">${profile_url}</span>&quot; alt=&quot;&quot; /&gt;
+                    <span class="hljs-subst">${author}</span>
+                    &lt;div class=&quot;createdAt&quot;&gt;
+                        <span class="hljs-subst">${createdAt}</span>
+                    &lt;/div&gt;
+                    &lt;div class=&quot;content&quot;&gt;
+                        <span class="hljs-subst">${content}</span>
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;hr /&gt;
+                `</span>
+            );
+        })
+        .join(<span class="hljs-string">&#x27;&#x27;</span>);
+};
+
+<span class="hljs-comment">/**
+ * 페이지 버튼 생성
+ */</span>
+Pagination.prototype.makePaginationHtml = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.constructor !== Pagination) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;객체를 생성후 사용해 주세요!&#x27;</span>);
+    }
+    <span class="hljs-keyword">const</span> {
+        commentItems,
+        currentPageIndex,
+        maxPageItemCount,
+    } = <span class="hljs-built_in">this</span>;
+    <span class="hljs-keyword">const</span> count = <span class="hljs-built_in">Math</span>.ceil(commentItems.length / maxPageItemCount);
+    <span class="hljs-keyword">const</span> buttons = [];
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; count; i++) {
+        buttons.push(
+            i === currentPageIndex
+                ? <span class="hljs-string">`&lt;button class=&quot;active&quot; data-index=<span class="hljs-subst">${i}</span>&gt;<span class="hljs-subst">${(i + <span class="hljs-number">1</span>)}</span>&lt;/button&gt;`</span>
+                : <span class="hljs-string">`&lt;button data-index=<span class="hljs-subst">${i}</span>&gt;<span class="hljs-subst">${(i + <span class="hljs-number">1</span>)}</span>&lt;/button&gt;`</span>
+        )
+    }
+    <span class="hljs-keyword">return</span> buttons.join(<span class="hljs-string">&#x27;&#x27;</span>);
+};
+
+<span class="hljs-comment">/**
+ * 템플릿 랜더링
+ */</span>
+Pagination.prototype.render = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.constructor !== Pagination) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;객체를 생성후 사용해 주세요!&#x27;</span>);
+    }
+    <span class="hljs-keyword">const</span> {
+        commentContainerEl,
+        paginationContainerEl
+    } = <span class="hljs-built_in">this</span>;
+    <span class="hljs-keyword">if</span> (commentContainerEl &amp;&amp; paginationContainerEl) {
+        commentContainerEl.innerHTML = <span class="hljs-built_in">this</span>.makeCommentsHtml();
+        paginationContainerEl.innerHTML = <span class="hljs-built_in">this</span>.makePaginationHtml();
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+};
+
+Pagination.prototype.setCurrentPageIndex = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">pageIndex</span>) </span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.constructor !== Pagination) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;객체를 생성후 사용해 주세요!&#x27;</span>);
+    }
+    <span class="hljs-built_in">this</span>.currentPageIndex = pageIndex;
+    <span class="hljs-built_in">this</span>.render();
+}
+
+<span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">&#x27;DOMContentLoaded&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">const</span> commentContainerEl = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#commentContainer&#x27;</span>);
+    <span class="hljs-keyword">const</span> paginationContainerEl = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#pageContainer&#x27;</span>);
+    <span class="hljs-comment">/**
+     * 페이지네이션 객체 인스턴스 생성
+     */</span>
+    <span class="hljs-keyword">const</span> pagination = <span class="hljs-keyword">new</span> Pagination(
+        commentContainerEl, paginationContainerEl, comments);
+})
+
+
+</div></code></pre>
+  <h5 id="해설">해설</h5>
+  <blockquote>
+    <p>[!] 제공된 Question 템플릿과 다른 방법으로 문제를 풀이하였습니다. 참고 부탁드립니다.</p>
+  </blockquote>
+  <ul>
+    <li>
+      <p>Pagination 객체를 만들고, 모든 인스턴스에서 공용으로 사용되는 메서드는 <code>prototype</code> 속성을 이용하여 할당하였습니다.</p>
+      <ul>
+        <li><code>prototype</code>을 이용한 속성은 해당 객체에서 생성되는 모든 인스턴스에서 참조하여 사용되기 때문에 인스턴스가 생성될때 마다 다시 생성되지 않고 모두 공유됩니다.</li>
+        <li><code>prototype</code> 내부에서 <code>this</code> 객체를 참조하기 위해서 모두 <code>function</code> 표현식을 사용하였고 인스턴스를 통한 접근이
+          아닌, 직접 <code>prototype</code>을 접근하는 경우 에러를 발생하도록 만들어 두었습니다(Pagination으로 생성된 객체를 <code>bind</code>할 경우 직접 접근도
+          가능합니다.)</li>
+      </ul>
+    </li>
+    <li>
+      <p>Pagination 객체는 다음과 같은 구성입니다.</p>
+      <ul>
+        <li>setPageItems: 페이지 데이터를 변경</li>
+        <li>setCommentContainerEl: 코멘트 컨테이너 객체 엘리먼트 변경</li>
+        <li>setPaginationContainerEl: 페이지네이션 컨테이너 엘리먼트 변경</li>
+        <li>makeCommentsHtml: 코멘트 마크업 생성</li>
+        <li>makePaginationHtml: 페이지네이션 마크업 생성</li>
+        <li>render: 페이지 랜더링</li>
+        <li>setCurrentPageIndex: 현재 페이지 인덱스 변경</li>
+      </ul>
+    </li>
+    <li>
+      <p>Pagination 객체를 이용하여 인스턴스를 생성하면 자동으로 지정된 엘리먼트 영역에 랜더링이 됩니다.</p>
+    </li>
+    <li>
+      <p><code>DOMContentLoaded</code> 이벤트를 이용하여 HTML이 파싱되는 즉시 화면을 그리도록 구현하였습니다(참고자료에 있는 <code>load</code> 이벤트와 차이점을 비교해
+        보세요!).</p>
+    </li>
+  </ul>
+  <h5 id="참고자료">참고자료</h5>
+  <ul>
+    <li><a
+        href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/this">https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/this</a>
+    </li>
+    <li><a
+        href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/function">https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/function</a>
+    </li>
+    <li><a
+        href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype">https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype</a>
+    </li>
+    <li><a
+        href="https://developer.mozilla.org/ko/docs/Web/Events/DOMContentLoaded">https://developer.mozilla.org/ko/docs/Web/Events/DOMContentLoaded</a>
+    </li>
+    <li><a
+        href="https://developer.mozilla.org/ko/docs/Web/Events/load">https://developer.mozilla.org/ko/docs/Web/Events/load</a>
+    </li>
+  </ul>
+  <h3 id="q2--jquery-로-코드를-작성해보세요">q2. jQuery 로 코드를 작성해보세요.</h3>
+  <h4 id="a-1">A)</h4>
+  <pre><code class="language-js"><div><span class="hljs-comment">/**
+ * 페이징 객체
+ * <span class="hljs-doctag">@param <span class="hljs-type">{*}</span> </span>$commentContainerEl 
+ * <span class="hljs-doctag">@param <span class="hljs-type">{*}</span> </span>$paginationContainerEl 
+ * <span class="hljs-doctag">@param <span class="hljs-type">{*}</span> </span>initialItems 
+ */</span>
+<span class="hljs-keyword">const</span> Pagination = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">
+    $commentContainerEl,
+    $paginationContainerEl,
+    initialItems = []
+</span>) </span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.constructor !== Pagination) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;객체를 생성후 사용해 주세요!&#x27;</span>);
+    }
+    
+    ...
+
+    const onClickButtons = <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
+        <span class="hljs-keyword">const</span> { target } = event
+        <span class="hljs-comment">/**
+         * <span class="hljs-doctag">@see </span>https://api.jquery.com/data/
+         */</span>
+        <span class="hljs-keyword">const</span> index = $(target).data(<span class="hljs-string">&#x27;index&#x27;</span>);
+        <span class="hljs-built_in">this</span>.setCurrentPageIndex(index);
+    };
+
+    <span class="hljs-built_in">this</span>.$paginationContainerEl
+        .on(<span class="hljs-string">&#x27;click&#x27;</span>, onClickButtons);
+
+    <span class="hljs-comment">/**
+     * 랜더링된 페이지를 지우고 할당된 데이터를 모두 해제
+     */</span>
+    <span class="hljs-built_in">this</span>.destroy = <span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-built_in">this</span>.currentPageIndex = <span class="hljs-number">0</span>;
+        <span class="hljs-built_in">this</span>.commentItems = <span class="hljs-literal">null</span>;
+
+        <span class="hljs-built_in">this</span>.$commentContainerEl.html(<span class="hljs-string">&#x27;&#x27;</span>);
+        <span class="hljs-built_in">this</span>.$paginationContainerEl.html(<span class="hljs-string">&#x27;&#x27;</span>);
+
+        <span class="hljs-comment">/**
+         * Jquery Event Delegation 기능을 활용
+         * @see https://api.jquery.com/on/
+         */</span>
+        $paginationContainerEl.off(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-string">&#x27;button&#x27;</span>, onClickButtons);
+
+        <span class="hljs-built_in">this</span>.$commentContainerEl = <span class="hljs-literal">undefined</span>;
+        <span class="hljs-built_in">this</span>.$paginationContainerEl = <span class="hljs-literal">undefined</span>;
+    }
+};
+
+...
+
+$(() =&gt; {
+    <span class="hljs-comment">/**
+     * DOMContentLoaded 동일한 시점에 호출
+     * @see https://api.jquery.com/ready/
+     */</span>
+    <span class="hljs-keyword">const</span> $commentContainerEl = $(<span class="hljs-string">&#x27;#commentContainer&#x27;</span>);
+    <span class="hljs-keyword">const</span> $paginationContainerEl = $(<span class="hljs-string">&#x27;#pageContainer&#x27;</span>);
+    <span class="hljs-comment">/**
+     * 페이지네이션 객체 인스턴스 생성
+     */</span>
+    <span class="hljs-keyword">const</span> pagination = <span class="hljs-keyword">new</span> Pagination(
+        $commentContainerEl, $paginationContainerEl, comments);
+})
+
+
+</div></code></pre>
+  <h4 id="해설-1">해설</h4>
+  <ul>
+    <li>1번 문제와 내용은 거의 동일하지만 이벤트 바인딩, DOM을 제어하기 위해 Jquery 라이브러리를 사용하였습니다.</li>
+  </ul>
+  <h4 id="참고자료-1">참고자료</h4>
+  <ul>
+    <li><a href="https://api.jquery.com/ready/">https://api.jquery.com/ready/</a></li>
+    <li><a href="https://api.jquery.com/on/">https://api.jquery.com/on/</a></li>
+    <li><a href="https://api.jquery.com/data/">https://api.jquery.com/data/</a></li>
+  </ul>
+  <h3 id="q3--react-로-코드를-작성해보세요">q3. React 로 코드를 작성해보세요.</h3>
+  <h4 id="a-2">A)</h4>
+  <pre><code class="language-js"><div><span class="hljs-comment">// solution/2.others_1/q3_react_redux/src/store/modules/comments.js</span>
+<span class="hljs-keyword">import</span> { createSlice } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@reduxjs/toolkit&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> initialState = {
+  <span class="hljs-attr">commentItems</span>: [...],
+  <span class="hljs-attr">currentPageIndex</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">maxPageItemCount</span>: <span class="hljs-number">5</span>,
+};
+
+<span class="hljs-keyword">const</span> name = <span class="hljs-string">&#x27;comments&#x27;</span>;
+
+<span class="hljs-keyword">const</span> slice = createSlice({
+  name,
+  initialState,
+  <span class="hljs-attr">reducers</span>: {
+    setCurrentPageIndex(state, action) {
+      state.currentPageIndex = action.payload;
+    }
+  }
+});
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> { getComments, setCurrentPageIndex } = slice.actions;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> commentsReducer = slice.reducer;
+</div></code></pre>
+  <pre><code class="language-js"><div><span class="hljs-comment">// solution/2.others_1/q3_react_redux/src/containers/CommentListContainer.js</span>
+...
+
+function CommentListContainer() {
+  <span class="hljs-comment">/**
+   * [!] 불필요한 상태값을 모두 불러들이는 경우 상태값 변화에 따라 불필요하게 컴포넌트 랜더링 로직이 실행될 수 있습니다.
+   * 필요한 속성만 `useSelector`를 이용하여 불러 사용하는 습관을 만들면 좋습니다.
+   */</span>
+  <span class="hljs-keyword">const</span> { commentItems, currentPageIndex, maxPageItemCount } = useSelector(<span class="hljs-function">(<span class="hljs-params">{ comments }</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> { commentItems, currentPageIndex, maxPageItemCount } = comments;
+    <span class="hljs-keyword">return</span> {
+      commentItems, currentPageIndex, maxPageItemCount
+    };
+  });
+
+  <span class="hljs-keyword">const</span> data = useMemo(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">const</span> startIndex = currentPageIndex * maxPageItemCount;
+    <span class="hljs-keyword">return</span> commentItems.slice(startIndex, startIndex + maxPageItemCount);
+  }, [commentItems, currentPageIndex, maxPageItemCount]);
+
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">CommentList</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{data}</span> /&gt;</span></span>;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> CommentListContainer;
+
+<span class="hljs-comment">// solution/2.others_1/q3_react_redux/src/containers/PageListContainer.js</span>
+...
+function PaginationContainer() {
+
+  <span class="hljs-keyword">const</span> {
+    commentItems,
+    maxPageItemCount,
+    currentPageIndex } = useSelector(
+      <span class="hljs-function">(<span class="hljs-params">state</span>) =&gt;</span> state.comments
+    );
+  <span class="hljs-keyword">const</span> dispatch = useDispatch();
+  <span class="hljs-keyword">const</span> boundActionCreators = bindActionCreators({ setCurrentPageIndex }, dispatch);
+
+  <span class="hljs-comment">/**
+   * 페이지 갯수
+   */</span>
+  <span class="hljs-keyword">const</span> buttonCount = useMemo(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.ceil(commentItems.length / maxPageItemCount);
+  }, [maxPageItemCount, commentItems]);
+
+  <span class="hljs-comment">/**
+   * 현재 활성된 페이지
+   */</span>
+  <span class="hljs-keyword">const</span> activeIndex = useMemo(<span class="hljs-function">() =&gt;</span> currentPageIndex, [currentPageIndex]);
+
+  <span class="hljs-keyword">const</span> handleClickPaginationButton = <span class="hljs-function">(<span class="hljs-params">_, index</span>) =&gt;</span> {
+    boundActionCreators.setCurrentPageIndex(index);
+  }
+
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">PaginationButtons</span>
+      <span class="hljs-attr">buttonCount</span>=<span class="hljs-string">{buttonCount}</span>
+      <span class="hljs-attr">activeIndex</span>=<span class="hljs-string">{activeIndex}</span>
+      <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleClickPaginationButton}</span>
+    /&gt;</span></span>
+  );
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> PaginationContainer;
+</div></code></pre>
+  <pre><code class="language-js"><div><span class="hljs-comment">// solution/2.others_1/q3_react_redux/src/components/CommentList.js</span>
+...
+function CommentList({ data }) {
+  <span class="hljs-keyword">return</span> data.map(<span class="hljs-function">(<span class="hljs-params">comment, index</span>) =&gt;</span> {
+    <span class="hljs-comment">/**
+     * [!] React Component에서 `key` 값은 `index`로 바로 적용하지 않고, 유니크한 값으로 지정하는게 좋습니다.
+     * 컴포넌트가 랜더링될때 같은 레벨의 형제(siblings) 컴포넌트와 중복된 `key` 값을 갖게되면 불필요한 랜더링이 발생할 수 있습니다.
+     */</span>
+    <span class="hljs-keyword">const</span> key = <span class="hljs-string">`comment_`</span> + index;
+    <span class="hljs-keyword">const</span> {
+      author,
+      profile_url,
+      createdAt,
+      content
+    } = comment;
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Comment</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{key}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">{profile_url}</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span> /&gt;</span>
+        {author}
+        <span class="hljs-tag">&lt;<span class="hljs-name">CreatedAt</span>&gt;</span>{createdAt}<span class="hljs-tag">&lt;/<span class="hljs-name">CreatedAt</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Content</span>&gt;</span>{content}<span class="hljs-tag">&lt;/<span class="hljs-name">Content</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">hr</span> /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Comment</span>&gt;</span></span>
+    )
+  });
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> CommentList;
+
+<span class="hljs-comment">// solution/2.others_1/q3_react_redux/src/components/PageList.js</span>
+...
+<span class="hljs-comment">/**
+ * 버튼 컴포넌트를 재사용 가능할 수 있도록  입력되는 데이터 값의 연산을 제거하여 결합도, 복잡도를 낮춤
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">PaginationButtons</span>(<span class="hljs-params">{ buttonCount = <span class="hljs-number">0</span>, onClick, activeIndex = <span class="hljs-number">0</span> }</span>) </span>{
+  <span class="hljs-keyword">if</span> (buttonCount === <span class="hljs-number">0</span>) {
+    <span class="hljs-comment">/**
+     * 버튼이 존재하지 않는 경우
+     */</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+  }
+  <span class="hljs-keyword">const</span> $buttons = <span class="hljs-built_in">Array</span>(buttonCount).fill().map(<span class="hljs-function">(<span class="hljs-params">_, index</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> key = <span class="hljs-string">`button_<span class="hljs-subst">${index}</span>`</span>;
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">PageButton</span>
+        <span class="hljs-attr">active</span>=<span class="hljs-string">{index</span> === <span class="hljs-string">activeIndex}</span>
+        <span class="hljs-attr">onClick</span>=<span class="hljs-string">{(e)</span> =&gt;</span> onClick(e, index)} key={key}&gt;
+        {index + 1}
+      <span class="hljs-tag">&lt;/<span class="hljs-name">PageButton</span>&gt;</span></span>
+    );
+  })
+
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">PageListStyle</span>&gt;</span>{$buttons}<span class="hljs-tag">&lt;/<span class="hljs-name">PageListStyle</span>&gt;</span></span>;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> PaginationButtons;
+</div></code></pre>
+  <h5 id="해설-2">해설</h5>
+  <blockquote>
+    <p>[!] 제공된 Question 템플릿과 다른 방법으로 문제를 풀이하였습니다. 참고 부탁드립니다.</p>
+  </blockquote>
+  <ul>
+    <li>상태값 및 일부 컴포넌트 네이밍 변경하였습니다.</li>
+    <li>기존 제공된 컨테이너와 Redux를 최대한 활용하였고 컴포넌트와 데이터 결합도를 최대한 낮췄습니다.</li>
+    <li>Redux 액션 형식은 FSA(Flux Standard Action)를 사용하였습니다.</li>
+    <li></li>
+  </ul>
+  <h5 id="참고자료-2">참고자료</h5>
+  <ul>
+    <li><a
+        href="https://github.com/redux-utilities/flux-standard-action">https://github.com/redux-utilities/flux-standard-action</a>
+    </li>
+    <li><a href="https://redux-toolkit.js.org/api/createSlice">https://redux-toolkit.js.org/api/createSlice</a></li>
+    <li><a
+        href="https://ko.reactjs.org/docs/hooks-reference.html#usememo">https://ko.reactjs.org/docs/hooks-reference.html#usememo</a>
+    </li>
+    <li><a
+        href="https://ko.reactjs.org/docs/hooks-reference.html#usecallback">https://ko.reactjs.org/docs/hooks-reference.html#usecallback</a>
+    </li>
+    <li><a
+        href="https://ko.reactjs.org/docs/lists-and-keys.html#keys-must-only-be-unique-among-siblings">https://ko.reactjs.org/docs/lists-and-keys.html#keys-must-only-be-unique-among-siblings</a>
+    </li>
+  </ul>
+</body>
+
+</html>

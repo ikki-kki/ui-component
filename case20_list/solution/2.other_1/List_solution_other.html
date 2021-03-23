@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case20 : List - 대기업 S사 프론트엔드 개발자님의 답안</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css"
+    />
+    <style>
+      /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. 루트 폴더에 README_OOO.md 생성 (OOO : Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+        
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+      html {
+        overflow-x: hidden;
+      }
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      ul,
+      ol,
+      li,
+      dl,
+      dt,
+      dd,
+      p,
+      table {
+        margin: 0;
+        padding: 0;
+        color: #494949;
+        letter-spacing: -0.025rem;
+        box-sizing: border-box;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 600;
+      }
+      a {
+        color: inherit;
+        text-decoration: inherit;
+      }
+
+      a img {
+        border: none;
+      }
+
+      img {
+        max-width: 100%;
+        vertical-align: middle;
+      }
+
+      ul li {
+        list-style: none;
+      }
+      p {
+        line-height: 1.8;
+      }
+
+      /* STYLE */
+      body {
+        padding: 0;
+        margin: 0;
+        line-height: 1.6;
+      }
+      h2 {
+        padding: 50px 0;
+        color: #ffffff;
+        font-size: 2rem;
+        text-align: center;
+        background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+      }
+      h2::before {
+        content: "#";
+        display: inline-block;
+        margin-right: 5px;
+        color: #ff9db0;
+        font-weight: 300;
+        font-size: 2.2rem;
+      }
+      h3 {
+        position: relative;
+        margin: 30px 20px;
+        padding-bottom: 15px;
+        color: #303030;
+        font-size: 1.6rem;
+        border-bottom: 1px solid #ededed;
+      }
+
+      blockquote {
+        margin: 20px;
+        padding: 20px;
+        background: #f2f2f2;
+      }
+
+      strong {
+        display: block;
+        margin-top: 10px;
+      }
+
+      .code-wrap {
+        position: relative;
+        background: #2f303b;
+        margin: 15px 0 0 0;
+      }
+      .code-wrap > p {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 2px 15px;
+        font-size: 0.7rem;
+        color: #ffffff;
+        text-align: center;
+        background: #61c8cc;
+      }
+      code {
+        background: #ededed;
+      }
+
+      .language-css > div,
+      .language-js > div {
+        color: #fff;
+        padding: 30px 20px;
+        background: #2f303b;
+      }
+      code.language-bash div {
+        margin-top: -20px;
+        padding: 30px 20px;
+        font-size: 1rem;
+        color: #ffffff;
+        background: #2f303b;
+        box-sizing: border-box;
+      }
+      code::after {
+        content: "";
+        display: block;
+      }
+
+      code.code-inlineBlock::after {
+        content: "";
+        display: inline-block;
+      }
+
+      .excute-text {
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: #ed234b;
+      }
+      /* 좌, 우 여백 */
+      ol,
+      ul {
+        margin: 20px;
+        padding: 20px;
+        background: #f2f2f2;
+      }
+      ol li {
+        margin-left: 15px;
+      }
+      li {
+        font-size: 0.85rem;
+      }
+      h4,
+      h5,
+      h6,
+      p,
+      img,
+      pre {
+        padding: 0 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 id="case5--list---대기업-s사-프론트엔드-개발자님의-답안">
+      Case20 : List - 대기업 S사 프론트엔드 개발자님의 답안
+    </h2>
+    <h3 id="문제-1--4-공통-코드-조각">문제 1 ~ 4 공통 코드 조각</h3>
+    <pre><code class="language-html"><div>...
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;list&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/script&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;template&quot;</span>&gt;</span><span class="handlebars"><span class="xml">
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">%=title%</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">%=description%</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        </span></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+    ...
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+...
+</div></code></pre>
+    <h5 id="해설">해설</h5>
+    <ul>
+      <li>
+        <code>&lt;script type=&quot;text/script&quot;&gt;</code> 태그내 포함된
+        태그 내용은 브라우저가 화면에 랜더링 하지 않습니다.
+      </li>
+      <li>
+        위 <code>script</code> 내 태그정보는 JS에서 템플릿 정보로
+        활용합니다(아래 JS 코드를 확인해 주세요)
+      </li>
+    </ul>
+    <pre><code class="language-js"><div><span class="hljs-comment">/**
+ * 템플릿 유틸
+ * <span class="hljs-doctag">@param <span class="hljs-type">{*}</span> </span>htmlString 
+ */</span>
+<span class="hljs-keyword">const</span> makeTemplate = <span class="hljs-function">(<span class="hljs-params">htmlString</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">obj</span>) =&gt;</span> {
+        <span class="hljs-keyword">let</span> template = htmlString;
+        <span class="hljs-built_in">Object</span>.keys(obj).forEach(<span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> {
+            template = template.replace(<span class="hljs-built_in">RegExp</span>(<span class="hljs-string">`&lt;%=<span class="hljs-subst">${key}</span>%&gt;`</span>, <span class="hljs-string">&quot;g&quot;</span>), obj[key]);
+        })
+        <span class="hljs-keyword">return</span> template.replace(<span class="hljs-regexp">/&lt;%=\w+?%&gt;/g</span>, <span class="hljs-string">&#x27;&#x27;</span>);
+    }
+}
+<span class="hljs-keyword">const</span> template = makeTemplate(<span class="hljs-built_in">document</span>.body.querySelector(<span class="hljs-string">&#x27;#template&#x27;</span>).textContent);
+</div></code></pre>
+    <h5 id="해설-1">해설</h5>
+    <ul>
+      <li>
+        <code>lodash.template</code> 코드와 유사한 HTMLString을 이용하여
+        템플릿을 생성하는 코드를 구현해 보았습니다.
+      </li>
+      <li>입력받은 HTMLString, Object 정보를 이용하여 템플릿을 생성합니다.</li>
+    </ul>
+    <h5 id="참고자료">참고자료</h5>
+    <ul>
+      <li>
+        <a href="https://lodash.com/docs/4.17.15#template"
+          >https://lodash.com/docs/4.17.15#template</a
+        >
+      </li>
+    </ul>
+    <h3 id="q1-javascript---fetch">q1. Javascript - fetch</h3>
+    <h4 id="a">A)</h4>
+    <pre><code class="language-js"><div><span class="hljs-comment">// solution/2.other_1/1. js-fetch/main.js</span>
+<span class="hljs-comment">/**
+ * 가급적 셀렉터 대상에게는 class or id 값을 명시적으로 지정해 주시는것이 좋습니다.
+ * [&gt;] 태그 이름을 이용해 셀렉트 하는 경우 의도하지 않는 대상이 선택될 수 있습니다.
+ */</span>
+<span class="hljs-keyword">const</span> listEl = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#list&#x27;</span>);
+<span class="hljs-keyword">const</span> API = <span class="hljs-string">&#x27;https://jsonplaceholder.typicode.com/posts&#x27;</span>;
+
+...
+
+<span class="hljs-comment">// 통신 상태 처리</span>
+<span class="hljs-keyword">const</span> checkStatusAndParse = <span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> {
+    <span class="hljs-comment">/**
+     * [!] `res.ok`는 서버 에러를 탐지하기 위한 값이 아닙니다.
+     * HTTP status `200~299` 응답이 오는경우 `true` 값이 전달되며, `30x` redirection 응답이 오는 경우 `false` 값이 전달됩니다.
+     * 조회 실패, 서버에러등 `40x, 50x` 처리를 위해서는 `catch` 블록을 사용해 주세요
+     * @see https://ko.javascript.info/fetch
+     */</span>
+    <span class="hljs-keyword">if</span> (res.ok) { <span class="hljs-comment">// `res.ok` 대신 `res.status &lt; 300` 값으로 동일하게 확인할 수 있습니다.</span>
+        <span class="hljs-keyword">return</span> res.json();
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`예상하지 못한 HTTP Status(<span class="hljs-subst">${res.status}</span>) 응답 입니다.`</span>);
+    }
+}
+
+<span class="hljs-comment">// 템플릿</span>
+<span class="hljs-keyword">const</span> printPosts = <span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+    <span class="hljs-keyword">const</span> listHtml = data.map(<span class="hljs-function">(<span class="hljs-params">{ title, body: description }</span>) =&gt;</span> {
+        <span class="hljs-keyword">return</span> template({ title, description });
+    })
+    listEl.innerHTML = listHtml;
+}
+
+<span class="hljs-comment">// HTTP 통신</span>
+<span class="hljs-keyword">const</span> fetchPosts = <span class="hljs-function">(<span class="hljs-params">url</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> fetch(url);
+}
+
+fetchPosts(API)
+    .then(checkStatusAndParse)
+    .then(printPosts)
+    .catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+        alert(error.message);
+    })
+
+</div></code></pre>
+    <h5 id="해설-2">해설</h5>
+    <ul>
+      <li>
+        <code>fetch</code> 함수의 <code>res.ok</code> 의미에 대해 잘 알아두면
+        좋을것 같습니다.
+        <ul>
+          <li>
+            HTTP status <code>200~299</code> 응답이 오는경우
+            <code>true</code> 값이 전달되며, <code>30x</code> redirection 응답이
+            오는 경우 <code>false</code> 값이 전달됩니다.
+          </li>
+          <li>
+            조회 실패, 서버에러등 <code>40x, 50x</code> 처리를 위해서는
+            <code>catch</code> 블록을 사용해 주세요
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h5 id="참고자료-1">참고자료</h5>
+    <ul>
+      <li>
+        <a href="https://ko.javascript.info/fetch"
+          >https://ko.javascript.info/fetch</a
+        >
+      </li>
+    </ul>
+    <h3 id="q2-javascript---axios">q2. Javascript - axios</h3>
+    <h4 id="a-1">A)</h4>
+    <pre><code class="language-js"><div><span class="hljs-comment">/**
+ * 가급적 셀렉터 대상에게는 class or id 값을 명시적으로 지정해 주시는것이 좋습니다.
+ * [&gt;] 태그 이름을 이용해 셀렉트 하는 경우 의도하지 않는 대상이 선택될 수 있습니다.
+ */</span>
+<span class="hljs-keyword">const</span> listEl = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#list&#x27;</span>);
+<span class="hljs-keyword">const</span> API = <span class="hljs-string">&#x27;https://jsonplaceholder.typicode.com/posts&#x27;</span>;
+
+...
+<span class="hljs-comment">// solution/2.other_1/2. js-axios/main.js</span>
+<span class="hljs-comment">// 통신 상태 처리</span>
+<span class="hljs-keyword">const</span> checkStatusAndParse = <span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> {
+    <span class="hljs-comment">/**
+     * `Fetch`에서 사용된 `res.ok` 값과 동일한 기능을 아래와 같이 구현하실 수 있습니다.
+     */</span>
+    <span class="hljs-keyword">if</span> (res.status &lt; <span class="hljs-number">300</span>) {
+        <span class="hljs-keyword">return</span> res.data;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`예상하지 못한 HTTP Status(<span class="hljs-subst">${res.status}</span>) 응답 입니다.`</span>);
+    }
+}
+
+<span class="hljs-comment">// 템플릿</span>
+<span class="hljs-keyword">const</span> printPosts = <span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+    <span class="hljs-keyword">const</span> listHtml = data.map(<span class="hljs-function">(<span class="hljs-params">{ title, body: description }</span>) =&gt;</span> {
+        <span class="hljs-keyword">return</span> template({ title, description });
+    })
+    listEl.innerHTML = listHtml;
+}
+
+<span class="hljs-comment">// HTTP 통신</span>
+<span class="hljs-keyword">const</span> fetchPosts = <span class="hljs-function">(<span class="hljs-params">url</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> axios.get(url);
+}
+
+fetchPosts(API)
+    .then(checkStatusAndParse)
+    .then(printPosts)
+    .catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+        alert(error.message);
+    })
+</div></code></pre>
+    <h5 id="해설-3">해설</h5>
+    <ul>
+      <li>
+        문제 1번과 다른점은 <code>fetch</code> 대신
+        <code>axios</code> 라이브러리를 사용한 것 입니다. 다른 라이브러리를
+        사용했더라도 동작은 완전히 같습니다!
+      </li>
+    </ul>
+    <h5 id="참고자료-2">참고자료</h5>
+    <ul>
+      <li>
+        <a href="https://ko.javascript.info/fetch"
+          >https://ko.javascript.info/fetch</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/axios/axios#response-schema"
+          >https://github.com/axios/axios#response-schema</a
+        >
+      </li>
+    </ul>
+    <h3 id="q3-javascript---asyncawait와-콜백-함수">
+      q3. Javascript - async/await와 콜백 함수
+    </h3>
+    <h4 id="a-2">A)</h4>
+    <pre><code class="language-js"><div><span class="hljs-comment">// solution/2.other_1/3. js-async-await/main.js</span>
+<span class="hljs-comment">/**
+ * 가급적 셀렉터 대상에게는 class or id 값을 명시적으로 지정해 주시는것이 좋습니다.
+ * [&gt;] 태그 이름을 이용해 셀렉트 하는 경우 의도하지 않는 대상이 선택될 수 있습니다.
+ */</span>
+<span class="hljs-keyword">const</span> listEl = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#list&#x27;</span>);
+<span class="hljs-keyword">const</span> API = <span class="hljs-string">&#x27;https://jsonplaceholder.typicode.com/posts&#x27;</span>;
+
+...
+
+<span class="hljs-comment">// 템플릿</span>
+<span class="hljs-keyword">const</span> printPosts = <span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+    <span class="hljs-keyword">const</span> listHtml = data.map(<span class="hljs-function">(<span class="hljs-params">{ title, body: description }</span>) =&gt;</span> {
+        <span class="hljs-keyword">return</span> template({ title, description });
+    })
+    listEl.innerHTML = listHtml;
+}
+
+
+<span class="hljs-comment">// HTTP 통신</span>
+<span class="hljs-keyword">const</span> fetchPosts = <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">return</span> axios.get(API);
+}
+
+<span class="hljs-comment">/**
+ * [!] 인자로 전달되는 함수 이름을 헷갈리지 않도록 임의로 변경해 주었습니다. 😅
+ */</span>
+<span class="hljs-keyword">const</span> render = <span class="hljs-keyword">async</span> (asyncFetchPostsFn, printPostsFn) =&gt; {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> asyncFetchPostsFn();
+        <span class="hljs-comment">/**
+         * checkStatusAndParse 함수에서 체크하던 로직
+         */</span>
+        <span class="hljs-keyword">const</span> { status, data } = res;
+        <span class="hljs-keyword">if</span> (status &gt; <span class="hljs-number">300</span>) {
+            <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`예상하지 못한 HTTP Status(<span class="hljs-subst">${res.status}</span>) 응답 입니다.`</span>);
+        }
+        <span class="hljs-comment">/**
+         * 데이터를 화면에 그림
+         */</span>
+        printPostsFn(data);
+    } <span class="hljs-keyword">catch</span> (e) {
+        alert(e.message);
+    }
+}
+
+
+(<span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-keyword">await</span> render(fetchPosts, printPosts);
+})();
+</div></code></pre>
+    <h5 id="해설-4">해설</h5>
+    <ul>
+      <li>
+        문제 1, 2번과 동작은 완전히 같으며 <code>async/await</code>을 이용하여
+        처리하였습니다.(코드내 변수 네이밍을 약간 변경하였는데 이부분은 꼭
+        정답이 있는것은 아닙니다.)
+      </li>
+    </ul>
+    <h5 id="참고자료-3">참고자료</h5>
+    <ul>
+      <li>
+        <a href="https://ko.javascript.info/fetch"
+          >https://ko.javascript.info/fetch</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/axios/axios#response-schema"
+          >https://github.com/axios/axios#response-schema</a
+        >
+      </li>
+    </ul>
+    <h3 id="4-jquery로-기능-구현">4. Jquery로 기능 구현</h3>
+    <h4 id="a-3">A)</h4>
+    <pre><code class="language-js"><div><span class="hljs-comment">/**
+ * 가급적 셀렉터 대상에게는 class or id 값을 명시적으로 지정해 주시는것이 좋습니다.
+ * [&gt;] 태그 이름을 이용해 셀렉트 하는 경우 의도하지 않는 대상이 선택될 수 있습니다.
+ */</span>
+<span class="hljs-keyword">const</span> $list = $(<span class="hljs-string">&#x27;#list&#x27;</span>);
+<span class="hljs-keyword">const</span> API = <span class="hljs-string">&#x27;https://jsonplaceholder.typicode.com/posts&#x27;</span>;
+
+...
+
+<span class="hljs-comment">// Ajax</span>
+$.ajax(API, {
+    <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;GET&#x27;</span>,
+    <span class="hljs-attr">beforeSend</span>: <span class="hljs-function">(<span class="hljs-params">_xhr, _opts</span>) =&gt;</span> {
+        alert(<span class="hljs-string">&#x27;요청 보내기 전입니다!&#x27;</span>);
+    },
+    <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">data, _, res</span>) </span>{
+        <span class="hljs-keyword">const</span> { status } = res;
+        <span class="hljs-keyword">if</span> (status &gt; <span class="hljs-number">300</span>) {
+            <span class="hljs-comment">/**
+             * 기존 `checkStatusAndParse` 기능을 구현
+             * [&gt;] 에러 콜백을 강제로 호출(더 좋은 방법이 있다면 알려주세요!)
+             */</span>
+            <span class="hljs-built_in">this</span>.error(<span class="hljs-built_in">Error</span>(<span class="hljs-string">`예상하지 못한 HTTP Status(<span class="hljs-subst">${res.status}</span>) 응답 입니다.`</span>));
+        }
+        <span class="hljs-comment">/**
+         * 템플릿을 이용한 HTML 생성
+         */</span>
+        <span class="hljs-keyword">const</span> listHtml = data.map(<span class="hljs-function">(<span class="hljs-params">{ title, body: description }</span>) =&gt;</span> {
+            <span class="hljs-keyword">return</span> template({ title, description });
+        })
+        <span class="hljs-comment">/**
+         * 화면에 목록을 그림
+         */</span>
+        $list.html(listHtml);
+    },
+    <span class="hljs-attr">error</span>: <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {
+        alert(e.message);
+    },
+    <span class="hljs-attr">complete</span>: <span class="hljs-function">() =&gt;</span> {
+        alert(<span class="hljs-string">&#x27;요청에 대한 응답 처리가 완료 됐습니다!&#x27;</span>);
+    },
+})
+
+</div></code></pre>
+    <h5 id="해설-5">해설</h5>
+    <ul>
+      <li>
+        문제 1, 2, 3번과 동작은 완전히 같으며 jQuery에서 지원하는
+        <code class="code-inlineBlock">$.ajax</code> 유틸을 사용하였습니다.
+      </li>
+    </ul>
+    <h5 id="참고자료-4">참고자료</h5>
+    <ul>
+      <li>
+        <a href="https://api.jquery.com/jquery.ajax/"
+          >https://api.jquery.com/jquery.ajax/</a
+        >
+      </li>
+    </ul>
+    <h5 id="결론">결론</h5>
+    <ul>
+      <li>
+        다른 라이브러리라 하더라도 구현 원리만 잘 이해하고 있다면 같은동작을
+        만들어낼 수 있습니다. 프로젝트에서 이미 사용되고 있거나, 가장 잘 활용할
+        수 있는 라이브러리를 사용하시면 좋습니다.
+      </li>
+      <li>
+        <code class="code-inlineBlock">XMLHttpRequest</code> 객체에 대해서도 잘
+        알아두시면 좋습니다(<code class="code-inlineBlock">fetch</code>가 나오기
+        전까지 모든 XHR 통신은 이 객체를 통해 구현되었습니다.)
+        <a href="https://developer.mozilla.org/ko/docs/Web/API/XMLHttpRequest"
+          >https://developer.mozilla.org/ko/docs/Web/API/XMLHttpRequest</a
+        >
+      </li>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+}
+
+.auto-complete-container {
+    position: relative;
+    display: table-cell;
+    height: 50px;
+    vertical-align: middle;
+    padding: 10px;
+    background-color: lightgray;
+}
+
+.auto-complete-input {
+    width: 200px;
+    border: none;
+    outline: 0px solid transparent;
+}
+
+.auto-complete-item-list-box {
+    box-shadow: 2px 2px 2px 2px gray;
+    background-color: #ccc;
+    opacity: 1;
+    display: block;
+    position: absolute;
+    z-index: 999;
+    top: 8px;
+}
+
+.auto-complete-item-box {
+    position: relative;
+    display: block;
+    padding: .25em .25em .25em .25em;
+    cursor: pointer;
+}

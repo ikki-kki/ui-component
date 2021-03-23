@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+ul {
+  width: 1024px;
+  margin: 80px auto;
+}
+ul li {
+  border: solid 1px #000000;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+/*# sourceMappingURL=style.css.map */

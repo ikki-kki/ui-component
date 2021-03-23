@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case11 : DropdownMenu - 타 시니어 개발자의 해설지</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css" />
+    <style>
+        /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. 루트 폴더에 README_OOO.md 생성 (OOO : Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+        
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+        html {
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: "Noto Sans KR", sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul,
+        ol,
+        li,
+        dl,
+        dt,
+        dd,
+        p,
+        table {
+            margin: 0;
+            padding: 0;
+            color: #494949;
+            letter-spacing: -0.025rem;
+            box-sizing: border-box;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 600;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: inherit;
+        }
+
+        a img {
+            border: none;
+        }
+
+        img {
+            max-width: 100%;
+            vertical-align: middle;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        p {
+            line-height: 1.8;
+        }
+
+        /* STYLE */
+        body {
+            padding: 0;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h2 {
+            padding: 50px 0;
+            color: #ffffff;
+            font-size: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+        }
+
+        h2::before {
+            content: "#";
+            display: inline-block;
+            margin-right: 5px;
+            color: #ff9db0;
+            font-weight: 300;
+            font-size: 2.2rem;
+        }
+
+        h3 {
+            position: relative;
+            margin: 30px 20px;
+            padding-bottom: 15px;
+            color: #303030;
+            font-size: 1.6rem;
+            border-bottom: 1px solid #ededed;
+        }
+
+        blockquote {
+            margin: 20px;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        strong {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .code-wrap {
+            position: relative;
+            background: #2f303b;
+            margin: 15px 0 0 0;
+        }
+
+        .code-wrap>p {
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 2px 15px;
+            font-size: 0.7rem;
+            color: #ffffff;
+            text-align: center;
+            background: #61c8cc;
+        }
+
+        code {
+            background: #ededed;
+        }
+
+        .language-html>div,
+        .language-css>div,
+        .language-js>div {
+            color: #fff;
+            padding: 30px 20px;
+            background: #2f303b;
+        }
+
+        code.language-bash div {
+            margin-top: -20px;
+            padding: 30px 20px;
+            font-size: 1rem;
+            color: #ffffff;
+            background: #2f303b;
+            box-sizing: border-box;
+        }
+
+        code::after {
+            content: "";
+            display: block;
+        }
+
+        code.code-inlineBlock::after {
+            content: "";
+            display: inline-block;
+        }
+
+        .excute-text {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #ed234b;
+        }
+
+        /* 좌, 우 여백 */
+        ol,
+        ul {
+            margin: 20px;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        ol li {
+            margin-left: 15px;
+        }
+
+        li {
+            font-size: 0.85rem;
+        }
+
+        table,
+        h4,
+        h5,
+        h6,
+        p,
+        img,
+        pre {
+            padding: 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 id="case17--dropdownmenu---타-시니어-개발자의-해설지">Case17 : DropdownMenu - 타 시니어 개발자의 해설지</h2>
+    <h3 id="a">A)</h3>
+    <pre><code class="language-js"><div><span class="hljs-comment">// solution/2.others_1/index.js</span>
+...
+<span class="hljs-comment">/**
+ * 유저 데이터
+ */</span>
+<span class="hljs-keyword">const</span> userDataItems = [
+    {
+        <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;01&quot;</span>,
+        <span class="hljs-attr">userName</span>: <span class="hljs-string">&quot;Kenneth&quot;</span>,
+        <span class="hljs-attr">favorites</span>: <span class="hljs-string">&quot;0001&quot;</span>
+    },
+    ...
+];
+
+<span class="hljs-comment">/**
+ * 항목 데이터
+ */</span>
+<span class="hljs-keyword">const</span> selectorDataItems = [
+    {
+        <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+        <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;선택하세요.&#x27;</span>
+    },
+    {
+        <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;0001&#x27;</span>,
+        <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Google&#x27;</span>
+    },
+    ...
+];
+
+<span class="hljs-comment">/**
+ * 아이디를 이용해 빠르게 찾기 위해 맵 구조의 데이터를 생성
+ */</span>
+<span class="hljs-keyword">const</span> websiteIndex = selectorDataItems.reduce(<span class="hljs-function">(<span class="hljs-params">map, { id, label }</span>) =&gt;</span> {
+    map[id] = label;
+    <span class="hljs-keyword">return</span> map;
+}, {});
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DropdownList</span> </span>{
+    <span class="hljs-keyword">constructor</span>(selectorEl, selectorOptionsEl, dataItems = [], updateSelectorIndexCallbackFn = () =&gt; null) {
+        <span class="hljs-comment">/**
+         * 셀렉터 엘리먼트
+         */</span>
+        <span class="hljs-built_in">this</span>.selectorEl = selectorEl;
+        <span class="hljs-comment">/**
+         * 옵션 엘리먼트
+         */</span>
+        <span class="hljs-built_in">this</span>.selectorOptionsEl = selectorOptionsEl;
+        <span class="hljs-comment">/**
+         * 최초 선택된 아이템
+         */</span>
+        <span class="hljs-built_in">this</span>.currentSelectedIndex = <span class="hljs-number">0</span>;
+        <span class="hljs-comment">/**
+         * 항목 아이템
+         */</span>
+        <span class="hljs-built_in">this</span>.dataItems = dataItems;
+        <span class="hljs-comment">/**
+         * 선택 항목 업데이트시 호출되는 콜백 함수
+         */</span>
+        <span class="hljs-built_in">this</span>.updateSelectorIndexCallbackFn = updateSelectorIndexCallbackFn;
+        <span class="hljs-built_in">this</span>.renderSelector();
+        <span class="hljs-built_in">this</span>.renderSelectorOptions();
+        <span class="hljs-built_in">this</span>.bindSelectorEvents();
+        <span class="hljs-built_in">this</span>.bindSelectorOptionsEvents();
+    }
+
+    <span class="hljs-comment">/**
+     * 현재 선택된 인덱스를 반환
+     */</span>
+    getCurrentSelectedIndex() {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.currentSelectedIndex;
+    }
+
+    <span class="hljs-comment">/**
+     * 현재 선텍된 인덱스의 항목 데이터를 반환
+     */</span>
+    getCurrentSelectedItem() {
+        <span class="hljs-keyword">const</span> { dataItems, currentSelectedIndex } = <span class="hljs-built_in">this</span>;
+        <span class="hljs-keyword">return</span> dataItems[currentSelectedIndex];
+    }
+
+    <span class="hljs-comment">/**
+     * 셀렉터 랜더링
+     */</span>
+    renderSelector() {
+        <span class="hljs-keyword">const</span> { currentSelectedIndex, dataItems, selectorEl } = <span class="hljs-built_in">this</span>;
+        <span class="hljs-keyword">const</span> selectedItem = dataItems[currentSelectedIndex];
+        selectorEl.innerHTML = <span class="hljs-string">`
+        &lt;div class=&quot;dropdown-select-label-container&quot;&gt;
+            &lt;span class=&quot;dropdown-select-label&quot;&gt;<span class="hljs-subst">${selectedItem.label}</span>&lt;/span&gt;
+            &lt;div class=&quot;dropdown-select-arrow-container&quot;&gt;
+                &lt;div class=&quot;dropdown-select-arrow&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        `</span>;
+    }
+
+    <span class="hljs-comment">/**
+     * 셀렉터 항목 랜더링
+     */</span>
+    renderSelectorOptions() {
+        <span class="hljs-comment">/**
+         * 선택 항목
+         */</span>
+        <span class="hljs-keyword">const</span> { currentSelectedIndex, selectorOptionsEl, selectorEl } = <span class="hljs-built_in">this</span>;
+        <span class="hljs-keyword">const</span> items = <span class="hljs-built_in">this</span>.dataItems.map(<span class="hljs-function">(<span class="hljs-params">item, index</span>) =&gt;</span> {
+            <span class="hljs-keyword">const</span> { label } = item;
+            <span class="hljs-keyword">return</span> <span class="hljs-string">`
+            &lt;div class=&quot;dropdown-item-box <span class="hljs-subst">${currentSelectedIndex === index ? <span class="hljs-string">&#x27;selected&#x27;</span> : <span class="hljs-string">&#x27;&#x27;</span>}</span>&quot; data-index=<span class="hljs-subst">${index}</span>&gt;
+                &lt;span&gt;<span class="hljs-subst">${label}</span>&lt;/span&gt;
+            &lt;/div&gt;
+            `</span>;
+        });
+        <span class="hljs-keyword">const</span> { height } = selectorEl.getBoundingClientRect();
+        selectorOptionsEl.style.cssText = <span class="hljs-string">`display: none; position: absolute; top: <span class="hljs-subst">${height}</span>px; `</span>;
+        selectorOptionsEl.innerHTML = <span class="hljs-string">`
+        &lt;div class=&quot;dropdown-item-list-box&quot;&gt;
+            <span class="hljs-subst">${items.join(<span class="hljs-string">&#x27;&#x27;</span>)}</span>
+        &lt;/div&gt;
+        `</span>;
+    }
+
+    <span class="hljs-comment">/**
+     * 셀렉터 이벤트 바인딩
+     */</span>
+    bindSelectorEvents() {
+        <span class="hljs-keyword">const</span> { selectorEl, selectorOptionsEl } = <span class="hljs-built_in">this</span>;
+        selectorEl.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {
+            e.preventDefault();
+            selectorOptionsEl.style.display = <span class="hljs-string">&#x27;block&#x27;</span>;
+        });
+    }
+
+    <span class="hljs-comment">/**
+     * 셀렉터 항목 이벤트 바인딩
+     */</span>
+    bindSelectorOptionsEvents() {
+        <span class="hljs-keyword">const</span> {
+            dataItems,
+            selectorOptionsEl,
+        } = <span class="hljs-built_in">this</span>;
+
+        selectorOptionsEl.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">{ target }</span>) =&gt;</span> {
+            <span class="hljs-keyword">let</span> el = target;
+            <span class="hljs-keyword">if</span> (el.tagName === <span class="hljs-string">&#x27;SPAN&#x27;</span>) {
+                <span class="hljs-comment">/**
+                 * 기존 마크업을 수정하지 않고 `data-id`가 있는 엘리먼트를 탐색
+                 */</span>
+                el = el.parentElement;
+            }
+            <span class="hljs-keyword">const</span> index = <span class="hljs-built_in">Number</span>(el.dataset.index);
+            <span class="hljs-built_in">this</span>.currentSelectedIndex = index;
+            <span class="hljs-comment">/**
+             * 셀렉터 랜더링
+             */</span>
+            <span class="hljs-built_in">this</span>.renderSelector();
+            <span class="hljs-comment">/**
+             * 콜백으로 데이터 전달
+             */</span>
+            <span class="hljs-built_in">this</span>.updateSelectorIndexCallbackFn(dataItems[index], index);
+        });
+
+        <span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+            <span class="hljs-built_in">this</span>.selectorOptionsEl.style.display = <span class="hljs-string">&#x27;none&#x27;</span>;
+        }, <span class="hljs-string">&#x27;click&#x27;</span>)
+    }
+}
+
+<span class="hljs-comment">/**
+ * DOM 파싱이 완료되면 스크립트 실행
+ */</span>
+<span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">&#x27;DOMContentLoaded&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">const</span> selectorEl = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#dropdown&#x27;</span>);
+    <span class="hljs-keyword">const</span> selectorOptionsEl = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.back-drop&#x27;</span>);
+    <span class="hljs-keyword">const</span> userListEl = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#userlist&#x27;</span>);
+    <span class="hljs-comment">/**
+     * 유저 목록 페이지를 그림
+     * @param {*} item 
+     */</span>
+    <span class="hljs-keyword">const</span> renderUserList = <span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> {
+        <span class="hljs-keyword">const</span> { id } = item;
+        <span class="hljs-keyword">const</span> userItems = userDataItems.filter(<span class="hljs-function">(<span class="hljs-params">{ favorites }</span>) =&gt;</span> {
+            <span class="hljs-comment">/**
+             * 아이디가 빈 값인경우 모든 아이템 노출,
+             * 그렇지 않은경우 해당 아이디만 노출
+             */</span>
+            <span class="hljs-keyword">return</span> id === <span class="hljs-string">&#x27;&#x27;</span> ? <span class="hljs-literal">true</span> : id === favorites;
+        });
+        userListEl.innerHTML = userItems.map(<span class="hljs-function">(<span class="hljs-params">user</span>) =&gt;</span> {
+            <span class="hljs-keyword">const</span> { favorites, userName } = user;
+            <span class="hljs-keyword">const</span> favoriteLabel = websiteIndex[favorites];
+            <span class="hljs-keyword">return</span> (<span class="hljs-string">`
+            &lt;div&gt;
+                &lt;span&gt;User: <span class="hljs-subst">${userName}</span>&lt;/span&gt;,
+                &lt;span&gt;favorites: <span class="hljs-subst">${favoriteLabel}</span>&lt;/span&gt;
+            &lt;/div&gt;`</span>);
+        }).join(<span class="hljs-string">&#x27;&#x27;</span>);
+    };
+
+    <span class="hljs-keyword">const</span> dropDownList = <span class="hljs-keyword">new</span> DropdownList(selectorEl, selectorOptionsEl, selectorDataItems, renderUserList);
+    <span class="hljs-keyword">const</span> currentSelectedItem = dropDownList.getCurrentSelectedItem();
+    <span class="hljs-comment">/**
+     * 최초 유저목록 강제로 랜더링
+     */</span>
+    renderUserList(currentSelectedItem);
+});
+
+</div></code></pre>
+    <h5 id="해설">해설</h5>
+    <blockquote>
+        <p>[!] 기존 문제 HTML + CSS + 더미데이터 내용을 가지고 다른 방법으로 접근하여 풀이하였습니다.</p>
+    </blockquote>
+    <ul>
+        <li>Dropdown 기능을 셀렉터 기능으로 제한하고, 유저 목록이 랜더링 되는 부분은 분리하여 결합도와 복잡도를 낮추도록 해 보았습니다.
+            <ul>
+                <li>Dropdown 메뉴에서 항목을 선택하면 Callback 함수로 선택된 항목 데이터가 전달됩니다.</li>
+                <li>선택된 항목 데이터를 이용하여 유저 목록을 랜더링합니다.</li>
+            </ul>
+        </li>
+        <li>위 코드에 사용된 기술 원리는 아래 참고자료를 확인해 주세요.</li>
+    </ul>
+    <h5 id="참고자료">참고자료</h5>
+    <ul>
+        <li><a
+                href="https://developer.mozilla.org/en-US/docs/Glossary/Callback_function">https://developer.mozilla.org/en-US/docs/Glossary/Callback_function</a>
+        </li>
+        <li><a
+                href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes">https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes</a>
+        </li>
+        <li><a
+                href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce">https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce</a>
+        </li>
+        <li><a
+                href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/filter</a>
+        </li>
+        <li><a
+                href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/map">https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/map</a>
+        </li>
+        <li><a
+                href="https://medium.com/@uriyang/data-structure-2-map-8ca759c74445">https://medium.com/@uriyang/data-structure-2-map-8ca759c74445</a>
+        </li>
+        <li><a
+                href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object">https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object</a>
+        </li>
+    </ul>
+    <h5 id="결론">결론</h5>
+    <ul>
+        <li>위와같은 구현은 어떤 방법으로 풀든 정답은 없는것 같습니다. 저의 경우는 코드의 복잡도를 낮추는것을 선호하기 때문에 가능한 기능단위로 묶어서 구현하고자 하였습니다.</li>
+        <li>위 내용의 풀이가 꼭 정답은 아니며 이런 방법의 접근도 있다는것 정도만 참고해 주셔도 좋을것 같습니다.</li>
+    </ul>
+</body>
+
+</html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case1 : ContextMenu - 출제자 해설</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css"
+  />
+  <style>
+    /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. 루트 폴더에 README_OOO.md 생성 (OOO : Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+        
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+    html {
+      overflow-x: hidden;
+    }
+    body {
+      font-family: "Noto Sans KR", sans-serif;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    ul,
+    ol,
+    li,
+    dl,
+    dt,
+    dd,
+    p,
+    table {
+      margin: 0;
+      padding: 0;
+      color: #494949;
+      letter-spacing: -0.025rem;
+      box-sizing: border-box;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: 600;
+    }
+    a {
+      color: inherit;
+      text-decoration: inherit;
+    }
+
+    a img {
+      border: none;
+    }
+
+    img {
+      max-width: 100%;
+      vertical-align: middle;
+    }
+
+    ul li {
+      list-style: none;
+    }
+    p {
+      line-height: 1.8;
+    }
+
+    /* STYLE */
+    body {
+      padding: 0;
+      margin: 0;
+      line-height: 1.6;
+    }
+    h2 {
+      padding: 50px 0;
+      color: #ffffff;
+      font-size: 2rem;
+      text-align: center;
+      background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+    }
+    h2::before {
+      content: "#";
+      display: inline-block;
+      margin-right: 5px;
+      color: #ff9db0;
+      font-weight: 300;
+      font-size: 2.2rem;
+    }
+    h3 {
+      position: relative;
+      margin: 30px 20px;
+      padding-bottom: 15px;
+      color: #303030;
+      font-size: 1.6rem;
+      border-bottom: 1px solid #ededed;
+    }
+
+    blockquote {
+      margin: 20px;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+
+    strong {
+      display: block;
+      margin-top: 10px;
+    }
+
+    .code-wrap {
+      position: relative;
+      background: #2f303b;
+      margin: 15px 0 0 0;
+    }
+    .code-wrap > p {
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 2px 15px;
+      font-size: 0.7rem;
+      color: #ffffff;
+      text-align: center;
+      background: #61c8cc;
+    }
+    code {
+      background: #ededed;
+    }
+
+    .language-css > div,
+    .language-js > div {
+      color: #fff;
+      padding: 30px 20px;
+      background: #2f303b;
+    }
+    code.language-bash div {
+      margin-top: -20px;
+      padding: 30px 20px;
+      font-size: 1rem;
+      color: #ffffff;
+      background: #2f303b;
+      box-sizing: border-box;
+    }
+    code::after {
+      content: "";
+      display: block;
+    }
+
+    .excute-text {
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: #ed234b;
+    }
+    /* 좌, 우 여백 */
+    ol,
+    ul {
+      margin: 20px;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+    ol li {
+      margin-left: 15px;
+    }
+    li {
+      font-size: 0.85rem;
+    }
+    h4,
+    h5,
+    h6,
+    p,
+    img,
+    pre {
+      padding: 0 20px;
+    }
+  </style>
+  </head>
+  <body>
+    <h2 id="case1--contextmenu---출제자-해설">
+      Case1 : ContextMenu - 출제자 해설
+    </h2>
+    <h3
+      id="q1-문제-상황에-대하여-java-script로-동작을-구현시킬-수-있는-코드를-작성해보세요"
+    >
+      q1. 문제 상황에 대하여 Java Script로 동작을 구현시킬 수 있는 코드를
+      작성해보세요
+    </h3>
+    <ul>
+      <li>
+        이벤트 핸들러는 가급적 최소한으로만 활용할 것. 감시대상이 늘 수록 성능에
+        좋지 않다.
+      </li>
+      <li>이벤트 캡쳐링/버블링을 이해하고 있는지</li>
+      <li>stopPropagation과 preventDefault를 구분하여 사용할 수 있는지</li>
+      <li>
+        (추가로 생각해볼 문제) click 이벤트의 감시 대상을 더욱 줄일 수는 없을까?
+      </li>
+    </ul>
+    <h4 id="a">A)</h4>
+    <pre><code class="language-css"><div><span class="hljs-selector-class">.item</span><span class="hljs-selector-class">.open</span> <span class="hljs-selector-class">.context</span> {
+  <span class="hljs-attribute">display</span>: block;
+}
+</div></code></pre>
+    <pre><code class="language-js"><div><span class="hljs-comment">// 초보자의 접근법</span>
+
+<span class="hljs-keyword">const</span> items = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&#x27;.item&#x27;</span>);
+items.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">item</span>) </span>{
+  item.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
+    item.classList.toggle(<span class="hljs-string">&#x27;open&#x27;</span>);
+    items.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">elem</span>) </span>{
+      <span class="hljs-keyword">if</span> (elem !== item) elem.classList.remove(<span class="hljs-string">&#x27;open&#x27;</span>);
+    });
+  });
+});
+</div></code></pre>
+    <pre><code class="language-js"><div><span class="hljs-comment">// 더 나은 방법 1</span>
+<span class="hljs-keyword">const</span> wrapper = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.wrapper&#x27;</span>);
+<span class="hljs-keyword">const</span> items = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&#x27;.item&#x27;</span>);
+
+wrapper.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>)</span>{
+  <span class="hljs-keyword">const</span> targetElem = e.target;
+  e.stopPropagation();
+  <span class="hljs-keyword">if</span> (!targetElem.classList.contains(<span class="hljs-string">&#x27;item&#x27;</span>)) <span class="hljs-keyword">return</span>;
+  
+  targetElem.classList.toggle(<span class="hljs-string">&#x27;open&#x27;</span>);
+  items.forEach(<span class="hljs-function"><span class="hljs-params">cont</span> =&gt;</span> {
+    <span class="hljs-keyword">if</span>(cont !== targetElem) cont.classList.remove(<span class="hljs-string">&#x27;open&#x27;</span>);
+  });
+});
+
+<span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
+  <span class="hljs-keyword">if</span> (e.target.classList.contains(<span class="hljs-string">&#x27;context&#x27;</span>)) <span class="hljs-keyword">return</span>;
+  items.forEach(<span class="hljs-function"><span class="hljs-params">cont</span> =&gt;</span> {
+    cont.classList.remove(<span class="hljs-string">&#x27;open&#x27;</span>);
+  });
+});
+</div></code></pre>
+    <pre><code class="language-js"><div><span class="hljs-comment">// 더 나은 방법 (2)</span>
+<span class="hljs-keyword">const</span> wrapper = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.wrapper&#x27;</span>);
+<span class="hljs-keyword">const</span> items = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&#x27;.item&#x27;</span>);
+
+<span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
+  <span class="hljs-keyword">const</span> targetClassList = e.target.classList;
+  <span class="hljs-keyword">if</span> (targetClassList.contains(<span class="hljs-string">&#x27;context&#x27;</span>)) <span class="hljs-keyword">return</span>;
+  <span class="hljs-keyword">if</span> (targetClassList.contains(<span class="hljs-string">&#x27;item&#x27;</span>)) {
+    targetClassList.toggle(<span class="hljs-string">&#x27;open&#x27;</span>);
+    items.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">elem</span>) </span>{
+      <span class="hljs-keyword">if</span> (elem !== e.target) elem.classList.remove(<span class="hljs-string">&#x27;open&#x27;</span>);
+    });
+    <span class="hljs-keyword">return</span>;
+  }
+  items.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">elem</span>) </span>{
+    elem.classList.remove(<span class="hljs-string">&#x27;open&#x27;</span>);
+  });
+});
+</div></code></pre>
+    <h5 id="해설">해설</h5>
+    <ul>
+      <li>
+        초보자들은 DOM 제어와 관련하여 이벤트 리스너를 잔뜩 작성하곤 한다.
+        목록의 각 아이템 하나하나마다 등록하는 식이다. 본 문제의 경우를 예로
+        들면 다음과 같이.
+      </li>
+    </ul>
+    <pre><code class="language-js"><div>items.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">item</span>) </span>{
+  item.addEventListener(‘click’, …)
+}
+</div></code></pre>
+    <p>이렇게 작성하면 크게 두가지 문제가 있다.</p>
+    <p>
+      (1) 이벤트 감시대상이 많은 만큼 메모리에 부담이 된다. (2) 어떤 변경에 의해
+      목록에 아이템이 추가될 경우 해당 아이템은 감시대상에 속하지 않아 팝오버
+      동작이 이뤄지지 않는다.
+    </p>
+    <p>
+      따라서 새로운 아이템이 추가될 때마다 그에 대한 리스너를 등록해주어야 한다.
+    </p>
+    <p>
+      반면 리스너를 상위 노드에 등록하면 위 두가지 문제가 모두 해결된다. 따라서
+      리스너 등록은 최소화하는 것이 바람직하다. 이벤트 핸들러를 최소화하기
+      위해서는 캡쳐링/버블링을 이해하는 것이 필요하다. 나아가 리스너 함수의
+      첫번째 인자인 event 객체의 내부에 어떤 정보가 들어있는지를 알 필요가 있다.
+    </p>
+    <ul>
+      <li>
+        stopPropagation과 preventDefault를 구분하여 사용할 수 있는지도 중요한
+        요소
+      </li>
+    </ul>
+    <h5 id="추가로-생각해볼-문제">(추가로 생각해볼 문제)</h5>
+    <ul>
+      <li>
+        click 이벤트의 감시 대상을 더욱 줄일 수는 없을까? 그럴 경우의 장단점은?
+      </li>
+    </ul>
+    <p>
+      장점: 리스너가 줄어듦. 단점: 1) 함수 내부에 등장할수밖에 없는 조건문에
+      대한 최적화 필요. 2) 개별 등록/해제 가능한 리스너에 비해 관리가 어려움
+    </p>
+    <h3
+      id="q2-문제-상황에-대하여-jquery로-동작을-구현시킬-수-있는-코드를-작성해보세요"
+    >
+      q2. 문제 상황에 대하여 jquery로 동작을 구현시킬 수 있는 코드를
+      작성해보세요
+    </h3>
+    <ul>
+      <li>javascript와 사실상 같은 구조.</li>
+      <li>jquery의 ‘delegate target’에 대한 이해가 필요하다.</li>
+      <li>상황에 꼭 맞는 메서드들을 알고 있는지가 관건.</li>
+    </ul>
+    <h4 id="a-1">A)</h4>
+    <pre><code class="language-js"><div><span class="hljs-keyword">const</span> $wrapper = $(<span class="hljs-string">&#x27;.wrapper&#x27;</span>);
+<span class="hljs-keyword">const</span> $items = $wrapper.find(<span class="hljs-string">&#x27;.item&#x27;</span>);
+$wrapper.on(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-string">&#x27;.item&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
+  e.stopPropagation();
+  $(<span class="hljs-built_in">this</span>).toggleClass(<span class="hljs-string">&#x27;open&#x27;</span>).siblings().removeClass(<span class="hljs-string">&#x27;open&#x27;</span>);
+});
+$(<span class="hljs-string">&#x27;body&#x27;</span>).on(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
+  $items.removeClass(<span class="hljs-string">&#x27;open&#x27;</span>);
+});
+</div></code></pre>
+    <pre><code class="language-css"><div><span class="hljs-selector-class">.item</span><span class="hljs-selector-class">.open</span> <span class="hljs-selector-class">.context</span> {
+  <span class="hljs-attribute">display</span>: block;
+}
+</div></code></pre>
+    <h5 id="추가로-생각해볼-문제-1">(추가로 생각해볼 문제)</h5>
+    <ul>
+      <li>마찬가지로 이벤트 감시 대상을 줄일 방법은 없을지?</li>
+    </ul>
+    <pre><code class="language-js"><div><span class="hljs-keyword">const</span> $items = $(<span class="hljs-string">&#x27;.wrapper .item&#x27;</span>);
+$(<span class="hljs-string">&#x27;body&#x27;</span>).on(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> item = $(e.target);
+  <span class="hljs-keyword">if</span> (item.is(<span class="hljs-string">&#x27;.item&#x27;</span>)) {
+    item.toggleClass(<span class="hljs-string">&#x27;open&#x27;</span>).siblings().removeClass(<span class="hljs-string">&#x27;open&#x27;</span>);
+  } <span class="hljs-keyword">else</span> {
+    $items.removeClass(<span class="hljs-string">&#x27;open&#x27;</span>);
+  }
+});
+</div></code></pre>
+    <h3
+      id="q3-문제-상황에-대하여-htmldetail-태그-javascript로-동작을-구현시킬-수-있는-코드를-작성해보세요"
+    >
+      q3. 문제 상황에 대하여 HTML(detail 태그)-JavaScript로 동작을 구현시킬 수
+      있는 코드를 작성해보세요
+    </h3>
+    <ul>
+      <li>
+        HTML5의 details 태그를 활용하면 팝오버 오픈을 위한 처리를 자바스크립트가
+        관여하지 않아도 되므로 코드가 훨씬 간결해진다.
+      </li>
+    </ul>
+    <h4 id="a-2">A)</h4>
+    <pre><code class="language-css"><div><span class="hljs-comment">/* css */</span>
+<span class="hljs-selector-tag">details</span><span class="hljs-selector-attr">[open]</span> <span class="hljs-selector-tag">p</span> {
+  <span class="hljs-attribute">display</span>: block;
+}
+</div></code></pre>
+    <pre><code class="language-js"><div><span class="hljs-keyword">const</span> items = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&#x27;details&#x27;</span>);
+<span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
+  <span class="hljs-keyword">if</span> (e.target.nodeName !== <span class="hljs-string">&#x27;P&#x27;</span> &amp;&amp; e.target.nodeName !== <span class="hljs-string">&#x27;SUMMARY&#x27;</span>) {
+    items.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">item</span>) </span>{
+      item.removeAttribute(<span class="hljs-string">&#x27;open&#x27;</span>);
+    });
+    <span class="hljs-keyword">return</span>;
+  }
+  items.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">item</span>) </span>{
+    <span class="hljs-keyword">if</span> (item !== e.target.parentElement) {
+      item.removeAttribute(<span class="hljs-string">&#x27;open&#x27;</span>);
+    }
+  });
+});
+</div></code></pre>
+    <h3
+      id="q4-문제-상황에-대하여-react로-동작을-구현시킬-수-있는-코드를-작성해보세요"
+    >
+      q4. 문제 상황에 대하여 React로 동작을 구현시킬 수 있는 코드를 작성해보세요
+    </h3>
+    <h4 id="a-3">A)</h4>
+    <pre><code class="language-js"><div><span class="hljs-keyword">const</span> togglePopover = <span class="hljs-function"><span class="hljs-params">index</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> {
+  e.preventDefault();
+  e.stopPropagation();
+  setOpen(openedIndex === index ? <span class="hljs-literal">null</span> : index);
+};
+
+<span class="hljs-keyword">const</span> closeAll = <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> {
+  <span class="hljs-keyword">if</span> (e.target.nodeName !== <span class="hljs-string">&#x27;P&#x27;</span>) setOpen(<span class="hljs-literal">null</span>);
+};
+</div></code></pre>
+    <h3
+      id="q5-문제-상황에-대하여-react-createportal-기능으로-동작을-구현시킬-수-있는-코드를-작성해보세요"
+    >
+      q5. 문제 상황에 대하여 React-CreatePortal 기능으로 동작을 구현시킬 수 있는
+      코드를 작성해보세요
+    </h3>
+    <ul>
+      <li>
+        createPortal은 Modal, Popover 등 floating UI를 효과적으로 제어할 수 있는
+        강력한 도구다.
+      </li>
+    </ul>
+    <h4 id="a-4">A)</h4>
+    <pre><code class="language-js"><div>&lt;ContextPortal
+  target={detailRefs.current[openedIndex]}
+  children={<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{dummyData[openedIndex]?.context}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>}
+/&gt;
+</div></code></pre>
+    <h3 id="결론---장단점-비교">결론 - 장단점 비교</h3>
+    <ul>
+      <li>html / css로 처리할 방법이 있다면 최대한 활용하는 것이 좋다.</li>
+    </ul>
+    <ol>
+      <li>
+        자바스크립트가 관여하지 못하는 경우에도 완결성 있는 화면을 보여줄 수
+        있다.
+      </li>
+      <li>
+        개발자가 온갖 상황을 테스트하며 일일이 대응하여 작성한 코드보다 이미
+        브라우저에서 검증이 완료된 html / css의 기본 동작의 신뢰도가 높을 수밖에
+        없다.
+      </li>
+      <li>무엇보다 코드량이 줄어든다. simple is the best.</li>
+    </ol>
+    <ul>
+      <li>
+        노출하지 않는 데이터를 html에 계속 보유하고 있는 것이 좋을까, 그렇지
+        않고 필요할 때만 그리는 편이 좋을까?
+      </li>
+    </ul>
+    <blockquote>
+      <p>
+        어느 경우에도 리페인트는 피할 수 없으니 논외. 리플로우는 position:
+        absolute로 이미 최소화되어 있는 상태. 그렇다면 이미 만들어진 노드를
+        그대로 사용하는 것과 추가하는 것 중 어느 쪽이 빠를까가 관건인데,
+        모던브라우저에서 속도 차이는 거의 없다고 봐도 무방하다. 팝오버 안의
+        내용이 민감한 정보라거나, 매 번 오픈할 때마다 서버로부터 실시간 정보를
+        반영해야 하는 경우라면 선택의 여지가 없겠으나, 그렇지 않은 경우라면
+        개발의 편리성을 고려하는 것으로 충분하겠다.
+      </p>
+    </blockquote>
+  </body>
+</html>

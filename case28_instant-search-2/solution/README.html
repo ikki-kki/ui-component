@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case28 : 출제자해설</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css"
+    />
+    <style>
+      /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. 루트 폴더에 README_OOO.md 생성 (OOO : Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+        
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+      html {
+        overflow-x: hidden;
+      }
+
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      ul,
+      ol,
+      li,
+      dl,
+      dt,
+      dd,
+      p,
+      table {
+        margin: 0;
+        padding: 0;
+        color: #494949;
+        letter-spacing: -0.025rem;
+        box-sizing: border-box;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 600;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: inherit;
+      }
+
+      a img {
+        border: none;
+      }
+
+      img {
+        max-width: 100%;
+        vertical-align: middle;
+      }
+
+      ul li {
+        list-style: none;
+      }
+
+      p {
+        line-height: 1.8;
+      }
+
+      /* STYLE */
+      body {
+        padding: 0 0 40px 0;
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      h2 {
+        padding: 50px 0;
+        color: #ffffff;
+        font-size: 2rem;
+        text-align: center;
+        background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+      }
+
+      h2::before {
+        content: "#";
+        display: inline-block;
+        margin-right: 5px;
+        color: #ff9db0;
+        font-weight: 300;
+        font-size: 2.2rem;
+      }
+
+      h3 {
+        position: relative;
+        margin: 30px 20px;
+        padding-bottom: 15px;
+        color: #303030;
+        font-size: 1.6rem;
+        border-bottom: 1px solid #ededed;
+      }
+
+      blockquote {
+        margin: 20px;
+        padding: 20px;
+        background: #f2f2f2;
+      }
+
+      strong {
+        display: block;
+        margin-top: 10px;
+      }
+
+      .code-wrap {
+        position: relative;
+        background: #2f303b;
+        margin: 15px 0 0 0;
+      }
+
+      .code-wrap > p {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 2px 15px;
+        font-size: 0.7rem;
+        color: #ffffff;
+        text-align: center;
+        background: #61c8cc;
+      }
+
+      code {
+        background: #ededed;
+      }
+
+      .language-jsx > div,
+      .language-scss > div,
+      .language-html > div,
+      .language-css > div,
+      .language-js > div {
+        color: #fff;
+        padding: 30px 20px;
+        background: #2f303b;
+      }
+
+      code.language-bash div {
+        margin-top: -20px;
+        padding: 30px 20px;
+        font-size: 1rem;
+        color: #ffffff;
+        background: #2f303b;
+        box-sizing: border-box;
+      }
+
+      code::after {
+        content: "";
+        display: block;
+      }
+
+      code.code-inlineBlock::after {
+        content: "";
+        display: inline-block;
+      }
+
+      .excute-text {
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: #ed234b;
+      }
+
+      /* 좌, 우 여백 */
+      ol,
+      ul {
+        margin: 20px;
+        padding: 20px;
+        background: #f2f2f2;
+      }
+
+      ol li {
+        margin-left: 15px;
+      }
+
+      li {
+        font-size: 0.85rem;
+      }
+
+      table,
+      h4,
+      h5,
+      h6,
+      p,
+      img,
+      pre {
+        padding: 0 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 id="설명">설명</h2>
+    <ol>
+      <li>The Cat API를 사용합니다.</li>
+      <li>
+        기본적으로 input tag에 이벤트리스너를 등록해서(keypress, keyup 같은
+        이벤트를 수신) 해결합니다.
+      </li>
+      <li>
+        이때 사용자가 검색어를 입력하다가 전부 지우는 경우 즉, 이벤트리스너에
+        전달되는 값이 비어있는 경우가 생깁니다. 이럴땐 API 요청을 하는 것이
+        네트워크 자원 낭비이므로 이 경우를 제외합니다.
+      </li>
+      <li>로딩 인디케이터를 만드는 것은 다양한 방법이 있습니다.</li>
+    </ol>
+    <ul>
+      <li>
+        코드에 되어있는 것처럼 Pub-Sub 구조를 활용해 로딩 중임을 알리는 이벤트를
+        활용하는 방법
+      </li>
+      <li>
+        단순하게, 로딩 인디케이터는 초기에 보이지 않다가 API 요청 이전에
+        스타일을 이용해 보여주고, API 요청 이후에(Promise, async await) 스타일을
+        이용해 숨기는 방법
+      </li>
+    </ul>
+    <ol start="5">
+      <li>
+        API Request는 브라우저에서 API Request를 위해 기본적으로 제공하는 fetch
+        함수를 사용하는 방법이 있고 axios 같은 third party를 사용할 수 있습니다.
+      </li>
+    </ol>
+    <ul>
+      <li>
+        이때 fetch, axios, superagent 등의 함수는 Promise 기반으로 동작합니다.
+      </li>
+      <li>
+        따라서 then, catch, finally 함수를 체이닝해서 구현하는 방법과 이 API
+        요청 함수를 감싸는 함수를 async 함수로 만드는 방법이 있고 현재 코드는 이
+        방법으로 작성 돼있습니다.
+      </li>
+    </ul>
+    <ol start="6">
+      <li>이때 사용자가 타이핑을 한 문자씩 하면 즉각 API를 호출합니다.</li>
+      <li>
+        API Response를 받아서 검색어 결과를 목록을 표현하는 ul tag에 렌더링
+        합니다.
+      </li>
+    </ol>
+    <ul>
+      <li>응답 결과가 있으면 그대로 렌더링하고</li>
+      <li>
+        응답 결과가 null 이거나 빈 배열인 경우처럼 비어있으면 해당하는 검색어가
+        없다는 UI를 만들어 사용자에게 친절하게 알려줍니다.
+      </li>
+    </ul>
+    <ol start="8">
+      <li>
+        이때 API가 네트워크, 서버, 인증 등의 이유로 에러를 낼 수 있습니다.
+      </li>
+    </ol>
+    <ul>
+      <li>
+        API 처리를 Promise 기반으로 했다면 catch, finally 함수를 체이닝해서
+        에러가 생겼을때 사용자에게 알립니다.
+      </li>
+      <li>
+        async await를 사용했다면 API 요청 관련 코드를 try catch로 감싼 뒤
+        catch에서 동일한 작업을 수행합니다.
+      </li>
+    </ul>
+  </body>
+</html>

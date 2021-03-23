@@ -1,0 +1,39 @@
+* {
+    box-sizing: border-box;
+}
+
+.SearcutContainer {
+    position: relative;
+    width: 200px;
+    margin: 0 auto;
+}
+
+.SearchInput {
+    display: inline-block;
+    padding-left: 5px;
+    width: 200px;
+    height: 40px;
+    font-size: 16px;
+}
+
+.LoadingIndicator {
+    position: absolute;
+    top: 10px;
+    right: -75px;
+    margin-left: 5px;
+    visibility: hidden;
+}
+
+.InfoParagraph {
+    text-align: center;
+}
+
+.TextList {
+    margin: 10px auto 0 auto;
+    list-style: none;
+    padding: 0 0 0 5px;
+    width: 200px;
+    border: solid 1px black;
+    font-size: 16px;
+    visibility: hidden;
+}

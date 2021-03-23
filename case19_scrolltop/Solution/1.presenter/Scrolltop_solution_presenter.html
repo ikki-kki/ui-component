@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case19 : ScrollTop - 출제자 해설</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css"
+    />
+    <style>
+      /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. 루트 폴더에 README_OOO.md 생성 (OOO : Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+        
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+      html {
+        overflow-x: hidden;
+      }
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      ul,
+      ol,
+      li,
+      dl,
+      dt,
+      dd,
+      p,
+      table {
+        margin: 0;
+        padding: 0;
+        color: #494949;
+        letter-spacing: -0.025rem;
+        box-sizing: border-box;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 600;
+      }
+      a {
+        color: inherit;
+        text-decoration: inherit;
+      }
+
+      a img {
+        border: none;
+      }
+
+      img {
+        max-width: 100%;
+        vertical-align: middle;
+      }
+
+      ul li {
+        list-style: none;
+      }
+      p {
+        line-height: 1.8;
+      }
+
+      /* STYLE */
+      body {
+        padding: 0;
+        margin: 0;
+        line-height: 1.6;
+      }
+      h2 {
+        padding: 50px 0;
+        color: #ffffff;
+        font-size: 2rem;
+        text-align: center;
+        background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+      }
+      h2::before {
+        content: "#";
+        display: inline-block;
+        margin-right: 5px;
+        color: #ff9db0;
+        font-weight: 300;
+        font-size: 2.2rem;
+      }
+      h3 {
+        position: relative;
+        margin: 30px 20px;
+        padding-bottom: 15px;
+        color: #303030;
+        font-size: 1.6rem;
+        border-bottom: 1px solid #ededed;
+      }
+
+      blockquote {
+        margin: 20px;
+        padding: 20px;
+        background: #f2f2f2;
+      }
+
+      strong {
+        display: block;
+        margin-top: 10px;
+      }
+
+      .code-wrap {
+        position: relative;
+        background: #2f303b;
+        margin: 15px 0 0 0;
+      }
+      .code-wrap > p {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 2px 15px;
+        font-size: 0.7rem;
+        color: #ffffff;
+        text-align: center;
+        background: #61c8cc;
+      }
+      code {
+        background: #ededed;
+      }
+
+      .language-css > div,
+      .language-js > div {
+        color: #fff;
+        padding: 30px 20px;
+        background: #2f303b;
+      }
+      code.language-bash div {
+        margin-top: -20px;
+        padding: 30px 20px;
+        font-size: 1rem;
+        color: #ffffff;
+        background: #2f303b;
+        box-sizing: border-box;
+      }
+      code::after {
+        content: "";
+        display: block;
+      }
+
+      .excute-text {
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: #ed234b;
+      }
+      /* 좌, 우 여백 */
+      ol,
+      ul {
+        margin: 20px;
+        padding: 20px;
+        background: #f2f2f2;
+      }
+      ol li {
+        margin-left: 15px;
+      }
+      li {
+        font-size: 0.85rem;
+      }
+      h4,
+      h5,
+      h6,
+      p,
+      img,
+      pre {
+        padding: 0 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 id="case4--scrolltop---출제자-해설">Case19 : ScrollTop - 출제자 해설</h2>
+    <h3
+      id="q1-javascript---스크롤을-다시-올릴-경우-변경된-상태를-유지하다가-더-이상-올릴-수-없을-때최상단에-스크롤이-위치할-때-이전-상태로-변경"
+    >
+      q1. Javascript - 스크롤을 다시 올릴 경우 변경된 상태를 유지하다가 더 이상
+      올릴 수 없을 때(최상단에 스크롤이 위치할 때) 이전 상태로 변경
+    </h3>
+    <h4 id="a">A)</h4>
+    <ul>
+      <li>
+        스크롤 다운은 배경과 폰트 색상 변경 / 스크롤 업은 변경 상태를 유지하닥
+        더 이상 올릴 수 없을 때(최상단에 스크롤이 위치할 때) 최초 상태로 변경
+      </li>
+      <li>
+        스크롤 동작을 감지하기 위해서는 window 객체 또는 document 객체에
+        addEventListener를 사용하여 스크롤 이벤트를 추가합니다. 스크롤 이벤트는
+        지금 스크롤 중인지 아닌지를 감지하게 됩니다.
+      </li>
+    </ul>
+    <h5 id="해설">해설</h5>
+    <pre><code class="language-js"><div><span class="hljs-comment">// window 객체</span>
+<span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&#x27;scroll&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+ <span class="hljs-built_in">console</span>.log(‘scrolling’);
+})
+
+<span class="hljs-comment">// or</span>
+
+<span class="hljs-built_in">window</span>.onscroll = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{……}
+
+<span class="hljs-comment">// document 객체</span>
+<span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">&#x27;scroll&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{……})
+
+</div></code></pre>
+    <ul>
+      <li>
+        만약 특정 영역 안에서 스크롤 이벤트를 적용하고 싶다면 아래와 같이
+        변경합니다.
+      </li>
+    </ul>
+    <pre><code class="language-js"><div><span class="hljs-comment">// 선택자로 특정 영역을 가리킨 후 스크롤 이벤트 추가</span>
+<span class="hljs-keyword">const</span> section1 = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#section-1&#x27;</span>);
+
+section1.addEventListener(<span class="hljs-string">&#x27;scroll&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{……})
+</div></code></pre>
+    <ul>
+      <li>
+        다음 스크롤 위치를 가져오는 코드를 추가합니다. 이 때 크로스 브라우징을
+        고려해서 복수의 코드를 입력해야 합니다. 각 코드가 지원하는 브라우저는
+        아래 표에서 확인할 수 있습니다.
+      </li>
+    </ul>
+    <pre><code class="language-js"><div><span class="hljs-comment">// window 객체</span>
+<span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&#x27;scroll&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+ <span class="hljs-keyword">const</span> top = <span class="hljs-built_in">window</span>.scrollY || <span class="hljs-built_in">window</span>.pageYOffset || <span class="hljs-built_in">document</span>.documentElement.scrollTop || <span class="hljs-built_in">document</span>.body.scrollTop;
+})
+</div></code></pre>
+    <p>
+      <img
+        src="file:////Users/ming/Desktop/ui-component/case4_scrolltop/Solution/1.presenter/image.jpg"
+        alt="example_image"
+      />
+    </p>
+    <ul>
+      <li>
+        스크롤 특정 위치를 가져올 수 있게 되었다면 조건문 또는 삼항 연산자를
+        사용하여 참일 경우에는 active 클래스를 추가하고 거짓을 경우에는
+        제거해주는 코드를 작성합니다.
+      </li>
+    </ul>
+    <pre><code class="language-js"><div><span class="hljs-comment">// window 객체</span>
+<span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&#x27;scroll&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+ <span class="hljs-keyword">const</span> top = <span class="hljs-built_in">window</span>.scrollY || <span class="hljs-built_in">window</span>.pageYOffset || <span class="hljs-built_in">document</span>.documentElement.scrollTop || <span class="hljs-built_in">document</span>.body.scrollTop;
+ (top &gt;= <span class="hljs-number">50</span> )
+ ? nav.classList.add(<span class="hljs-string">&#x27;active&#x27;</span>)
+ : nav.classList.remove(‘active<span class="hljs-string">&#x27;);
+})
+</span></div></code></pre>
+    <h3
+      id="q2-javascript---스크롤을-다시-올릴-경우-곧바로-배경폰트-색상을-이전-상태로-변경"
+    >
+      q2. Javascript - 스크롤을 다시 올릴 경우 곧바로 배경/폰트 색상을 이전
+      상태로 변경
+    </h3>
+    <h4 id="a-1">A)</h4>
+    <pre><code class="language-js"><div><span class="hljs-keyword">let</span> oldValue = <span class="hljs-number">0</span>;
+<span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&#x27;scroll&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>)</span>{
+ <span class="hljs-keyword">const</span> newValue = <span class="hljs-built_in">window</span>.scrollY || <span class="hljs-built_in">window</span>.pageYOffset || <span class="hljs-built_in">document</span>.documentElement.scrollTop || <span class="hljs-built_in">document</span>.body.scrollTop;
+ <span class="hljs-comment">// 음수는 스크롤 다운, 양수는 스크롤 업</span>
+ <span class="hljs-keyword">if</span>(oldValue - newValue &lt; <span class="hljs-number">0</span>) nav.classList.add(<span class="hljs-string">&#x27;active&#x27;</span>);
+ <span class="hljs-keyword">if</span>(oldValue - newValue &gt; <span class="hljs-number">0</span>) nav.classList.remove(<span class="hljs-string">&#x27;active&#x27;</span>);
+ <span class="hljs-comment">// 기준 값을 변경 값으로 치환</span>
+ oldValue = newValue;
+});
+</div></code></pre>
+    <h5 id="해설-1">해설</h5>
+    <ul>
+      <li>
+        스크롤 다운은 배경과 폰트 색상 변경 / 스크롤 업은 이전 상태로 변경
+      </li>
+      <li>
+        최초 기준 값을 설정한 후 기준 값 - 변경 값을 연산하여 스크롤 다운 /
+        스크롤 업 상태를 판단할 수 있습니다.
+      </li>
+      <li>
+        기준 값 - 변경 값 연산이 음수면 스크롤 다운, 양수면 스크롤 업입니다.
+      </li>
+      <li>기준 값은 항상 변경 값으로 치환하여 새롭게 갱신을 해야 합니다.</li>
+    </ul>
+    <h3
+      id="q3-javascript---자바스크립트에서-제공하는-마우수-휠-이벤트-동작-감지-기능을-사용해서-구현"
+    >
+      q3. Javascript - 자바스크립트에서 제공하는 마우수 휠 이벤트 동작 감지
+      기능을 사용해서 구현
+    </h3>
+    <h4 id="a-2">A)</h4>
+    <pre><code class="language-js"><div><span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&#x27;wheel&#x27;</span>, mouseWheelEvent);
+<span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&#x27;DOMMouseScroll&#x27;</span>, mouseWheelEvent);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mouseWheelEvent</span>(<span class="hljs-params">e</span>) </span>{
+ <span class="hljs-keyword">const</span> delta = e.wheelDelta ? e.wheelDelta : -e.detail;
+ (delta &lt; <span class="hljs-number">0</span>)
+ ? nav.classList.add(<span class="hljs-string">&#x27;active&#x27;</span>)
+ : nav.classList.remove(<span class="hljs-string">&#x27;active&#x27;</span>);
+}
+
+<span class="hljs-comment">// or</span>
+
+<span class="hljs-keyword">const</span> isFireFox = (navigator.userAgent.indexOf(<span class="hljs-string">&#x27;Firefox&#x27;</span>) !== <span class="hljs-number">-1</span>);
+<span class="hljs-keyword">const</span> wheelEvt = isFireFox ? <span class="hljs-string">&#x27;DOMMouseScroll&#x27;</span> : <span class="hljs-string">&#x27;wheel&#x27;</span>;
+
+<span class="hljs-built_in">window</span>.addEventListener(wheelEvt, mouseWheelEvent);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mouseWheelEvent</span>(<span class="hljs-params">e</span>) </span>{
+ <span class="hljs-keyword">const</span> delta = e.wheelDelta ? e.wheelDelta : -e.detail;
+ (delta &lt; <span class="hljs-number">0</span>)
+ ? nav.classList.add(<span class="hljs-string">&#x27;active&#x27;</span>)
+ : nav.classList.remove(<span class="hljs-string">&#x27;active&#x27;</span>);
+}
+
+</div></code></pre>
+    <h5 id="해설-2">해설</h5>
+    <ul>
+      <li>
+        자바스크립트에서는 마우스 휠 방향을 알 수 있는 mousewheel, wheel,
+        DOMMouseScroll 이벤트를 제공합니다.
+      </li>
+      <li>mousewheel은 비표준으로, wheel을 사용해야 합니다.</li>
+      <li>파이어폭스에서는 DOMMouseScroll을 사용해야 합니다.</li>
+    </ul>
+    <h3
+      id="q4-jquery---스크롤을-다시-올릴-경우-변경된-상태를-유지하다가-더-이상-올릴-수-없을-때최상단에-스크롤이-위치할-때-이전-상태로-변경"
+    >
+      q4. Jquery - 스크롤을 다시 올릴 경우 변경된 상태를 유지하다가 더 이상 올릴
+      수 없을 때(최상단에 스크롤이 위치할 때) 이전 상태로 변경
+    </h3>
+    <h4 id="a-3">A)</h4>
+    <pre><code class="language-js"><div>$(<span class="hljs-built_in">window</span>).scroll(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+ <span class="hljs-keyword">const</span> $top = $(<span class="hljs-built_in">this</span>).scrollTop();
+
+ ($top &gt;= <span class="hljs-number">50</span> )
+ ? $nav.addClass(<span class="hljs-string">&#x27;active&#x27;</span>)
+ : $nav.removeClass(<span class="hljs-string">&#x27;active&#x27;</span>);
+});
+</div></code></pre>
+    <h5 id="해설-3">해설</h5>
+    <ul>
+      <li>
+        스크롤 다운은 배경과 폰트 색상 변경 / 스크롤 업은 변경 상태를 유지하닥
+        더 이상 올릴 수 없을 때(최상단에 스크롤이 위치할 때) 최초 상태로 변경
+      </li>
+      <li>
+        scrollTop()는 제이쿼리에서 스크롤의 위치를 가져올 때 사용되는
+        메서드입니다. 이를 사용하면 자바스크립트 구현 방법 1과 동일한 방식으로
+        구현할 수 있습니다.
+      </li>
+    </ul>
+    <h3
+      id="q5-jquery---스크롤을-다시-올릴-경우-곧바로-배경폰트-색상을-이전-상태로-변경"
+    >
+      q5. Jquery - 스크롤을 다시 올릴 경우 곧바로 배경/폰트 색상을 이전 상태로
+      변경
+    </h3>
+    <h4 id="a-4">A)</h4>
+    <pre><code class="language-js"><div>$(<span class="hljs-built_in">window</span>).on(<span class="hljs-string">&#x27;mousewheel DOMMouseScroll&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
+ <span class="hljs-keyword">const</span> delta = e.originalEvent.wheelDelta
+ ? e.originalEvent.wheelDelta
+ : -e.originalEvent.detail;
+
+ (delta &lt; <span class="hljs-number">0</span>)
+ ? $nav.addClass(<span class="hljs-string">&#x27;active&#x27;</span>)
+ : $nav.removeClass(<span class="hljs-string">&#x27;active&#x27;</span>);
+});
+
+</div></code></pre>
+    <h5 id="해설-4">해설</h5>
+    <ul>
+      <li>
+        스크롤 다운은 배경과 폰트 색상 변경 / 스크롤 업은 이전 상태로 변경
+      </li>
+      <li>제이쿼리에서도 마우스 휠 이벤트를 적용할 수 있습니다.</li>
+      <li>
+        originalEvent : 제이쿼리의 이벤트 객체에서 지원하지 않는 브라우저 기능을
+        활용하고자 할 때 사용되는 이벤트 객체
+      </li>
+    </ul>
+  </body>
+</html>

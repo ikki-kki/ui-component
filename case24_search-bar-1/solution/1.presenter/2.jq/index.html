@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .container {
+            width: 400px;
+        }
+
+        .dropdown-menu {
+            overflow-y: scroll;
+            width: 100%;
+            max-height: 500px;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-item img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .dropdown-item span {
+            overflow: hidden;
+            display: block;
+            width: calc(100% - 60px);
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .image-info {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<main style="padding-top: 50px;">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="dropdown">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+
+                    <ul class="dropdown-menu">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="p-t-50">
+                    <img class="image-info" src="" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<script src="jquery-3.4.1.js"></script>
+<script src="axios/axios.js"></script>
+<script src="lodash.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>

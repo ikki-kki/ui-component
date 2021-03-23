@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Check Box</title>
+  </head>
+  <body>
+    <form>
+      <p>좋아하는 음식</p>
+      <div>
+        <input type="checkbox" id="favoriteFood1" name="food" value="pizza" />
+        <label for="favoriteFood1">Pizza</label>
+        <input type="checkbox" id="favoriteFood2" name="food" value="steak" />
+        <label for="favoriteFood2">Steak</label>
+        <input type="checkbox" id="favoriteFood3" name="food" value="noodle" />
+        <label for="favoriteFood3">Noodle</label>
+      </div>
+      <p>관심사</p>
+      <div>
+        <input type="checkbox" id="interest1" name="interest" value="cooking" />
+        <label for="interest1">Cooking</label>
+        <input type="checkbox" id="interest2" name="interest" value="Bike" />
+        <label for="interest2">Bike</label>
+        <input type="checkbox"id="interest3" name="interest" value="swimming" />
+        <label for="interest3">Swimming</label>
+        <input type="checkbox" id="interest4" name="interest" value="piano" />
+        <label for="interest4">Piano</label>
+        <input type="checkbox" id="interest5" name="interest" value="book" />
+        <label for="interest5">Book</label>
+      </div>
+      <div class="SubmitButtonContainer">
+        <button type="submit">확인</button>
+      </div>
+    </form>
+    <span class="CurrentItem"></span>
+    <script src="app.js"></script>
+  </body>
+</html>

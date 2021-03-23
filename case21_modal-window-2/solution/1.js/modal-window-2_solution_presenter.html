@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case21 : ModalWindow2 - 출제자 해설</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css"
+    />
+    <style>
+      /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. 루트 폴더에 README_OOO.md 생성 (OOO : Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+        
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+      html {
+        overflow-x: hidden;
+      }
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      ul,
+      ol,
+      li,
+      dl,
+      dt,
+      dd,
+      p,
+      table {
+        margin: 0;
+        padding: 0;
+        color: #494949;
+        letter-spacing: -0.025rem;
+        box-sizing: border-box;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 600;
+      }
+      a {
+        color: inherit;
+        text-decoration: inherit;
+      }
+
+      a img {
+        border: none;
+      }
+
+      img {
+        max-width: 100%;
+        vertical-align: middle;
+      }
+
+      ul li {
+        list-style: none;
+      }
+      p {
+        line-height: 1.8;
+      }
+
+      /* STYLE */
+      body {
+        padding: 0 0 40px 0;
+        margin: 0;
+        line-height: 1.6;
+      }
+      h2 {
+        padding: 50px 0;
+        color: #ffffff;
+        font-size: 2rem;
+        text-align: center;
+        background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+      }
+      h2::before {
+        content: "#";
+        display: inline-block;
+        margin-right: 5px;
+        color: #ff9db0;
+        font-weight: 300;
+        font-size: 2.2rem;
+      }
+      h3 {
+        position: relative;
+        margin: 30px 20px;
+        padding-bottom: 15px;
+        color: #303030;
+        font-size: 1.6rem;
+        border-bottom: 1px solid #ededed;
+      }
+
+      blockquote {
+        margin: 20px;
+        padding: 20px;
+        background: #f2f2f2;
+      }
+
+      strong {
+        display: block;
+        margin-top: 10px;
+      }
+
+      .code-wrap {
+        position: relative;
+        background: #2f303b;
+        margin: 15px 0 0 0;
+      }
+      .code-wrap > p {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 2px 15px;
+        font-size: 0.7rem;
+        color: #ffffff;
+        text-align: center;
+        background: #61c8cc;
+      }
+      code {
+        background: #ededed;
+      }
+      .language-jsx > div,
+      .language-scss > div,
+      .language-html > div,
+      .language-css > div,
+      .language-js > div {
+        color: #fff;
+        padding: 30px 20px;
+        background: #2f303b;
+      }
+      code.language-bash div {
+        margin-top: -20px;
+        padding: 30px 20px;
+        font-size: 1rem;
+        color: #ffffff;
+        background: #2f303b;
+        box-sizing: border-box;
+      }
+      code::after {
+        content: "";
+        display: block;
+      }
+
+      code.code-inlineBlock::after {
+        content: "";
+        display: inline-block;
+      }
+
+      .excute-text {
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: #ed234b;
+      }
+      /* 좌, 우 여백 */
+      ol,
+      ul {
+        margin: 20px;
+        padding: 20px;
+        background: #f2f2f2;
+      }
+      ol li {
+        margin-left: 15px;
+      }
+      li {
+        font-size: 0.85rem;
+      }
+      table,
+      h4,
+      h5,
+      h6,
+      p,
+      img,
+      pre {
+        padding: 0 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 id="case21--modalwindow2---출제자-해설">
+      Case21 : ModalWindow2 - 출제자 해설
+    </h2>
+    <h3 id="javascript로-해당-기능을-구현하시오">
+      JavaScript로 해당 기능을 구현하시오.
+    </h3>
+    <h4 id="a">A)</h4>
+    <ul>
+      <li>
+        Unspalsh API :
+        <a href="https://unsplash.com/documentation#list-photos"
+          >https://unsplash.com/documentation#list-photos</a
+        >
+      </li>
+    </ul>
+    <pre><code class="language-js"><div>
+<span class="hljs-keyword">const</span> accessKey = <span class="hljs-string">&quot;hPyF-tz9tHnxeaoTwb7q0GTw10Wxwr85cD63lk7d7UE&quot;</span>;
+<span class="hljs-keyword">const</span> imageLists = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.image-lists&#x27;</span>);
+<span class="hljs-keyword">const</span> modal = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.custom-modal&#x27;</span>);
+<span class="hljs-keyword">const</span> thumbnail = modal.querySelector(<span class="hljs-string">&#x27;.thumbnail&#x27;</span>);
+<span class="hljs-keyword">const</span> profileImg = modal.querySelector(<span class="hljs-string">&#x27;.profile-image&#x27;</span>);
+<span class="hljs-keyword">const</span> userName = modal.querySelector(<span class="hljs-string">&#x27;.name&#x27;</span>);
+<span class="hljs-keyword">const</span> insta = modal.querySelector(<span class="hljs-string">&#x27;.insta&#x27;</span>);
+
+
+<span class="hljs-comment">// API 통신</span>
+<span class="hljs-keyword">const</span> imageApi = <span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> axios.get(<span class="hljs-string">&#x27;https://api.unsplash.com/photos/&#x27;</span>, {
+    <span class="hljs-attr">params</span>: {
+      <span class="hljs-attr">client_id</span>: accessKey,
+    }
+  });
+  <span class="hljs-keyword">return</span> res;
+};
+
+<span class="hljs-comment">// 콜백 함수</span>
+<span class="hljs-keyword">const</span> render = <span class="hljs-keyword">async</span> (callApi, callTemplate) =&gt; {
+  <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> callApi();
+  callTemplate(res);
+}
+</div></code></pre>
+    <pre><code class="language-js"><div><span class="hljs-comment">// 이미지 템플릿 및 클릭 이벤트 추가</span>
+<span class="hljs-keyword">const</span> imageTemplate = <span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> images = res.data;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">const</span> image <span class="hljs-keyword">of</span> images) {
+    <span class="hljs-keyword">const</span> { urls, alt_description, user } = image;
+    <span class="hljs-keyword">const</span> { name, instagram_username, <span class="hljs-attr">profile_image</span>: {medium} } = user;
+    <span class="hljs-keyword">const</span> li = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&#x27;li&#x27;</span>);
+
+    li.classList.add(<span class="hljs-string">&#x27;image-list&#x27;</span>);
+    li.dataset.user = <span class="hljs-built_in">JSON</span>.stringify({name, instagram_username, medium});
+    li.dataset.image = <span class="hljs-string">`<span class="hljs-subst">${urls.regular}</span>`</span>;
+    li.innerHTML = <span class="hljs-string">`&lt;img src=&quot;<span class="hljs-subst">${urls.regular}</span>&quot; alt=&quot;<span class="hljs-subst">${alt_description}</span>&quot;&gt;`</span>;
+    imageLists.appendChild(li);
+
+    li.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">const</span> obj = {
+        <span class="hljs-attr">image</span>: <span class="hljs-built_in">this</span>.dataset.image,
+        ...JSON.parse(<span class="hljs-built_in">this</span>.dataset.user)
+      };
+      modal.classList.add(<span class="hljs-string">&#x27;active&#x27;</span>);
+      thumbnail.src = obj.image;
+      profileImg.src = obj.medium;
+      userName.textContent = obj.name;
+      insta.textContent = obj.instagram_username;
+    })
+  }
+}
+</div></code></pre>
+    <ul>
+      <li>
+        JSON.stringify() : 자바스크립트 값을 JSON 객체를 String 객체로 변환
+      </li>
+      <li>JSON.parse() : String 객체를 JSON 객체로 변환</li>
+    </ul>
+    <pre><code class="language-js"><div><span class="hljs-comment">// 이미지 표기 및 modal 이벤트 추가</span>
+(<span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">await</span> render(imageApi, imageTemplate);
+  modal.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>{
+    <span class="hljs-keyword">const</span> target = e.target;
+    <span class="hljs-keyword">const</span> isLayer = target.classList.contains(<span class="hljs-string">&#x27;layer&#x27;</span>);
+    isLayer &amp;&amp; modal.classList.remove(<span class="hljs-string">&#x27;active&#x27;</span>);
+  });
+})();
+</div></code></pre>
+  </body>
+</html>
