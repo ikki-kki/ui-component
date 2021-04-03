@@ -52,11 +52,14 @@ summary:after {
 }
 
 summary:hover:after {
-  content: 'open'
+  content: "open";
 }
 
 details[open] summary:after {
-  content: 'close';
+  content: "close";
 }
 
 /* do something here */
+details[open] p {
+  display: block;
+}
