@@ -8,33 +8,35 @@ const contentItems = Array.from(contentsElem.children);
 
 let offsetTops = [];
 const getOffsetTops = () => {
-  offsetTops = contentItems.map(elem => {
+  offsetTops = contentItems.map((elem) => {
     const [ofs, clh] = [elem.offsetTop, elem.clientHeight];
     return [ofs - clh / 2, ofs + clh / 2];
   });
 };
 getOffsetTops();
 
-window.addEventListener("scroll", throttle(e => {
-  const { scrollTop } = e.target.scrollingElement;
-  const targetIndex = offsetTops.findIndex(([from, to]) => (
-    scrollTop >= from && scrollTop < to
-  ))
-  Array.from(navElem.children).forEach((c, i) => {
-    if (i !== targetIndex) c.classList.remove('on');
-    else c.classList.add('on');
-  })
-}, 300));
+window.addEventListener(
+  "scroll"((e) => {
+    const { scrollTop } = e.target.scrollingElement;
+    const targetIndex = offsetTops.findIndex(
+      ([from, to]) => scrollTop >= from && scrollTop < to,
+    );
+    Array.from(navElem.children).forEach((c, i) => {
+      if (i !== targetIndex) c.classList.remove("on");
+      else c.classList.add("on");
+    });
+  }),
+);
 
-window.addEventListener("resize", debounce(getOffsetTops, 300));
+window.addEventListener("resize"(getOffsetTops));
 
-navElem.addEventListener("click", e => {
+navElem.addEventListener("click", (e) => {
   const targetElem = e.target;
   if (targetElem.tagName === "BUTTON") {
     const targetIndex = navItems.indexOf(targetElem.parentElement);
     contentItems[targetIndex].scrollIntoView({
       block: "start",
-      behavior: "smooth"
+      behavior: "smooth",
     });
   }
 });
