@@ -7,30 +7,35 @@ const contentItems = Array.from(contentsElem.children);
 
 let offsetTops = [];
 const getOffsetTops = () => {
-  // do something
+  offsetTops = contentItems.map((elem) => {
+    const [ofs, clh] = [elem.offsetTop, elem.clientHeight];
+    return [ofs - clh / 2, ofs + clh / 2];
+  });
 };
+// 이상태로 최초에 한 번만 함수를 실행해준다.
 getOffsetTops();
 
-window.addEventListener("scroll", e => {
+window.addEventListener("scroll", (e) => {
   const { scrollTop } = e.target.scrollingElement;
-  const targetIndex = offsetTops.findIndex(([from, to]) => (
-    scrollTop >= from && scrollTop < to
-  ))
-  Array.from(navElem.children).forEach((c, i) => {
-    if (i !== targetIndex) c.classList.remove('on');
-    else c.classList.add('on');
+  const targetIndex = offsetTops.findIndex(
+    ([from, to]) => scrollTop >= from && scrollTop < to,
+  );
+  navItems.forEach((c, i) => {
+    if (i !== targetIndex) c.classList.remove("on");
+    else c.classList.add("on");
   });
 });
 
-window.addEventListener("resize", getOffsetTops);
+//! resize에 관한 이벤트 리스너 작성
+window.addEventListener("resize", getOffsetTops());
 
-navElem.addEventListener("click", e => {
+navElem.addEventListener("click", (e) => {
   const targetElem = e.target;
   if (targetElem.tagName === "BUTTON") {
     const targetIndex = navItems.indexOf(targetElem.parentElement);
     contentItems[targetIndex].scrollIntoView({
       block: "start",
-      behavior: "smooth"
+      behavior: "smooth",
     });
   }
 });
